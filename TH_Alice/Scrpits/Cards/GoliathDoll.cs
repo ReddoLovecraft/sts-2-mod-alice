@@ -24,7 +24,7 @@ public class GoliathDoll : AliceCardModel
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-        new BlockVar(12, ValueProp.Move),
+        new BlockVar(10, ValueProp.Move),
      ];
     static string text = StringHelper.Slugify("Doll");
     static LocString locString = ToolBox.L10NStatic(text + ".title");

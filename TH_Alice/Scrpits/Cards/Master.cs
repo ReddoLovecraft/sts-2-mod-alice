@@ -34,7 +34,7 @@ public class Master : AliceCardModel
         base.EnergyHoverTip,
         new HoverTip(locString,locString2)
   });
-    public Master() : base(1, CardType.Power ,CardRarity.Uncommon, TargetType.Self)
+    public Master() : base(1, CardType.Power ,CardRarity.Rare, TargetType.Self)
 	{
 	}
 

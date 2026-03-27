@@ -23,7 +23,7 @@ namespace TH_Alice.Scrpits.Cards;
 public class DollSquare : AliceCardModel
 {
     public override bool GainsBlock => true;
-    protected override bool ShouldGlowGoldInternal => ToolBox.GetDollCount(Owner.Creature) >= 0;
+    protected override bool ShouldGlowGoldInternal => ToolBox.GetDollCount(Owner.Creature) > 0;
     protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
        new BlockVar(8m, ValueProp.Move) 

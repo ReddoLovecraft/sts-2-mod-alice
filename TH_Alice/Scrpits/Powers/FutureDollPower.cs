@@ -13,7 +13,7 @@ namespace TH_Alice.Scrpits.Powers
     public sealed class FutureDollPower : AlicePowerModel
     {
         public override PowerType Type => PowerType.Buff;
-        public override PowerStackType StackType => PowerStackType.Single;
+        public override PowerStackType StackType => PowerStackType.Counter;
         public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
         public override string? CustomPackedIconPath => "res://ArtWorks/Powers/FDP32.png";
         public override string? CustomBigIconPath => "res://ArtWorks/Powers/FDP64.png";
@@ -28,7 +28,7 @@ namespace TH_Alice.Scrpits.Powers
            if (Owner.Player.PlayerCombatState.Energy > 0) 
             { 
             
-                for(int i = 0; i < Owner.Player.PlayerCombatState.Energy; i++) 
+                for(int i = 0; i <Amount; i++) 
                 {
                     await ToolBox.MakeRandomDoll(Owner);
                 }

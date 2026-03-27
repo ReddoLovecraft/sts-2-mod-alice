@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\10868\\Documents\\sts-2-mod-alice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F3ABD26F-9D1E-4D77-BFF0-2EF72BEDCDC1}|Sts2ModAlice.csproj|c:\\users\\10868\\documents\\sts-2-mod-alice\\th_alice\\scrpits\\main\\alicecharacter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3ABD26F-9D1E-4D77-BFF0-2EF72BEDCDC1}|Sts2ModAlice.csproj|solutionrelative:th_alice\\scrpits\\main\\alicecharacter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F3ABD26F-9D1E-4D77-BFF0-2EF72BEDCDC1}|Sts2ModAlice.csproj|c:\\users\\10868\\documents\\sts-2-mod-alice\\th_alice\\scrpits\\cards\\dollsqure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3ABD26F-9D1E-4D77-BFF0-2EF72BEDCDC1}|Sts2ModAlice.csproj|solutionrelative:th_alice\\scrpits\\cards\\dollsqure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3ABD26F-9D1E-4D77-BFF0-2EF72BEDCDC1}|Sts2ModAlice.csproj|c:\\users\\10868\\documents\\sts-2-mod-alice\\th_alice\\scrpits\\cards\\master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3ABD26F-9D1E-4D77-BFF0-2EF72BEDCDC1}|Sts2ModAlice.csproj|solutionrelative:th_alice\\scrpits\\cards\\master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F3ABD26F-9D1E-4D77-BFF0-2EF72BEDCDC1}|Sts2ModAlice.csproj|c:\\users\\10868\\documents\\sts-2-mod-alice\\th_alice\\scrpits\\cards\\dollmake.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -18,11 +22,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DollSqure.cs",
+              "DocumentMoniker": "C:\\Users\\10868\\Documents\\sts-2-mod-alice\\TH_Alice\\Scrpits\\Cards\\DollSqure.cs",
+              "RelativeDocumentMoniker": "TH_Alice\\Scrpits\\Cards\\DollSqure.cs",
+              "ToolTip": "C:\\Users\\10868\\Documents\\sts-2-mod-alice\\TH_Alice\\Scrpits\\Cards\\DollSqure.cs",
+              "RelativeToolTip": "TH_Alice\\Scrpits\\Cards\\DollSqure.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAADwvxkAAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-27T20:49:22.631Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Master.cs",
+              "DocumentMoniker": "C:\\Users\\10868\\Documents\\sts-2-mod-alice\\TH_Alice\\Scrpits\\Cards\\Master.cs",
+              "RelativeDocumentMoniker": "TH_Alice\\Scrpits\\Cards\\Master.cs",
+              "ToolTip": "C:\\Users\\10868\\Documents\\sts-2-mod-alice\\TH_Alice\\Scrpits\\Cards\\Master.cs",
+              "RelativeToolTip": "TH_Alice\\Scrpits\\Cards\\Master.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAADwvyQAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-27T20:33:01.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "DollMake.cs",
               "DocumentMoniker": "C:\\Users\\10868\\Documents\\sts-2-mod-alice\\TH_Alice\\Scrpits\\Cards\\DollMake.cs",
               "RelativeDocumentMoniker": "TH_Alice\\Scrpits\\Cards\\DollMake.cs",
@@ -31,19 +61,6 @@
               "ViewState": "AgIAABIAAAAAAAAAAADwvysAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-27T19:03:22.621Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AliceCharacter.cs",
-              "DocumentMoniker": "C:\\Users\\10868\\Documents\\sts-2-mod-alice\\TH_Alice\\Scrpits\\Main\\AliceCharacter.cs",
-              "RelativeDocumentMoniker": "TH_Alice\\Scrpits\\Main\\AliceCharacter.cs",
-              "ToolTip": "C:\\Users\\10868\\Documents\\sts-2-mod-alice\\TH_Alice\\Scrpits\\Main\\AliceCharacter.cs",
-              "RelativeToolTip": "TH_Alice\\Scrpits\\Main\\AliceCharacter.cs",
-              "ViewState": "AgIAAFAAAAAAAAAAAAAowGoAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T18:56:13.359Z",
               "EditorCaption": ""
             }
           ]

@@ -42,10 +42,11 @@ public class DollCremation : AliceCardModel
     }
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        CardModel cardModel = await CardSelectCmd.FromHandForUpgrade(choiceContext, base.Owner, this);
-		if (cardModel != null)
+       CardPile pile = PileType.Hand.GetPile(base.Owner);
+		CardModel cardModel2 = base.Owner.RunState.Rng.CombatCardSelection.NextItem(pile.Cards);
+		if (cardModel2 != null)
 		{
-			CardCmd.Upgrade(cardModel);
+			await CardCmd.Exhaust(choiceContext, cardModel2);
 		}
         for(int i=0;i<base.DynamicVars.Cards.IntValue;i++)
         await ToolBox.MakeRandomDoll(Owner.Creature);

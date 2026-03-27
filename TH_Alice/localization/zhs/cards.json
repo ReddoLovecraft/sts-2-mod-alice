@@ -182,7 +182,7 @@
 	"TH_ALICE-FLOWER.title": "斑驳木春菊",
 	"TH_ALICE-FLOWER.description": "在你的回合结束时，所有[gold]人偶[/gold]获得{Power:diff()}点最大生命值。",
 	"TH_ALICE-FUTURE_DOLL.title": "人偶「未来文乐」",
-	"TH_ALICE-FUTURE_DOLL.description": "在你的回合结束时，如果你有剩余的{Energy:energyIcons()}，随机制作等量的[gold]人偶[/gold]。",
+	"TH_ALICE-FUTURE_DOLL.description": "在你的回合结束时，如果你有剩余的{Energy:energyIcons()}，随机制作一个[gold]人偶[/gold]。",
 	"TH_ALICE-COLORFUL_DOLLER.title": "七色的人偶使",
 	"TH_ALICE-COLORFUL_DOLLER.description": "在你的回合开始时，每有一个[gold]人偶[/gold]就获得{Energy:energyIcons()}，\n每有一种[gold]人偶[/gold]就抽1张牌。",
 	"TH_ALICE-WITCH_FORM.title": "魔神形态",
