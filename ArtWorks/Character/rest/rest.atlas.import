@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://m0wkemobljny"
+path="res://.godot/imported/rest.atlas-d5be4f728ce31459247352a34154d852.spatlas"
+
+[deps]
+
+source_file="res://ArtWorks/Character/rest/rest.atlas"
+dest_files=["res://.godot/imported/rest.atlas-d5be4f728ce31459247352a34154d852.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

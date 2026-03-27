@@ -1,0 +1,156 @@
+[gd_scene load_steps=13 format=3 uid="uid://bh7mlrpx2vbce"]
+
+[ext_resource type="Texture2D" uid="uid://by5t7bps4fjxs" path="res://ArtWorks/VFX/energy_orb_burst.png" id="1_fxdbh"]
+[ext_resource type="Script" uid="uid://b3bqeloytrreg" path="res://NAliceEnergyCounter.cs" id="1_k51tk"]
+[ext_resource type="Material" uid="uid://c281ff8d6uddt" path="res://ArtWorks/VFX/canvas_item_material_additive_shared.tres" id="1_pabcb"]
+[ext_resource type="Texture2D" uid="uid://ciag7i22afad1" path="res://ArtWorks/VFX/AliceEnergy.png" id="3_fxdbh"]
+[ext_resource type="Texture2D" uid="uid://0yu80eea534a" path="res://ArtWorks/VFX/AliceEnergy2.png" id="4_2dcmw"]
+[ext_resource type="Texture2D" uid="uid://c7hgg0p7tyv07" path="res://ArtWorks/VFX/energy_orb_shine.png" id="4_pabcb"]
+[ext_resource type="Texture2D" uid="uid://du5tt8m5yi1qw" path="res://ArtWorks/VFX/AliceEnergy3.png" id="5_2dcmw"]
+
+[sub_resource type="Curve" id="Curve_2dcmw"]
+_data = [Vector2(0, 0.033707857), 0.0, 1.4494387, 0, 0, Vector2(0.31976748, 0.7865169), 0.59051156, 0.59051156, 0, 0, Vector2(0.9941861, 0.9325843), -0.58426994, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_k51tk"]
+offsets = PackedFloat32Array(0, 0.39041096, 0.739726, 0.9931507)
+colors = PackedColorArray(0, 0, 0, 1, 9.9708605, 9.9708605, 9.9708605, 0.99379086, 18.892157, 18.892157, 18.892157, 0.9882353, 0.94520545, 0.94520545, 0.94520545, 1)
+
+[sub_resource type="Curve" id="Curve_pabcb"]
+_data = [Vector2(0.017441869, 0.056179762), 0.0, 1.8702422, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_2dcmw"]
+offsets = PackedFloat32Array(0, 0.006849315, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.6643836, 0.6643836, 0.6643836, 1, 1, 1, 1, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_2dcmw"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+pivot_offset = Vector2(64, 64)
+script = ExtResource("1_k51tk")
+
+[node name="BurstBack" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+material = ExtResource("1_pabcb")
+position = Vector2(65, 63)
+emitting = false
+texture = ExtResource("4_pabcb")
+one_shot = true
+local_coords = true
+gravity = Vector2(0, 0)
+angular_velocity_min = 30.0
+angular_velocity_max = 30.0
+radial_accel_max = 10.0
+angle_max = 260.0
+scale_amount_min = 0.45
+scale_amount_max = 0.45
+scale_amount_curve = SubResource("Curve_2dcmw")
+color = Color(1, 1, 0.5254902, 0.6627451)
+color_ramp = SubResource("Gradient_k51tk")
+
+[node name="Layers" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Layer1" type="TextureRect" parent="Layers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 88.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_fxdbh")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RotationLayers" type="Control" parent="Layers"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Layer2" type="TextureRect" parent="Layers/RotationLayers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 88.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+mouse_filter = 2
+texture = ExtResource("4_2dcmw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Layer3" type="TextureRect" parent="Layers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.9999995
+offset_top = 3.999999
+offset_right = 94.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.038122796
+texture = ExtResource("5_2dcmw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BurstFront" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+material = ExtResource("1_pabcb")
+position = Vector2(65, 63)
+emitting = false
+amount = 1
+texture = ExtResource("1_fxdbh")
+lifetime = 0.5
+one_shot = true
+local_coords = true
+gravity = Vector2(0, 0)
+angular_velocity_min = 30.0
+angular_velocity_max = 30.0
+radial_accel_max = 10.0
+angle_max = 260.0
+scale_amount_min = 0.45
+scale_amount_max = 0.45
+scale_amount_curve = SubResource("Curve_pabcb")
+color = Color(1, 1, 0.5294118, 0.6745098)
+color_ramp = SubResource("Gradient_2dcmw")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 8.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 0.6901961, 0.96862745)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0.8784314, 0.8117647, 0.22745098, 0.7411765)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 16
+theme_override_constants/shadow_outline_size = 16
+theme_override_fonts/font = SubResource("FontVariation_2dcmw")
+theme_override_font_sizes/font_size = 18
+text = "3/3"
+horizontal_alignment = 1
+vertical_alignment = 1

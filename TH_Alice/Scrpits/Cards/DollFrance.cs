@@ -1,0 +1,58 @@
+using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.CardPools;
+using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.ValueProps;
+using TH_Alice.Scrpits.Character;
+using TH_Alice.Scrpits.Main;
+using TH_Alice.Scrpits.Powers;
+using TH_Alice.TH_Alice.Scrpits.Main;
+
+namespace TH_Alice.Scrpits.Cards;
+[Pool(typeof(AliceCardPool))]
+public class DollFrance : AliceCardModel
+{
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+     [
+       new DamageVar(3, ValueProp.Move),
+       new CardsVar(2)
+     ];
+    static string text = StringHelper.Slugify("Doll");
+    static LocString locString = ToolBox.L10NStatic(text + ".title");
+    static LocString locString2 = ToolBox.L10NStatic(text + ".description");
+    static string text2 = StringHelper.Slugify("France");
+    static LocString locString3 = ToolBox.L10NStatic(text2 + ".title");
+    static LocString locString4 = ToolBox.L10NStatic(text2 + ".description");
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => (new IHoverTip[2]
+  {
+         new HoverTip(locString3,locString4),
+        new HoverTip(locString,locString2)
+  });
+    public DollFrance() : base(1, CardType.Attack ,CardRarity.Common, TargetType.AnyEnemy)
+	{
+	}
+
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	{
+         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount(2).FromCard(this)
+            .Targeting(cardPlay.Target)
+            .WithHitFx("vfx/vfx_attack_slash")
+            .Execute(choiceContext);
+            await ToolBox.MakeDoll<FrancePower>(Owner.Creature);
+    }
+	protected override void OnUpgrade()
+	{
+        base.DynamicVars.Damage.UpgradeValueBy(2);
+    }
+}

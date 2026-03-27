@@ -1,0 +1,11 @@
+{
+  "THREAD.title": "针线盒",
+  "THREAD.description": "你的回合开始时，将一张[gold]操纵[/gold]加入你的[gold]手牌[/gold]。",
+  "THREAD.flavor": "爱丽丝制作人偶的常用工具之一，也可以用来修复破损的人偶。",
+  "BLOOD_THREAD.title": "染血针线盒",
+  "BLOOD_THREAD.description": "你的回合开始时，所有[gold]人偶[/gold]的最大生命值提高[blue]5[/blue]点，\n并将一张[gold]操纵[/gold]加入你的[gold]手牌[/gold]。。",
+  "BLOOD_THREAD.flavor": "爱丽丝制作人偶的常用工具之一，沾染了先古之民的血液后产生了神秘的变化。",
+  "TH_ALICE-ALICE_TEA.title": "魔女之茶",
+  "TH_ALICE-ALICE_TEA.description": "你的下一场战斗每回合额外获得[blue]{Energy:energyIcons()}[/blue]。",
+  "TH_ALICE-ALICE_TEA.flavor": "魔女们的下午茶，趁热享用吧~"
+}

@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhnafu0ui0xx6"]
+
+[ext_resource type="Script" uid="uid://d1sdrupj7gfic" path="res://ArtWorks/Character/Alicerest.cs" id="1_rfjk2"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://d1wbtdhnjuwwt" path="res://ArtWorks/Character/rest/rest.tres" id="1_xodtj"]
+
+[node name="alicerest" type="Node2D"]
+script = ExtResource("1_rfjk2")
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_xodtj")
+preview_skin = "default"
+preview_animation = "overgrowth_loop"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(0, -600)
+scale = Vector2(8, 8)
+
+[node name="ControlRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="SelectionRetic" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -189.0
+offset_top = -698.0
+offset_right = 231.0
+offset_bottom = -28.0
+
+[node name="Hitbox" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -201.0
+offset_top = -724.0
+offset_right = 220.0
+offset_bottom = -41.0
+
+[node name="ThoughtBubbleRight" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 209.0
+offset_top = -700.0
+offset_right = 209.0
+offset_bottom = -700.0
+
+[node name="ThoughtBubbleLeft" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -231.0
+offset_top = -700.0
+offset_right = -73.0
+offset_bottom = -700.0

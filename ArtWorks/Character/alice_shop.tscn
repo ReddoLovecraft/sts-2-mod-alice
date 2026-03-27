@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvgkxjdve42bk"]
+
+[ext_resource type="Script" uid="uid://6c1ddf853dwu" path="res://AliceShop.cs" id="1_xsix8"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://col3wxkdjy4px" path="res://ArtWorks/Character/character.tres" id="2_rdeba"]
+
+[node name="alice_shop" type="Node2D"]
+script = ExtResource("1_xsix8")
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_rdeba")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(3, 3)

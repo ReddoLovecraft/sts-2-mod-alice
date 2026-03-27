@@ -1,0 +1,11 @@
+{
+  "id": "TH_Alice",          
+  "name": "爱丽丝·玛格特洛伊德",
+  "author": "Reddo",
+  "description": "加入了来自东方Project的角色，七色的人偶师爱丽丝。",
+  "version": "1.0",
+  "has_pck": true,         
+  "has_dll": true,       
+  "dependencies": ["BaseLib"],    
+  "affects_gameplay": true 
+}

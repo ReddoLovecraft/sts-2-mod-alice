@@ -1,0 +1,17 @@
+{
+  "TH_ALICE-ALICE_CHARACTER.aromaPrinciple": "[sine][blue]……等待……[/blue][/sine]",
+  "TH_ALICE-ALICE_CHARACTER.banter.alive.endTurnPing": "……",
+  "TH_ALICE-ALICE_CHARACTER.banter.dead.endTurnPing": "……",
+  "TH_ALICE-ALICE_CHARACTER.cardsModifierDescription": "爱丽丝的卡牌现在会出现在奖励和商店中。",
+  "TH_ALICE-ALICE_CHARACTER.cardsModifierTitle": "爱丽丝卡牌",
+  "TH_ALICE-ALICE_CHARACTER.description": "七色的人偶使，\n擅长操纵人偶和使用魔法来战胜敌人。",
+  "TH_ALICE-ALICE_CHARACTER.eventDeathPrevention": "呜……我不甘心……",
+  "TH_ALICE-ALICE_CHARACTER.goldMonologue": "[sine]这些金币……也许能派上用场……[/sine]",
+  "TH_ALICE-ALICE_CHARACTER.possessiveAdjective": "她的",
+  "TH_ALICE-ALICE_CHARACTER.pronounObject": "她",
+  "TH_ALICE-ALICE_CHARACTER.pronounPossessive": "她的",
+  "TH_ALICE-ALICE_CHARACTER.pronounSubject": "她",
+  "TH_ALICE-ALICE_CHARACTER.title": "爱丽丝·玛格特洛伊德",
+  "TH_ALICE-ALICE_CHARACTER.titleObject": "爱丽丝",
+  "TH_ALICE-ALICE_CHARACTER.unlockText": "用[pink]{Prerequisite}[/pink]进行一局游戏来解锁这个角色。"
+}

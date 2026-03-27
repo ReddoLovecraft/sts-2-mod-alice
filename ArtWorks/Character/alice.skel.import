@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://4wkmj4h712d3"
+path="res://.godot/imported/alice.skel-d36322c1eee1281f2a2d7a55240b8b45.spskel"
+
+[deps]
+
+source_file="res://ArtWorks/Character/alice.skel"
+dest_files=["res://.godot/imported/alice.skel-d36322c1eee1281f2a2d7a55240b8b45.spskel"]
+
+[params]
+
