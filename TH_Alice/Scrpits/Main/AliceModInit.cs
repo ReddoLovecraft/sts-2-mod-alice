@@ -249,33 +249,92 @@ namespace TH_Alice.Scrpits.Main
     {
         static void Postfix(ref CardModel __result,Player player)
         {
+            if (player == null)
+            {
+                return;
+            }
+
             if(player.Character is AliceCharacter)
             {
-                CardModel cm=player.Deck.Cards.FirstOrDefault((CardModel c) =>c is DollCreate);
+                CardModel? cm = player.Deck?.Cards?.FirstOrDefault((CardModel c) => c is DollCreate);
                 if(cm!=null)
                 __result=cm;
+                else
+                 Log.Debug("DollCreate not found in deck");
             }
            
         }
     }
     [HarmonyPatch(typeof(ArchaicTooth),"GetTranscendenceTransformedCard",[typeof(CardModel)])]
+    [HarmonyPriority(Priority.First)]
     public static class GetStarterCardTransformedPatch
     {
-        static void Postfix(ref CardModel __result,CardModel starterCard)
+        static bool _logged;
+
+        static bool Prefix(ArchaicTooth __instance, ref CardModel __result, CardModel starterCard, ref CardModel? __state)
         {
-            if(starterCard is DollCreate)
+            try
             {
-                CardModel cardModel=ModelDb.Card<DollMake>();
+                if (starterCard == null)
+                {
+                    return true;
+                }
+
+                if (starterCard is not DollCreate)
+                {
+                    return true;
+                }
+
+                if (!_logged)
+                {
+                    _logged = true;
+                    Log.Debug("GetTranscendenceTransformedCard Prefix: handling DollCreate");
+                }
+
+                var template = ModelDb.Card<DollMake>();
+                if (template == null)
+                {
+                    Log.Error("DollMake card template not found in ModelDb");
+                    return true;
+                }
+
+                CardModel? cardModel = template.MutableClone() as CardModel;
+                if (cardModel == null)
+                {
+                    Log.Error("Failed to clone DollMake card template");
+                    return true;
+                }
+
                 if (starterCard.IsUpgraded)
-			{
-				CardCmd.Upgrade(cardModel);
-			}
-			if (starterCard.Enchantment != null)
-			{
-				EnchantmentModel enchantmentModel = (EnchantmentModel)starterCard.Enchantment.MutableClone();
-				CardCmd.Enchant(enchantmentModel, cardModel, enchantmentModel.Amount);
-			}
-            __result=cardModel;
+                {
+                    CardCmd.Upgrade(cardModel);
+                }
+
+                if (starterCard.Enchantment is EnchantmentModel enchantment)
+                {
+                    if (enchantment.MutableClone() is EnchantmentModel enchantmentModel)
+                    {
+                        CardCmd.Enchant(enchantmentModel, cardModel, enchantmentModel.Amount);
+                    }
+                }
+
+                __state = cardModel;
+                __result = cardModel;
+                return false;
+            }
+            catch (System.Exception e)
+            {
+                Log.Error($"GetTranscendenceTransformedCard patch failed: {e}");
+                return true;
+            }
+        }
+
+        [HarmonyPriority(Priority.Last)]
+        static void Postfix(ref CardModel __result, CardModel starterCard, CardModel? __state)
+        {
+            if (starterCard is DollCreate && __state != null)
+            {
+                __result = __state;
             }
         }
     }
@@ -286,6 +345,8 @@ namespace TH_Alice.Scrpits.Main
      {
         static void Postfix(ref RelicModel __result,RelicModel starterRelic)
         {
+            if(starterRelic ==null)
+            return;
             if(starterRelic is Thread)
             __result=ModelDb.Relic<BloodThread>();
         }
