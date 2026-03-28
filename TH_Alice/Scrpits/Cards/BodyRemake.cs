@@ -28,7 +28,7 @@ public class BodyRemake : AliceCardModel
      protected override bool ShouldGlowGoldInternal =>ToolBox.GetDollCount(Owner.Creature)>0;
     protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-       new MaxHpVar(2)
+       new MaxHpVar(1)
      ];
     static string text = StringHelper.Slugify("Doll");
     static LocString locString = ToolBox.L10NStatic(text + ".title");
@@ -47,7 +47,7 @@ public class BodyRemake : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-       int increasement=ToolBox.GetDollCount(Owner.Creature)*2;
+       int increasement=ToolBox.GetDollCount(Owner.Creature)*1;
        await ToolBox.RecycleDolls(Owner.Creature,ToolBox.GetDollCount(Owner.Creature));
        await CreatureCmd.GainMaxHp(Owner.Creature,increasement);
   }

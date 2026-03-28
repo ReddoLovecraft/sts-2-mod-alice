@@ -23,6 +23,7 @@ namespace TH_Alice.Scrpits.Cards;
 [Pool(typeof(AliceCardPool))]
 public class Recycle : AliceCardModel
 {
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [(CardKeyword.Exhaust)];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
      ];

@@ -34,7 +34,7 @@ public class Doller : AliceCardModel
        
         new HoverTip(locString,locString2)
   });
-    public Doller() : base(2, CardType.Power ,CardRarity.Rare, TargetType.Self)
+    public Doller() : base(1, CardType.Power ,CardRarity.Rare, TargetType.Self)
 	{
 	}
 

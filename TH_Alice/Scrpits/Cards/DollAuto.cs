@@ -33,7 +33,7 @@ public class DollAuto : AliceCardModel
   {
         new HoverTip(locString,locString2)
   });
-    public DollAuto() : base(1, CardType.Skill ,CardRarity.Uncommon, TargetType.Self)
+    public DollAuto() : base(1, CardType.Skill ,CardRarity.Rare, TargetType.Self)
 	{
 	}
 

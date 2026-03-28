@@ -40,7 +40,7 @@ public class SuicidePact : AliceCardModel
         new HoverTip(locString3,locString4)
   });
     protected override bool IsPlayable => ToolBox.GetDollCount(Owner.Creature) > 0;
-    public SuicidePact() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+    public SuicidePact() : base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
     {
     }
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

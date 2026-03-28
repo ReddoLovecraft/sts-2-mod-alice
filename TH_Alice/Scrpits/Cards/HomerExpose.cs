@@ -26,7 +26,7 @@ public class HomerExpose : AliceCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
       new DynamicVar("Power", 2),
-      new BlockVar(10m, ValueProp.Move)
+      new BlockVar(14m, ValueProp.Move)
      ];
    
     protected override IEnumerable<IHoverTip> ExtraHoverTips => (new IHoverTip[1]
@@ -45,6 +45,6 @@ public class HomerExpose : AliceCardModel
 	protected override void OnUpgrade()
 	{
         base.DynamicVars["Power"].UpgradeValueBy(-1);
-         base.DynamicVars.Block.UpgradeValueBy(2);
+         base.DynamicVars.Block.UpgradeValueBy(3);
     }
 }
