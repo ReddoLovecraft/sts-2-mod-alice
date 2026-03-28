@@ -1,8 +1,8 @@
 {
-  "MANA_POTION.description": "将{energyPrefix:energyIcons(1)}恢复至上限。在你的下{ManaResistencePower}个回合开始时，失去{energyPrefix:energyIcons(1)}。",
-  "MANA_POTION.title": "魔力药水",
-  "LUBE_POTION.description": "本回合内所有[gold]人偶[/gold]行动时额外行动1次。",
-  "LUBE_POTION.title": "关节润滑油",
-  "BOTTLE_OF_WAX_DOLL_POTION.description": "随机制作2个[gold]蜡形人偶[/gold]。",
-  "BOTTLE_OF_WAX_DOLL_POTION.title": "瓶中蜡像"
+  "TH_ALICE-MANA_POTION.description": "将能量恢复至上限。在你的下[blue]2[/blue]个回合开始时，失去[blue]1[/blue]点能量。",
+  "TH_ALICE-MANA_POTION.title": "魔力药水",
+  "TH_ALICE-LUBE_POTION.description": "本回合内所有[gold]人偶[/gold]行动时额外行动[blue]1[/blue]次。",
+  "TH_ALICE-LUBE_POTION.title": "关节润滑油",
+  "TH_ALICE-BOTTLE_OF_WAX_POTION.description": "随机制作[blue]2[/blue]个[gold]蜡形人偶[/gold]。",
+  "TH_ALICE-BOTTLE_OF_WAX_POTION.title": "瓶中蜡像"
 }

@@ -31,13 +31,6 @@ namespace TH_Alice.Scrpits.Powers
                 return;
             }
             await PlayerCmd.LoseEnergy(1, player);
-        }
-        public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
-        {
-            if (side != base.Owner.Side)
-            {
-                return;
-            }
             await PowerCmd.Decrement(this);
         }
     }

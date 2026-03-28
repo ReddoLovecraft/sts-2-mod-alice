@@ -29,7 +29,7 @@ namespace TH_Alice.Scrpits.Powers
         public RussiaPower() {
             
         }
-        public async override Task DollAction(PlayerChoiceContext choiceContext,bool Repeatable)
+        public async override Task DollAction(PlayerChoiceContext choiceContext,bool Repeatable = true)
         {
             foreach (Creature monster in Owner.CombatState.Enemies)
             {

@@ -1,4 +1,5 @@
 using BaseLib.Abstracts;
+using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -11,11 +12,12 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TH_Alice.Scrpits.Character;
 using TH_Alice.Scrpits.Powers;
 using TH_Alice.TH_Alice.Scrpits.Main;
 
-namespace MegaCrit.Sts2.Core.Models.Potions;
-
+namespace TH_Alice.Scrpits.Potions;
+[Pool(typeof(AlicePotionPool))]
 public sealed class LubePotion : CustomPotionModel
 {
     public override PotionRarity Rarity => PotionRarity.Rare;
