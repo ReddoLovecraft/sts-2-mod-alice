@@ -62,7 +62,36 @@ namespace TH_Alice.Scrpits.Main
             //GD.Print("[TH_Alice] Alice mod initialized");
         }
     }
+    /*
+    代办
 
++爱丽丝的皮靴 稀有
+每场战斗开始时，击晕所有敌人。
+东脚吧专武，味大，无需多言。
++灵丝 稀有
+每当人偶行动时，下回合获得一点能量。
+神秘的丝线，能够从人偶处回馈能量。
++能力卡牌［上海人形］商店
+现在上海人形的意图改为对所有敌人造成伤害。
+原理不明的神秘卡牌，据说是市场之神的杰作。
++罐装火药 罕见
+现在人偶死亡时额外对所有敌人造成其当前生命值的伤害。
+魔法秘典 罕见
+回合开始时，你每打出3张牌，将第三张牌的虚无复制品置入手中。
+一本神秘的书。
+爱丽丝的魔法书。 事件
+拾起时，选择任意张旧作卡牌加入卡组。
+爱丽丝fumo 稀有
+回合开始时将一张带有消耗的随机牌置入手中，且本回合内耗能为0。
+fumofumo。
++魔能药水 普通
+将能量回复至上限，下个回合少获得1点能量。
++瓶中蜡像 罕见
+制作3个随机蜡制人偶。
++关节润滑油 稀有
+本回合内所有人偶行动时额外行动1次。
+
+    */
     [HarmonyPatch(typeof(NAudioManager), "PlayOneShot", [typeof(string), typeof(float)])]
     public static class ModSfxPatch
     {
@@ -320,6 +349,7 @@ namespace TH_Alice.Scrpits.Main
 
                 __state = cardModel;
                 __result = cardModel;
+                __result.Owner = starterCard.Owner;
                 return false;
             }
             catch (System.Exception e)
