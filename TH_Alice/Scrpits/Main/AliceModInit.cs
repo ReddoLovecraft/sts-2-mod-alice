@@ -352,6 +352,29 @@ namespace TH_Alice.Scrpits.Main
         }
      } 
 
+    [HarmonyPatch(typeof(DustyTome), "SetupForPlayer", [typeof(Player)])]
+    public static class DustyTomeSetupForPlayerPatch
+    {
+        static bool Prefix(DustyTome __instance, Player player)
+        {
+            if (player?.Character is not AliceCharacter)
+            {
+                return true;
+            }
+
+            try
+            {
+                __instance.AncientCard = ModelDb.Card<WitchForm>().Id;
+                return false;
+            }
+            catch (System.Exception e)
+            {
+                Log.Error($"Failed to set DustyTome.AncientCard to WitchForm: {e}");
+                return true;
+            }
+        }
+    }
+
     [HarmonyPatch(typeof(PowerCmd), "ModifyAmount",[typeof(PowerModel),typeof(decimal),typeof(Creature),typeof(CardModel),typeof(bool)])]
     public static class ModifyAmountPatch 
     {
