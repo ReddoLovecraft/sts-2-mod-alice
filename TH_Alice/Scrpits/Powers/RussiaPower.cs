@@ -29,7 +29,7 @@ namespace TH_Alice.Scrpits.Powers
         public RussiaPower() {
             
         }
-        public async override Task DollAction(PlayerChoiceContext choiceContext)
+        public async override Task DollAction(PlayerChoiceContext choiceContext,bool Repeatable)
         {
             foreach (Creature monster in Owner.CombatState.Enemies)
             {
@@ -46,6 +46,10 @@ namespace TH_Alice.Scrpits.Powers
                     }
                 }
 
+            }
+            if (Owner != null && Owner.HasPower<LubePower>() && Repeatable)
+            {
+                await DollAction(choiceContext, false);
             }
         }
         public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)

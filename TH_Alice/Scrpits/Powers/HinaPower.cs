@@ -38,9 +38,13 @@ namespace TH_Alice.Scrpits.Powers
             await DollAction(choiceContext);
             await base.BeforeTurnEnd(choiceContext, side);
         }
-        public override async Task DollAction(PlayerChoiceContext choiceContext)
+        public override async Task DollAction(PlayerChoiceContext choiceContext,bool Repeatable)
         {
             await PowerCmd.Apply<ArtifactPower>(Owner, base.DynamicVars.Damage.BaseValue, Owner, null);
+            if (Owner != null && Owner.HasPower<LubePower>() && Repeatable)
+            {
+                await DollAction(choiceContext, false);
+            }
         }
         public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
         {

@@ -1,4 +1,10 @@
 {
+  "TH_ALICE-MANA_LOSE_POWER.description": "下个回合开始时，失去[blue]1[/blue]点能量。",
+  "TH_ALICE-MANA_LOSE_POWER.smartDescription": "下[blue]{Amount}[/blue]个回合开始时，失去[blue]1[/blue]点能量。",
+  "TH_ALICE-MANA_LOSE_POWER.title": "抗魔性",
+  "TH_ALICE-LUBE_POWER.description": "本回合内所有[gold]人偶[/gold]行动时额外行动[blue]1[/blue]次。",
+  "TH_ALICE-LUBE_POWER.smartDescription": "本回合内所有[gold]人偶[/gold]行动时额外行动[blue]{Amount}[/blue]次。",
+  "TH_ALICE-LUBE_POWER.title": "润滑",
   "TH_ALICE-MGR_POWER.description": "本回合内会被[gold]人偶[/gold]优先攻击。",
   "TH_ALICE-MGR_POWER.smartDescription": "[blue]{Amount}[/blue]回合内会被[gold]人偶[/gold]优先攻击。",
   "TH_ALICE-MGR_POWER.title": "操纵",

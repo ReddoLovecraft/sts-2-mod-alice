@@ -29,7 +29,7 @@ namespace TH_Alice.Scrpits.Powers
         public OrlPower() {
             
         }
-        public async override Task DollAction(PlayerChoiceContext choiceContext)
+        public async override Task DollAction(PlayerChoiceContext choiceContext, bool Repeatable = true)
         {
             await CreatureCmd.GainBlock(Owner, base.DynamicVars.Damage.BaseValue, ValueProp.Unpowered, null);
             List<Creature> target = new List<Creature>();
@@ -45,6 +45,10 @@ namespace TH_Alice.Scrpits.Powers
                 target.Add(Owner.Player.RunState.Rng.CombatTargets.NextItem(base.CombatState.HittableEnemies));
             if (target != null && target[0] != null && target[0].IsAlive)
                 await CreatureCmd.Damage(choiceContext, target, Owner.Block, ValueProp.Unpowered, base.Owner);
+            if (Owner != null && Owner.HasPower<LubePower>() && Repeatable)
+            {
+                await DollAction(choiceContext, false);
+            }
         }
         public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
         {

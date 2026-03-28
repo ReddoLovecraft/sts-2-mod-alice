@@ -38,7 +38,7 @@ namespace TH_Alice.Scrpits.Powers
             await DollAction(choiceContext);
             await base.BeforeTurnEnd(choiceContext, side);
         }
-        public async override Task DollAction(PlayerChoiceContext choiceContext)
+        public async override Task DollAction(PlayerChoiceContext choiceContext, bool Repeatable = true)
         {
             List<Creature> target = new List<Creature>();
             foreach (Creature monster in base.CombatState.HittableEnemies)
@@ -65,6 +65,10 @@ namespace TH_Alice.Scrpits.Powers
                     }
                 }
                 target.Add(Owner.Player.RunState.Rng.CombatTargets.NextItem(base.CombatState.HittableEnemies));
+            }
+            if (Owner != null && Owner.HasPower<LubePower>() && Repeatable)
+            {
+                await DollAction(choiceContext, false);
             }
         }
         public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)

@@ -26,9 +26,13 @@ namespace TH_Alice.Scrpits.Powers
         public PengLaiPower() {
             
         }
-        public async override Task DollAction(PlayerChoiceContext choiceContext)
+        public async override Task DollAction(PlayerChoiceContext choiceContext, bool Repeatable = true)
         {
             await PowerCmd.ModifyAmount(this, base.DynamicVars.Damage.BaseValue, null, null);
+            if (Owner != null && Owner.HasPower<LubePower>() && Repeatable)
+            {
+                await DollAction(choiceContext, false);
+            }
         }
         public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
         {

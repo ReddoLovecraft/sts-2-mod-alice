@@ -29,10 +29,14 @@ namespace TH_Alice.Scrpits.Powers
         public NetherlandPower() {
             
         }
-        public async override Task DollAction(PlayerChoiceContext choiceContext)
+        public async override Task DollAction(PlayerChoiceContext choiceContext, bool Repeatable = true)
         {
             await CreatureCmd.Damage(choiceContext, base.CombatState.HittableEnemies, base.DynamicVars.Damage, base.Owner);
             AddDamage(-2);
+            if (Owner != null && Owner.HasPower<LubePower>() && Repeatable)
+            {
+                await DollAction(choiceContext, false);
+            }
         }
         public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
         {

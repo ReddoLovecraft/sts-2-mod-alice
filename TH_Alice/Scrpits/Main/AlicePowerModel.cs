@@ -69,7 +69,7 @@ namespace TH_Alice.Scrpits.Main
           
             //执行一些buff的判断
         }
-        public virtual async Task DollAction(PlayerChoiceContext choiceContext) { }
+        public virtual async Task DollAction(PlayerChoiceContext choiceContext,bool Repeatable=true) { }
         public async Task APM_Remove(bool IsRecyle,AlicePowerModel power) 
         {
             //调用这个函数来移除这个Power，触发移除时的相关效果

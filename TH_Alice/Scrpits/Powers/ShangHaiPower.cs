@@ -28,7 +28,7 @@ namespace TH_Alice.Scrpits.Powers
         public ShangHaiPower() {
             
         }
-        public async override Task DollAction(PlayerChoiceContext choiceContext)
+        public async override Task DollAction(PlayerChoiceContext choiceContext, bool Repeatable = true)
         {
             List<Creature> target = new List<Creature>();
             foreach (Creature monster in base.CombatState.HittableEnemies)
@@ -43,6 +43,10 @@ namespace TH_Alice.Scrpits.Powers
                 target.Add(Owner.Player.RunState.Rng.CombatTargets.NextItem(base.CombatState.HittableEnemies));
             if (target != null && target[0]!=null && target[0].IsAlive)
             await CreatureCmd.Damage(choiceContext, target[0], base.DynamicVars.Damage, base.Owner);
+            if (Owner != null && Owner.HasPower<LubePower>() && Repeatable)
+            {
+                await DollAction(choiceContext, false);
+            }
         }
         public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
         {
