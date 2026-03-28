@@ -140,7 +140,7 @@
 	"TH_ALICE-DOLL_NETHERLAND.title": "红符「荷兰人偶」",
 	"TH_ALICE-DOLL_NETHERLAND.description": "对所有敌人{Damage:diff()}点伤害{Cards:diff()}次。\n制作一个[gold]荷兰人偶[/gold]。",
 	"TH_ALICE-DOLL_CREMATION.title": "人偶火葬",
-	"TH_ALICE-DOLL_CREMATION.description": "随机[gold]消耗[/gold]1张牌。\n随机制作{Cards:diff()}个[gold]人偶[/gold]。",
+	"TH_ALICE-DOLL_CREMATION.description": "随机[gold]消耗[/gold]{Cards:diff()}张牌。\n随机制作{Cards:diff()}个[gold]人偶[/gold]。",
 	"TH_ALICE-DOLL_BLOW_UP.title": "人偶振起",
 	"TH_ALICE-DOLL_BLOW_UP.description": "对所有敌人造成{Damage:diff()}点伤害。\n如果你有[gold]人偶[/gold]，再造成{IfUpgraded:show:2|1}次。",
 	"TH_ALICE-DOLL_SP.title": "人偶SP",

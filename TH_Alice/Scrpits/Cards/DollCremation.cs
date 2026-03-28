@@ -48,6 +48,16 @@ public class DollCremation : AliceCardModel
 		{
 			await CardCmd.Exhaust(choiceContext, cardModel2);
 		}
+    if(IsUpgraded)
+    {
+         CardPile pile2 = PileType.Hand.GetPile(base.Owner);
+		CardModel cardModel3 = base.Owner.RunState.Rng.CombatCardSelection.NextItem(pile2.Cards);
+		if (cardModel3 != null)
+		{
+			await CardCmd.Exhaust(choiceContext, cardModel3);
+		}
+    }
+
         for(int i=0;i<base.DynamicVars.Cards.IntValue;i++)
         await ToolBox.MakeRandomDoll(Owner.Creature);
     }

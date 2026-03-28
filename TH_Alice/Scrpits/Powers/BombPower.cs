@@ -46,7 +46,6 @@ namespace TH_Alice.Scrpits.Powers
             }
             await CreatureCmd.Damage(choiceContext, base.CombatState.HittableEnemies, base.DynamicVars.Damage, base.Owner);
             await APM_Remove(false, this);
-            await base.AfterPlayerTurnStart(choiceContext, player);
         }
         
     }

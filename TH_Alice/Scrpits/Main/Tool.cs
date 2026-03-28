@@ -123,7 +123,7 @@ namespace TH_Alice.TH_Alice.Scrpits.Main
             }
             if(inst is ShangHaiPower) 
             {
-                (await PowerCmd.Apply<ShangHaiPower>(player, 12, player, null)).SetDamageAndWax(6,isWax);
+                (await PowerCmd.Apply<ShangHaiPower>(player, 10, player, null)).SetDamageAndWax(6,isWax);
                 return;
             }
             if (inst is XiZangPower)
@@ -133,12 +133,12 @@ namespace TH_Alice.TH_Alice.Scrpits.Main
             }
             if (inst is PengLaiPower)
             {
-                (await PowerCmd.Apply<PengLaiPower>(player, 5, player, null)).SetDamageAndWax(5, isWax);
+                (await PowerCmd.Apply<PengLaiPower>(player, 4, player, null)).SetDamageAndWax(4, isWax);
                 return;
             }
             if (inst is HinaPower)
             {
-                (await PowerCmd.Apply<HinaPower>(player, 8, player, null)).SetDamageAndWax(1, isWax);
+                (await PowerCmd.Apply<HinaPower>(player, 5, player, null)).SetDamageAndWax(1, isWax);
                 return;
             }
             if (inst is OrlPower)
@@ -148,12 +148,12 @@ namespace TH_Alice.TH_Alice.Scrpits.Main
             }
             if (inst is FrancePower)
             {
-                (await PowerCmd.Apply<FrancePower>(player, 12, player, null)).SetDamageAndWax(4, isWax);
+                (await PowerCmd.Apply<FrancePower>(player, 10, player, null)).SetDamageAndWax(4, isWax);
                 return;
             }
             if (inst is GoliathPower)
             {
-                (await PowerCmd.Apply<GoliathPower>(player, 25, player, null)).SetDamageAndWax(6, isWax);
+                (await PowerCmd.Apply<GoliathPower>(player, 20, player, null)).SetDamageAndWax(4, isWax);
                 return;
             }
             if (inst is RoundTablePower)
@@ -163,12 +163,12 @@ namespace TH_Alice.TH_Alice.Scrpits.Main
             }
             if (inst is RussiaPower)
             {
-                (await PowerCmd.Apply<RussiaPower>(player, 12, player, null)).SetDamageAndWax(2, isWax);
+                (await PowerCmd.Apply<RussiaPower>(player, 8, player, null)).SetDamageAndWax(2, isWax);
                 return;
             }
             if (inst is LondonPower)
             {
-                (await PowerCmd.Apply<LondonPower>(player, 16, player, null)).SetDamageAndWax(3, isWax);
+                (await PowerCmd.Apply<LondonPower>(player, 12, player, null)).SetDamageAndWax(3, isWax);
                 return;
             }
             if (inst is BombPower)
@@ -183,7 +183,7 @@ namespace TH_Alice.TH_Alice.Scrpits.Main
             }
             if (inst is CursePower)
             {
-                (await PowerCmd.Apply<CursePower>(player, 9, player, null)).SetDamageAndWax(1, isWax);
+                (await PowerCmd.Apply<CursePower>(player, 6, player, null)).SetDamageAndWax(1, isWax);
                 return;
             }
         }
@@ -192,7 +192,7 @@ namespace TH_Alice.TH_Alice.Scrpits.Main
             int res = 2;
             if(apm is ShangHaiPower) 
             {
-               return apm.Amount > 12 ? ++res : apm.Amount<6? --res : res;
+               return apm.Amount > 10 ? ++res : apm.Amount<5? --res : res;
             }
             else if (apm is XiZangPower)
             {
@@ -200,11 +200,11 @@ namespace TH_Alice.TH_Alice.Scrpits.Main
             }
             else if (apm is PengLaiPower)
             {
-                return apm.Amount > 5 ? ++res : apm.Amount < 2.5 ? --res : res;
+                return apm.Amount > 4 ? ++res : apm.Amount < 2 ? --res : res;
             }
             else if (apm is HinaPower)
             {
-                return apm.Amount > 8 ? ++res : apm.Amount < 4 ? --res : res;
+                return apm.Amount > 5 ? ++res : apm.Amount < 2.5 ? --res : res;
             }
             else if (apm is OrlPower)
             {
@@ -212,11 +212,11 @@ namespace TH_Alice.TH_Alice.Scrpits.Main
             }
             else if (apm is FrancePower)
             {
-                return apm.Amount > 12 ? ++res : apm.Amount < 6 ? --res : res;
+                return apm.Amount > 10 ? ++res : apm.Amount < 5 ? --res : res;
             }
             else if (apm is GoliathPower)
             {
-                return apm.Amount > 25 ? ++res : apm.Amount < 12.5 ? --res : res;
+                return apm.Amount > 20 ? ++res : apm.Amount < 10 ? --res : res;
             }
             else if (apm is RoundTablePower)
             {
@@ -224,11 +224,11 @@ namespace TH_Alice.TH_Alice.Scrpits.Main
             }
             else if (apm is RussiaPower)
             {
-                return apm.Amount > 12 ? ++res : apm.Amount < 6 ? --res : res;
+                return apm.Amount > 8 ? ++res : apm.Amount < 4 ? --res : res;
             }
             else if (apm is LondonPower)
             {
-                return apm.Amount > 16 ? ++res : apm.Amount < 8 ? --res : res;
+                return apm.Amount > 12 ? ++res : apm.Amount < 6 ? --res : res;
             }
             else if (apm is BombPower)
             {
@@ -240,7 +240,7 @@ namespace TH_Alice.TH_Alice.Scrpits.Main
             }
             else if (apm is CursePower)
              {
-                return apm.Amount > 9 ? ++res : apm.Amount < 4.5 ? --res : res;
+                return apm.Amount > 6 ? ++res : apm.Amount < 3 ? --res : res;
             }
             return 2;
 

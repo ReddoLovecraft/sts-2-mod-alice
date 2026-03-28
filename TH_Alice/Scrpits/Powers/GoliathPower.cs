@@ -42,10 +42,7 @@ namespace TH_Alice.Scrpits.Powers
         }
         public async override Task DollAction(PlayerChoiceContext choiceContext)
         {
-            for (int i = 0; i < ToolBox.GetDollCount(Owner); i++)
-            {
-                await CreatureCmd.GainBlock(Owner, base.DynamicVars.Damage.BaseValue, ValueProp.Unpowered, null);
-            }
+                await CreatureCmd.GainBlock(Owner, base.DynamicVars.Damage.BaseValue+2*ToolBox.GetDollCount(Owner), ValueProp.Unpowered, null);
         }
         public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
         {

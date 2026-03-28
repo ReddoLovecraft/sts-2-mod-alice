@@ -36,7 +36,6 @@ namespace TH_Alice.Scrpits.Powers
             {
                 return;
             }
-            await DollAction(choiceContext);
             ChoiceContextEndTurn = choiceContext;
            await base.BeforeTurnEnd(choiceContext, side);
         }
@@ -46,8 +45,8 @@ namespace TH_Alice.Scrpits.Powers
             {
                 return;
             }
+            await DollAction(choiceContext);
             await base.AfterPlayerTurnStart(choiceContext, player);
-            
         }
        
     }
