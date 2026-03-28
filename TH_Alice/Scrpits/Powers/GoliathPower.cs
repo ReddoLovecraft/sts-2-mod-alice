@@ -43,6 +43,10 @@ namespace TH_Alice.Scrpits.Powers
         public async override Task DollAction(PlayerChoiceContext choiceContext, bool Repeatable = true)
         {
                 await CreatureCmd.GainBlock(Owner, base.DynamicVars.Damage.BaseValue+2*ToolBox.GetDollCount(Owner), ValueProp.Unpowered, null);
+            if (Owner.Player.GetRelic<Silk>() != null)
+            {
+                await PowerCmd.Apply<EnergyNextTurnPower>(Owner, 1, Owner, null);
+            }
             if (Owner != null && Owner.HasPower<LubePower>() && Repeatable)
             {
                 await DollAction(choiceContext, false);

@@ -33,6 +33,10 @@ namespace TH_Alice.Scrpits.Powers
         {
             await CreatureCmd.Damage(choiceContext, base.CombatState.HittableEnemies, base.DynamicVars.Damage, base.Owner);
             AddDamage(-2);
+            if (Owner.Player.GetRelic<Silk>() != null)
+            {
+                await PowerCmd.Apply<EnergyNextTurnPower>(Owner, 1, Owner, null);
+            }
             if (Owner != null && Owner.HasPower<LubePower>() && Repeatable)
             {
                 await DollAction(choiceContext, false);

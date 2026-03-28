@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -30,19 +31,31 @@ namespace TH_Alice.Scrpits.Powers
         }
         public async override Task DollAction(PlayerChoiceContext choiceContext, bool Repeatable = true)
         {
-            List<Creature> target = new List<Creature>();
-            foreach (Creature monster in base.CombatState.HittableEnemies)
+            if(Owner.Player.GetRelic<PowerCard>() != null) 
             {
-                if (monster.HasPower<MgrPower>())
-                {
-                    target.Add(monster);
-                    break;
-                }
+                if(base.CombatState!=null&&base.CombatState.HittableEnemies.Count>0)
+                await CreatureCmd.Damage(choiceContext, base.CombatState.HittableEnemies, base.DynamicVars.Damage, base.Owner);
             }
-            if (target.Count == 0)
-                target.Add(Owner.Player.RunState.Rng.CombatTargets.NextItem(base.CombatState.HittableEnemies));
-            if (target != null && target[0]!=null && target[0].IsAlive)
-            await CreatureCmd.Damage(choiceContext, target[0], base.DynamicVars.Damage, base.Owner);
+            else
+            {
+                List<Creature> target = new List<Creature>();
+                foreach (Creature monster in base.CombatState.HittableEnemies)
+                {
+                    if (monster.HasPower<MgrPower>())
+                    {
+                        target.Add(monster);
+                        break;
+                    }
+                }
+                if (target.Count == 0)
+                    target.Add(Owner.Player.RunState.Rng.CombatTargets.NextItem(base.CombatState.HittableEnemies));
+                if (target != null && target[0] != null && target[0].IsAlive)
+                    await CreatureCmd.Damage(choiceContext, target[0], base.DynamicVars.Damage, base.Owner);
+            }
+            if (Owner.Player.GetRelic<Silk>() != null)
+            {
+                await PowerCmd.Apply<EnergyNextTurnPower>(Owner, 1, Owner, null);
+            }
             if (Owner != null && Owner.HasPower<LubePower>() && Repeatable)
             {
                 await DollAction(choiceContext, false);

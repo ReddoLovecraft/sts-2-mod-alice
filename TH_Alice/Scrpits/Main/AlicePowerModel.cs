@@ -124,6 +124,10 @@ namespace TH_Alice.Scrpits.Main
             else 
             {
                 //触发死亡时的逻辑
+                if (Owner.Player.GetRelic<BottlePowder>() != null)
+                {
+                    (await PowerCmd.Apply<TheBombPower>(Owner, 1, null, null)).SetDamage(power.Amount);
+                }
                 if (Owner.HasPower<XiZangPower>() || power is XiZangPower)
                 {
                     await ToolBox.MakeDoll<XiZangPower>(Owner);

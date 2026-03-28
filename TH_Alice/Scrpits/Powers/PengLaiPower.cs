@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-
+using MegaCrit.Sts2.Core.Models.Powers;
 using TH_Alice.Scrpits.Main;
 
 namespace TH_Alice.Scrpits.Powers
@@ -29,10 +29,15 @@ namespace TH_Alice.Scrpits.Powers
         public async override Task DollAction(PlayerChoiceContext choiceContext, bool Repeatable = true)
         {
             await PowerCmd.ModifyAmount(this, base.DynamicVars.Damage.BaseValue, null, null);
+            if (Owner.Player.GetRelic<Silk>() != null)
+            {
+                await PowerCmd.Apply<EnergyNextTurnPower>(Owner, 1, Owner, null);
+            }
             if (Owner != null && Owner.HasPower<LubePower>() && Repeatable)
             {
                 await DollAction(choiceContext, false);
             }
+
         }
         public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
         {

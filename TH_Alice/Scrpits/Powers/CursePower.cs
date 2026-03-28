@@ -50,6 +50,10 @@ namespace TH_Alice.Scrpits.Powers
                     await PowerCmd.Apply<StrengthPower>(monster, -base.DynamicVars.Damage.BaseValue, Owner, null);
                 }
             }
+            if (Owner.Player.GetRelic<Silk>() != null)
+            {
+                await  PowerCmd.Apply<EnergyNextTurnPower>(Owner, 1, Owner, null);
+            }
             if (Owner != null && Owner.HasPower<LubePower>() && Repeatable) 
             {
                await DollAction(choiceContext,false);
