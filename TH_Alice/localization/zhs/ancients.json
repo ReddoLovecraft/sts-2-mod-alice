@@ -1,10 +1,19 @@
 {
-  "TH_Alice_Dialogue_1": "结束了...建筑师！",
-  "TH_Alice_Dialogue_2": "操纵人偶的小姑娘么？有点意思，但还不够！",
-  "TH_Alice_Dialogue_3": "什——？！",
-  "TH_Alice_Dialogue_4": "下次再来见我吧！",
-  "TH_Alice_Next_1": "人偶出击！",
-  "TH_Alice_Next_2": "继续",
-  "TH_Alice_Next_3": "倒下",
-  "TH_Alice_Next_4": "..."
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.1-0.ancient": "嗯……比起操纵人偶，倒不如说你才是那个被操纵的人偶吧？",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.1-0.next": "什么意思？",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.1-1.char": "……字面意思，你不正是被那个给我下毒的家伙操纵了么？",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.1-1.next": "沉默",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.1-2.ancient": "看来你完全不理解啊，那么下次再见！",
+
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.2-0r.ancient": "你又回来了，这一次，你是怎么想的呢？",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.2-0r.next": "继续",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.2-1r.char": "不管怎么样，看来不教训你一顿是不行了呢。",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.2-1r.next": "人偶出击！",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.2-2r.ancient": "唉……那就，下次见！",
+
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.0-0.ancient": "操纵人偶的小姑娘么？有点意思，但还远远不够看啊。",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.0-0.next": "继续",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.0-1.char": "那种事情不试试看怎么知道呢？",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.0-1.next": "人偶出击！",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.0-2.ancient": "……下次再来见我吧！"
 }

@@ -117,51 +117,51 @@ fumofumo。
             return true;
         }
     }
+    //baselib新版本已有接口，弃用patch
+    // [HarmonyPatch(typeof(TheArchitect), "DefineDialogues")]
+    // public static class ArchitectDialoguePatch
+    // {
+    //     static void Postfix(ref AncientDialogueSet __result)
+    //     {
+    //         var aliceKey = ModelDb.Character<AliceCharacter>().Id.Entry;
+    //         var aliceDialogues = new List<AncientDialogue>();
+    //         for (int i = 0; i <= 20; i++)
+    //         {
+    //             aliceDialogues.Add(new AncientDialogue("", "", "", "") { VisitIndex = i, EndAttackers = ArchitectAttackers.Both });
+    //         }
+    //         if (__result.CharacterDialogues is Dictionary<string, IReadOnlyList<AncientDialogue>> dict)
+    //         {
+    //             dict[aliceKey] = aliceDialogues;
+    //         }
+    //     }
+    // }
 
-    [HarmonyPatch(typeof(TheArchitect), "DefineDialogues")]
-    public static class ArchitectDialoguePatch
-    {
-        static void Postfix(ref AncientDialogueSet __result)
-        {
-            var aliceKey = ModelDb.Character<AliceCharacter>().Id.Entry;
-            var aliceDialogues = new List<AncientDialogue>();
-            for (int i = 0; i <= 20; i++)
-            {
-                aliceDialogues.Add(new AncientDialogue("", "", "", "") { VisitIndex = i, EndAttackers = ArchitectAttackers.Both });
-            }
-            if (__result.CharacterDialogues is Dictionary<string, IReadOnlyList<AncientDialogue>> dict)
-            {
-                dict[aliceKey] = aliceDialogues;
-            }
-        }
-    }
+    // [HarmonyPatch(typeof(TheArchitect), "LoadDialogue")]
+    // public static class ArchitectLoadDialoguePatch
+    // {
+    //     // 当建筑师加载对话后，强行覆盖其文本内容
+    //     static void Postfix(TheArchitect __instance)
+    //     {
+    //         if (__instance.Owner.Character is not AliceCharacter) return;
+    //         var diag = Traverse.Create(__instance).Property("Dialogue").GetValue<AncientDialogue>();
+    //         if (diag == null || diag.Lines.Count < 4) return;
+    //         diag.Lines[0].LineText = new LocString("ancients", "TH_Alice_Dialogue_1");
+    //         diag.Lines[0].NextButtonText = new LocString("ancients", "TH_Alice_Next_1");
+    //         diag.Lines[0].Speaker = AncientDialogueSpeaker.Character;
 
-    [HarmonyPatch(typeof(TheArchitect), "LoadDialogue")]
-    public static class ArchitectLoadDialoguePatch
-    {
-        // 当建筑师加载对话后，强行覆盖其文本内容
-        static void Postfix(TheArchitect __instance)
-        {
-            if (__instance.Owner.Character is not AliceCharacter) return;
-            var diag = Traverse.Create(__instance).Property("Dialogue").GetValue<AncientDialogue>();
-            if (diag == null || diag.Lines.Count < 4) return;
-            diag.Lines[0].LineText = new LocString("ancients", "TH_Alice_Dialogue_1");
-            diag.Lines[0].NextButtonText = new LocString("ancients", "TH_Alice_Next_1");
-            diag.Lines[0].Speaker = AncientDialogueSpeaker.Character;
+    //         diag.Lines[1].LineText = new LocString("ancients", "TH_Alice_Dialogue_2");
+    //         diag.Lines[1].NextButtonText = new LocString("ancients", "TH_Alice_Next_2");
+    //         diag.Lines[1].Speaker = AncientDialogueSpeaker.Ancient;
 
-            diag.Lines[1].LineText = new LocString("ancients", "TH_Alice_Dialogue_2");
-            diag.Lines[1].NextButtonText = new LocString("ancients", "TH_Alice_Next_2");
-            diag.Lines[1].Speaker = AncientDialogueSpeaker.Ancient;
+    //         diag.Lines[2].LineText = new LocString("ancients", "TH_Alice_Dialogue_3");
+    //         diag.Lines[2].NextButtonText = new LocString("ancients", "TH_Alice_Next_3");
+    //         diag.Lines[2].Speaker = AncientDialogueSpeaker.Character;
 
-            diag.Lines[2].LineText = new LocString("ancients", "TH_Alice_Dialogue_3");
-            diag.Lines[2].NextButtonText = new LocString("ancients", "TH_Alice_Next_3");
-            diag.Lines[2].Speaker = AncientDialogueSpeaker.Character;
-
-            diag.Lines[3].LineText = new LocString("ancients", "TH_Alice_Dialogue_4");
-            diag.Lines[3].NextButtonText = new LocString("ancients", "TH_Alice_Next_4");
-            diag.Lines[3].Speaker = AncientDialogueSpeaker.Ancient;
-        }
-    }
+    //         diag.Lines[3].LineText = new LocString("ancients", "TH_Alice_Dialogue_4");
+    //         diag.Lines[3].NextButtonText = new LocString("ancients", "TH_Alice_Next_4");
+    //         diag.Lines[3].Speaker = AncientDialogueSpeaker.Ancient;
+    //     }
+    // }
 
     [HarmonyPatch(typeof(CardPileCmd), "Add", [typeof(IEnumerable<CardModel>), typeof(CardPile), typeof(CardPilePosition), typeof(AbstractModel), typeof(bool)])]
     public static class CardPileAddPatch
