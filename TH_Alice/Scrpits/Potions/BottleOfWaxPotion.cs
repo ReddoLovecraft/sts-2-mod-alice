@@ -38,8 +38,8 @@ public sealed class BottleOfWaxPotion : CustomPotionModel
         new HoverTip(locString3,locString4),
         new HoverTip(locString,locString2)
   });
-    public override string? PackedImagePath => "res://ArtWorks/Potion/BOTTLE_OF_WAX_DOLL_POTION.png";
-    public override string? PackedOutlinePath => "res://ArtWorks/Potion/Outlines/BOTTLE_OF_WAX_DOLL_POTION.png";
+    public override string? CustomPackedImagePath => "res://ArtWorks/Potion/BOTTLE_OF_WAX_DOLL_POTION.png";
+    public override string? CustomPackedOutlinePath => "res://ArtWorks/Potion/Outlines/BOTTLE_OF_WAX_DOLL_POTION.png";
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {
         await ToolBox.MakeRandomDoll(Owner.Creature, true);

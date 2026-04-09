@@ -31,8 +31,8 @@ public sealed class ManaPotion : CustomPotionModel
         new EnergyVar(1),
         new PowerVar<ManaLosePower>(2m)
     });
-    public override string? PackedImagePath => "res://ArtWorks/Potion/MANA_POTION.png";
-    public override string? PackedOutlinePath => "res://ArtWorks/Potion/Outlines/MANA_POTION.png";
+    public override string? CustomPackedImagePath => "res://ArtWorks/Potion/MANA_POTION.png";
+    public override string? CustomPackedOutlinePath => "res://ArtWorks/Potion/Outlines/MANA_POTION.png";
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {
         await PlayerCmd.SetEnergy(Owner.Creature.Player.MaxEnergy, Owner.Creature.Player);

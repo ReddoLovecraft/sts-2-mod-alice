@@ -34,8 +34,8 @@ public sealed class LubePotion : CustomPotionModel
   {
         new HoverTip(locString,locString2)
   });
-    public override string? PackedImagePath => "res://ArtWorks/Potion/LUBE_POTION.png";
-    public override string? PackedOutlinePath => "res://ArtWorks/Potion/Outlines/LUBE_POTION.png";
+    public override string? CustomPackedImagePath => "res://ArtWorks/Potion/LUBE_POTION.png";
+    public override string? CustomPackedOutlinePath => "res://ArtWorks/Potion/Outlines/LUBE_POTION.png";
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {
         await PowerCmd.Apply<LubePower>(Owner.Creature, 1, base.Owner.Creature, null);

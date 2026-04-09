@@ -124,7 +124,7 @@
 	"TH_ALICE-LOSTWORD.title": "「猎奇剧团里的怪人」",
 	"TH_ALICE-LOSTWORD.description": "随机造成{CalculatedDamage:diff()}点伤害{ExtraDamage:diff()}次。\n每有一种[gold]人偶[/gold]，额外造成一次伤害。\n每有一个[gold]人偶[/gold]，额外造成{ExtraDamage:diff()}点伤害。{InCombat:\n（命中{CalculatedHits:diff()}次）}",
 	"TH_ALICE-STRAW_DOLL_KAMIKAZA.title": "咒符「稻草人偶神风」",
-	"TH_ALICE-STRAW_DOLL_KAMIKAZA.description": "消耗。随机[gold]回收[/gold]一个[gold]人偶[/gold]，然后对所有敌人给予{Power:diff()}层[gold]虚弱[/gold]与[gold]易伤[/gold]。\n在接下来的{Power:diff()}回合内，所有敌人身上的[gold]虚弱[/gold]与[gold]易伤[/gold]效率翻倍。",
+	"TH_ALICE-STRAW_DOLL_KAMIKAZA.description": "随机[gold]回收[/gold]一个[gold]人偶[/gold]，然后对所有敌人给予{Power:diff()}层[gold]虚弱[/gold]与[gold]易伤[/gold]。\n在接下来的{Power:diff()}回合内，所有敌人身上的[gold]虚弱[/gold]与[gold]易伤[/gold]效率翻倍。",
 	"TH_ALICE-ITERATION.title": "推陈出新",
 	"TH_ALICE-ITERATION.description": "随机[gold]回收[/gold]至多{Cards:diff()}个[gold]人偶[/gold]。\n随机制作等量{Cards:diff()}个[gold]人偶[/gold]。",
 	"TH_ALICE-COLLECTOR.title": "魔女收藏家",
