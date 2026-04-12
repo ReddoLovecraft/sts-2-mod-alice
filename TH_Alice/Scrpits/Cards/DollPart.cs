@@ -19,7 +19,7 @@ using TH_Alice.Scrpits.Powers;
 using TH_Alice.TH_Alice.Scrpits.Main;
 
 namespace TH_Alice.Scrpits.Cards;
-[Pool(typeof(ColorlessCardPool))]
+[Pool(typeof(StatusCardPool))]
 public class DollPart : AliceCardModel
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];

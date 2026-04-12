@@ -21,7 +21,7 @@ using TH_Alice.TH_Alice.Scrpits.Main;
 
 namespace TH_Alice.Scrpits.Cards
 {
-    [Pool(typeof(ColorlessCardPool))]
+    [Pool(typeof(StatusCardPool))]
     public sealed class CreateShangHai : AliceCardModel
     {
         public override bool CanBeGeneratedInCombat => true;
