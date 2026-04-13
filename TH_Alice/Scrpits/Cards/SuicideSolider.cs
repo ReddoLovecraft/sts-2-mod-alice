@@ -54,6 +54,7 @@ public class SuicideSolider : AliceCardModel
                 .TargetingRandomOpponents(base.CombatState)
                 .WithHitVfxNode((Creature t) => NScratchVfx.Create(t, goingRight: true))
                 .Execute(choiceContext);
+            SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/bomb.wav"));
         }
         await ToolBox.RecycleDolls(Owner.Creature, ToolBox.GetDollCount(Owner.Creature));
     }

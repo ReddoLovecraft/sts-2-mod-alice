@@ -34,6 +34,10 @@ public class ShangHaiAttack : AliceCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		await DamageCmd.Attack(DynamicVars.Damage.BaseValue) .FromCard(this) .Targeting(cardPlay.Target).Execute(choiceContext);
+		if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
 		await ToolBox.MakeDoll<ShangHaiPower>(Owner.Creature);
 	}
 	protected override void OnUpgrade()

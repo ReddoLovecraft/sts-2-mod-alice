@@ -49,6 +49,10 @@ public class CrossSoldier : AliceCardModel
         {
             if (mos.IsAlive) 
             {
+                 if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
                 await ToolBox.MakeDoll<ShangHaiPower>(Owner.Creature);
             }
         }

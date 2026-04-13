@@ -45,6 +45,10 @@ public class CircleDoll : AliceCardModel
             await CardPileCmd.Add(item, PileType.Draw);
         }
         await CardPileCmd.Shuffle(choiceContext, base.Owner);
+         if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
         await ToolBox.MakeDoll<XiZangPower>(Owner.Creature);
     }
 	protected override void OnUpgrade()

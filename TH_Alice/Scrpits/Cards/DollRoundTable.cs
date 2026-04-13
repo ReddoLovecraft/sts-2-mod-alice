@@ -45,6 +45,10 @@ public class DollRoundTable : AliceCardModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
         await PowerCmd.Apply<PlatingPower>(base.Owner.Creature, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
+        if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
         await ToolBox.MakeDoll<RoundTablePower>(Owner.Creature);
     }
 	protected override void OnUpgrade()

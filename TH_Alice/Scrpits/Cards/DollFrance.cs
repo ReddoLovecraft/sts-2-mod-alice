@@ -49,6 +49,10 @@ public class DollFrance : AliceCardModel
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
+           if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
             await ToolBox.MakeDoll<FrancePower>(Owner.Creature);
     }
 	protected override void OnUpgrade()

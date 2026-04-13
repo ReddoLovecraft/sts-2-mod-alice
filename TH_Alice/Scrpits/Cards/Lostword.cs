@@ -44,6 +44,7 @@ public class Lostword : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/muti.wav"));
         await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).WithHitCount(4+ToolBox.GetDollKind(Owner.Creature)).FromCard(this)
          .TargetingRandomOpponents(base.CombatState)
          .WithHitFx("vfx/vfx_attack_slash")

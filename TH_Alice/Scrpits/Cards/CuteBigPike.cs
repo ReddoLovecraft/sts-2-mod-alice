@@ -45,6 +45,7 @@ public class CuteBigPike : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/muti.wav"));
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount(1+ToolBox.GetDollCount(Owner.Creature)).FromCard(this)
             .Targeting(cardPlay.Target)

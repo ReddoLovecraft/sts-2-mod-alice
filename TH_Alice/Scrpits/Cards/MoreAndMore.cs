@@ -41,9 +41,18 @@ public class MoreAndMore : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+
        if(ToolBox.GetDollCount(Owner.Creature)<=0)
        {
+          if (base.Owner.Character is AliceCharacter)
+		    {
+			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+		    }
             await ToolBox.MakeRandomDoll(Owner.Creature);
+             if (base.Owner.Character is AliceCharacter)
+		    {
+			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+		    }
             await ToolBox.MakeRandomDoll(Owner.Creature);
        }
        else
@@ -52,6 +61,10 @@ public class MoreAndMore : AliceCardModel
           int repeatCnt= (int)(totalDoll /base.DynamicVars.Cards.BaseValue);
           for(int i=0;i<repeatCnt;i++)
           {
+             if (base.Owner.Character is AliceCharacter)
+		    {
+			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+		    }
             await ToolBox.MakeRandomDoll(Owner.Creature);
           }
        }

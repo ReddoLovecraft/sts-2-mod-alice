@@ -30,6 +30,7 @@ public class MessageExchange : AliceCardModel
 
     	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+		 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 		CardModel cardModel;
 		if (_mockGeneratedCard == null)
 		{

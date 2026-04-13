@@ -23,7 +23,10 @@ public class SakuyaDoll : AliceCardModel
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+        if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount((int)base.DynamicVars.Cards.BaseValue).FromCard(this)
             .TargetingRandomOpponents(base.CombatState)
             .WithHitVfxNode((Creature t) => NScratchVfx.Create(t, goingRight: true))

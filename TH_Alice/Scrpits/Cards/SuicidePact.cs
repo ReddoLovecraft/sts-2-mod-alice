@@ -45,7 +45,7 @@ public class SuicidePact : AliceCardModel
     }
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         foreach (PowerModel pm in Owner.Creature.Powers)
         {
             if (pm is AlicePowerModel apm && apm.IsDollPower)

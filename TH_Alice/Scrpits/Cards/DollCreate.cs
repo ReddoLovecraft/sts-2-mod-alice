@@ -44,7 +44,10 @@ public class DollCreate : AliceCardModel
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
         if (!this.IsUpgraded)
         {
-            await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
             await ToolBox.MakeRandomDoll(Owner.Creature);
         }
         else 
@@ -53,7 +56,10 @@ public class DollCreate : AliceCardModel
              IEnumerable<CardModel> c =[ModelDb.Card<CreatePengLai>(), ModelDb.Card<CreateShangHai>(), ModelDb.Card<CreateNetherland>(), ModelDb.Card<CreateBomb>(), ModelDb.Card<CreateCurse>(), ModelDb.Card<CreateRussia>(), ModelDb.Card<CreateXiZang>(), ModelDb.Card<CreateGoliath>(), ModelDb.Card<CreateRoundTable>(), ModelDb.Card<CreateHina>(), ModelDb.Card<CreateLondon>(), ModelDb.Card<CreateOrl>(), ModelDb.Card<CreateFrance>()];
             List<CardModel> cards = CardFactory.GetDistinctForCombat(Owner,c,3, Owner.RunState.Rng.CombatCardGeneration).ToList();
             cardModel = await CardSelectCmd.FromChooseACardScreen(choiceContext, cards, base.Owner, canSkip: false);
-            await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
             if (cardModel != null)
             {
                 await ((AliceCardModel)cardModel).OnChosen();

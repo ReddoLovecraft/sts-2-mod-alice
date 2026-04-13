@@ -47,6 +47,7 @@ public class BodyRemake : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+    	 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
        int increasement=ToolBox.GetDollCount(Owner.Creature)*1;
        await ToolBox.RecycleDolls(Owner.Creature,ToolBox.GetDollCount(Owner.Creature));
        await CreatureCmd.GainMaxHp(Owner.Creature,increasement);

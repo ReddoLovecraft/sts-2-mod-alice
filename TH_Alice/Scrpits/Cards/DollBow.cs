@@ -41,6 +41,7 @@ public class DollBow : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
         await PowerCmd.Apply<DollBowPower>(cardPlay.Target, base.DynamicVars["Power"].IntValue, base.Owner.Creature, this);
     }

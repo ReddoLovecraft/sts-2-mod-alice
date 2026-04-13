@@ -45,7 +45,10 @@ public class DollWar : AliceCardModel
         if (IsUpgraded) num += 2;
          for (int i = 0; i < num; i++) 
         {
-            await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+           if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
             await ToolBox.MakeRandomDoll(Owner.Creature);
         }
     }

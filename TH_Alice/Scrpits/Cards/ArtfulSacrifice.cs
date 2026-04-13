@@ -44,6 +44,7 @@ public sealed class ArtfulSacrifice : AliceCardModel
     protected override bool IsPlayable => ToolBox.GetDollCount(Owner.Creature) > 0;
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         if (ToolBox.GetDollCount(Owner.Creature)>0)
         {
      

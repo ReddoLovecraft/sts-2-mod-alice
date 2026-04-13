@@ -35,6 +35,7 @@ public class DollInSea : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 1);
         CardPile pile = PileType.Discard.GetPile(base.Owner);
         CardModel cardModel = (await CardSelectCmd.FromSimpleGrid(choiceContext, pile.Cards, base.Owner, prefs)).FirstOrDefault();

@@ -37,8 +37,8 @@ public class Collector : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-        await PowerCmd.Apply<CollectorPower>(Owner.Creature,1, base.Owner.Creature, this);
-       
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+        await PowerCmd.Apply<CollectorPower>(Owner.Creature,1, base.Owner.Creature, this);       
     }
 	protected override void OnUpgrade()
 	{

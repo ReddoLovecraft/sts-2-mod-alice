@@ -45,6 +45,7 @@ public class DollMegaCeti : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        
         await ToolBox.RecycleDolls(base.Owner.Creature);
         await PlayerCmd.GainEnergy(base.DynamicVars.Energy.IntValue, base.Owner);
         await PowerCmd.Apply<EnergyNextTurnPower>(base.Owner.Creature, base.DynamicVars.Energy.IntValue,base.Owner.Creature,this);

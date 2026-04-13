@@ -44,7 +44,12 @@ public class BombDoll : AliceCardModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
         for(int i = 0;i< base.DynamicVars["Power"].IntValue;i++)
+        { if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
         await ToolBox.MakeDoll<BombPower>(Owner.Creature);
+        }
     }
 	protected override void OnUpgrade()
 	{

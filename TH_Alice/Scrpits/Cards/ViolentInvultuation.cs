@@ -43,6 +43,7 @@ public class ViolentInvultuation : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/cast.wav"));
         List<PowerModel> to_remove = new List<PowerModel>();
         foreach(PowerModel buff in cardPlay.Target.Powers)
         {
@@ -53,6 +54,10 @@ public class ViolentInvultuation : AliceCardModel
         }
         for(int i=0;i<to_remove.Count;i++)
         {
+        if(Owner.Character is AliceCharacter)
+        {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+        }
           await ToolBox.MakeDoll<CursePower>(Owner.Creature);
         }
         for(int i=to_remove.Count-1;i>=0;i--)

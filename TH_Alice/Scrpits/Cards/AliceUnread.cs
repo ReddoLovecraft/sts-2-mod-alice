@@ -41,6 +41,7 @@ public class AliceUnread : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         await PowerCmd.Apply<AliceUnreadPower>(Owner.Creature, 1, base.Owner.Creature, this);
        
     }

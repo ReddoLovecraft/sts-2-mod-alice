@@ -63,6 +63,10 @@ public class DollNetherland : AliceCardModel
 			.TargetingAllOpponents(base.CombatState)
 			.WithHitFx("vfx/vfx_giant_horizontal_slash")
 			.Execute(choiceContext);
+         if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
         await ToolBox.MakeDoll<NetherlandPower>(Owner.Creature);
     }
 	protected override void OnUpgrade()

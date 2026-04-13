@@ -28,6 +28,7 @@ public class ShangHaiAliceMusic : AliceCardModel
 	}
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+		await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         foreach (CardModel card in PileType.Hand.GetPile(base.Owner).Cards)
 		{
 			card.EnergyCost.AddThisCombat(-1);

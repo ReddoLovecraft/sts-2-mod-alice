@@ -1,5 +1,6 @@
 
 using Godot;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -30,7 +31,13 @@ namespace TH_Alice.Scrpits.Powers
                 if (cnt>=2)
                 {
                     for(int i=0;i<Amount;i++)   
-                        await ToolBox.MakeRandomDoll(Owner);
+                      {
+                        if (base.Owner.Player.Character is AliceCharacter)
+		            {
+			        await CreatureCmd.TriggerAnim(base.Owner, "Summon", base.Owner.Player.Character.CastAnimDelay);
+		            }
+                          await ToolBox.MakeRandomDoll(Owner);
+                      }
                     cnt = 0;
                 }
             }

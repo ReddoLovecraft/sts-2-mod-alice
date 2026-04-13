@@ -45,6 +45,7 @@ public class TripWire : AliceCardModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+        SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/line.wav"));
         await PowerCmd.Apply<MgrPower>(cardPlay.Target, 1, base.Owner.Creature, this);
         await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this).Targeting(cardPlay.Target)
             .WithAttackerFx(null, "event:/sfx/enemy/enemy_attacks/giant_louse/giant_louse_attack_web")

@@ -45,6 +45,10 @@ namespace TH_Alice.Scrpits.Cards
 
         public override async Task OnChosen()
         {
+             if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
             await ToolBox.MakeDoll<GoliathPower>(Owner.Creature); 
         }
     }

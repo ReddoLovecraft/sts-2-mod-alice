@@ -39,6 +39,7 @@ public class DollAuto : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
         await PowerCmd.Apply<DollAutoPower>(Owner.Creature, 1, base.Owner.Creature, this);
     }

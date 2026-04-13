@@ -44,6 +44,7 @@ public class ReturnInanimateness : AliceCardModel
                 }
             })
             .Execute(choiceContext);
+        SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/bomb.wav"));
     }
 	protected override void OnUpgrade()
 	{

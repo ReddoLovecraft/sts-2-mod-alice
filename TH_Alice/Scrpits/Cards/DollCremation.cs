@@ -59,7 +59,13 @@ public class DollCremation : AliceCardModel
     }
 
         for(int i=0;i<base.DynamicVars.Cards.IntValue;i++)
+        {
+           if (base.Owner.Character is AliceCharacter)
+		            {
+			        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+		            }
         await ToolBox.MakeRandomDoll(Owner.Creature);
+        }
     }
     protected override void OnUpgrade()
     {

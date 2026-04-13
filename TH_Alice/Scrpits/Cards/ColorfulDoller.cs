@@ -40,8 +40,8 @@ public class ColorfulDoller : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         await PowerCmd.Apply<ColorfulDollerPower>(Owner.Creature, 1, base.Owner.Creature, this);
-       
     }
 	protected override void OnUpgrade()
 	{

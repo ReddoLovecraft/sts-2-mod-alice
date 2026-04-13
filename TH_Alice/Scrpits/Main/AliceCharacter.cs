@@ -42,11 +42,11 @@ namespace TH_Alice.Scrpits.Main
          public override string CustomCharacterSelectTransitionPath => "res://materials/transitions/silent_transition_mat.tres";
         public override string CustomMapMarkerPath => "res://ArtWorks/Character/map_marker_alice.png";
         // 攻击音效
-        // public override string CustomAttackSfx => null;
+         public override string CustomAttackSfx => AliceModInit.ToModSfxPath("ArtWorks/SFX/attack.wav");
         // 施法音效
-        // public override string CustomCastSfx => null;
+         public override string CustomCastSfx => AliceModInit.ToModSfxPath("ArtWorks/SFX/cast.wav");
         // 死亡音效
-        // public override string CustomDeathSfx => null;
+        public override string CustomDeathSfx => AliceModInit.ToModSfxPath("ArtWorks/SFX/die.wav");
         public override string CharacterSelectSfx  => AliceModInit.ToModSfxPath("ArtWorks/SFX/silkshot.mp3");
         public override string CharacterTransitionSfx => "event:/sfx/ui/wipe_ironclad";
         public override CardPoolModel CardPool => ModelDb.CardPool<AliceCardPool>();
@@ -66,7 +66,38 @@ namespace TH_Alice.Scrpits.Main
             ModelDb.Card<Defend>(),
             ModelDb.Card<DollCreate>()
     ];
+         //做完事件去做咲夜的遗物，等那边做完了写完那边的事件可以来这边想一想先古之民神绮，以及若干新先古遗物
+        //加入攻击死亡施法音效，还有人偶攻击和爆炸，死亡的音效
+        /*
+        事件：
+神秘金发小女孩(至少有一张稀有卡牌才能出现在事件池)
+随机偷你一张稀有度最高的卡牌。
+还我！拿回卡牌。获得50(25)金。
+再赛几本书。自选删3(2)。 
+不管。 无影响
+过去、未来？
+根据抉择获得不同的效果。
+过去：获得爱丽丝的魔法书，选择任意张旧作强力？卡牌加入手中。
+未来：移除所有打防。
+偶遇咲夜
+问你人偶是啥
+一般定义：随机敲4(3)
+杀人玩偶也是人偶！将一张杀人玩偶加入卡组。
+人偶剧表演
+你看到了有些人在剧场表演。
+上去试试：获得200(150)金。
+在下面观看：自选敲3(2)
+梦子
+神绮大人特别担心所以派梦子来找了。
+拒绝。-》比过一场。失去9(12)生命，150(100)g。 言语劝说-》获得苦恼+获得3瓶随机药。
+回去。结束这局游戏（真的要选择吗）。
+神秘魔界行商路易兹(持有金200+才能出现在事件池)
+你遇到了一个奇怪商人，一番推托无果之下你只能选一个东西来买了。
+买点喝的。随机稀有药水*3。(180->210g)
+买点吃的。回复全部生命。(100->150g)
+买点用的。获得稀有遗物*3。(300->400g)
 
+        */
         // 初始遗物
         public override IReadOnlyList<RelicModel> StartingRelics => [
             ModelDb.Relic<Thread>(),

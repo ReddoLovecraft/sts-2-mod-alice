@@ -40,6 +40,7 @@ public class SeekWire : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/line.wav"));
         int cnt = ToolBox.GetDollCount(Owner.Creature);
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount(cnt+1).FromCard(this)
              .TargetingRandomOpponents(base.CombatState)

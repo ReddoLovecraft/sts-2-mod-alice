@@ -35,6 +35,7 @@ public class DeathWitch : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         await PowerCmd.Apply<DeathWitchPower>(Owner.Creature, base.DynamicVars["Power"].IntValue, base.Owner.Creature, this);
        
     }

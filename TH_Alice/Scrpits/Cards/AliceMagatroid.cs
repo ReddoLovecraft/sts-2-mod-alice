@@ -26,6 +26,7 @@ public class AliceMagatroid : AliceCardModel
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+		 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 		int num = PileType.Hand.GetPile(Owner).Cards.Count;
 		int num2 = base.Owner.PlayerCombatState.Energy;
 		if (num > num2)

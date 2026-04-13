@@ -32,6 +32,7 @@ public class ArtfulChanter : AliceCardModel
 	}
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
         await PowerCmd.Apply<DrawCardsNextTurnPower>(Owner.Creature, base.DynamicVars["Power"].IntValue, base.Owner.Creature, this);
     }

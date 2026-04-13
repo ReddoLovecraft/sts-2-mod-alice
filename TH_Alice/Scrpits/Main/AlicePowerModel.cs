@@ -82,6 +82,7 @@ namespace TH_Alice.Scrpits.Main
             if (IsRecyle)
             {
                 //触发回收的逻辑
+		        SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/recycle.wav"));
                 int amt = ToolBox.GetRecycleNum(Owner, power);
                 List<DollPart> list = new List<DollPart>();
                 for (int i = 0; i < amt; i++)
@@ -91,6 +92,10 @@ namespace TH_Alice.Scrpits.Main
                 CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Draw, addedByPlayer: true, CardPilePosition.Random));
                 if (Owner.HasPower<XiZangPower>() || power is XiZangPower) 
                 {
+                     if(Owner is AliceCharacter)
+                    {
+                    await CreatureCmd.TriggerAnim(base.Owner, "Summon", base.Owner.Player.Character.CastAnimDelay);
+                    }
                     await ToolBox.MakeDoll<XiZangPower>(Owner);
                 }
                 if (power is HinaPower)
@@ -123,6 +128,7 @@ namespace TH_Alice.Scrpits.Main
             }
             else 
             {
+		        SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/dolldie.wav"));
                 //触发死亡时的逻辑
                 if (Owner.Player.GetRelic<BottlePowder>() != null)
                 {
@@ -130,6 +136,10 @@ namespace TH_Alice.Scrpits.Main
                 }
                 if (Owner.HasPower<XiZangPower>() || power is XiZangPower)
                 {
+                     if(Owner is AliceCharacter)
+                    {
+                        await CreatureCmd.TriggerAnim(base.Owner, "Summon", base.Owner.Player.Character.CastAnimDelay);
+                    }
                     await ToolBox.MakeDoll<XiZangPower>(Owner);
                 }
                 if (power is HinaPower)

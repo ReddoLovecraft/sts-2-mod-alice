@@ -34,6 +34,7 @@ public class FreeUseAll : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/cast.wav"));
         await PowerCmd.Apply<FreeSkillPower>(Owner.Creature, 1, base.Owner.Creature, this);
         await PowerCmd.Apply<FreePowerPower>(Owner.Creature, 1, base.Owner.Creature, this);
         await PowerCmd.Apply<FreeAttackPower>(Owner.Creature, 1, base.Owner.Creature, this);

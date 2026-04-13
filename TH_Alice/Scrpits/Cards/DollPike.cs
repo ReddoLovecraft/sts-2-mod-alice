@@ -50,6 +50,7 @@ public class DollPike : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/muti.wav"));
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).WithHitCount((int)base.DynamicVars.Repeat.BaseValue).FromCard(this)
             .Targeting(cardPlay.Target)

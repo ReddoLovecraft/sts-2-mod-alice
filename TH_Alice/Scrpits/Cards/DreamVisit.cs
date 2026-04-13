@@ -41,6 +41,7 @@ public class DreamVisit : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+       await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
        await PowerCmd.Apply<IntangiblePower>(Owner.Creature,base.DynamicVars.Cards.IntValue,Owner.Creature,this);
          PlayerCmd.EndTurn(base.Owner, canBackOut: false);
     }

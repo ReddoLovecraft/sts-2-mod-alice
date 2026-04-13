@@ -50,7 +50,10 @@ public class DollMake : AliceCardModel
         {
             CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 1);
             cardModel = (await CardSelectCmd.FromSimpleGrid(choiceContext, cards, base.Owner, prefs)).FirstOrDefault();
-            await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+             if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
             if (cardModel != null)
             {
                 await ((AliceCardModel)cardModel).OnChosen();

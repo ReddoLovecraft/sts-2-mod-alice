@@ -38,6 +38,7 @@ public class FolkDance : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         int num = 0 + ResolveEnergyXValue();
         if (IsUpgraded) num +=1;
         for (int i = 0; i < num; i++)

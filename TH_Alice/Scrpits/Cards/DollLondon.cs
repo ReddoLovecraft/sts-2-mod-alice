@@ -52,6 +52,10 @@ public class DollLondon : AliceCardModel
                 await PowerCmd.Apply<PoisonPower>(mos, base.DynamicVars["Power"].IntValue, base.Owner.Creature, this);
             }
         }
+        if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
        await ToolBox.MakeDoll<LondonPower>(Owner.Creature);
     }
 	protected override void OnUpgrade()

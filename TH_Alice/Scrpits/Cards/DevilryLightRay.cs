@@ -35,6 +35,8 @@ public class DevilryLightRay : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+        SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/line.wav"));
         foreach(Creature mos in Owner.Creature.CombatState.HittableEnemies) 
         {
             if (mos.IsAlive) 

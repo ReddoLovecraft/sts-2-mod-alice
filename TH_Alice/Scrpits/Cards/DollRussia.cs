@@ -44,6 +44,10 @@ public class DollRussia : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
         await ToolBox.MakeDoll<RussiaPower>(Owner.Creature);
         if(cardPlay.Target.IsAlive&&cardPlay.Target.Monster.IntendsToAttack)
         await PowerCmd.Apply<StrengthPower>(Owner.Creature, base.DynamicVars["Power"].IntValue, base.Owner.Creature, this);

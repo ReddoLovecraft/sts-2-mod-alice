@@ -50,9 +50,19 @@ public class YaPengLai : AliceCardModel
          await CardPileCmd.Draw(choiceContext, 1, base.Owner);
         }
       }
+      if(Owner.Character is AliceCharacter)
+      {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+      }
       await ToolBox.MakeDoll<PengLaiPower>(Owner.Creature);
       if(IsUpgraded)
+      {
+         if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
       await ToolBox.MakeDoll<PengLaiPower>(Owner.Creature);
+      }
   }
 	protected override void OnUpgrade()
 	{

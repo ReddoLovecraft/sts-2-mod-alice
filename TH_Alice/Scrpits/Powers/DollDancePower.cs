@@ -44,6 +44,10 @@ namespace TH_Alice.Scrpits.Powers
             }
             else for(int i=0;i<Amount;i++)
             {
+                 if (base.Owner.Player.Character is AliceCharacter)
+		            {
+			        await CreatureCmd.TriggerAnim(base.Owner, "Summon", base.Owner.Player.Character.CastAnimDelay);
+		            }
                 await ToolBox.MakeRandomDoll(Owner);
             }
         }

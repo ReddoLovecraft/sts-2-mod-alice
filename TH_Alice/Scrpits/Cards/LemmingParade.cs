@@ -50,7 +50,10 @@ public class LemmingParade : AliceCardModel
         {
             for(int i = 0; i < DynamicVars.Cards.IntValue - amt; i++)
             {
+                if(Owner.Character is AliceCharacter)
+            {
                 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
                 await ToolBox.MakeRandomDoll(Owner.Creature);
             }
         }

@@ -22,6 +22,7 @@ public class GodGun : AliceCardModel
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/bigline.wav"));
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(base.CombatState)
             .WithAttackerAnim("Cast", 0.5f)
             .BeforeDamage(async delegate

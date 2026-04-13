@@ -38,6 +38,7 @@ public class CityWitch : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         await PowerCmd.Apply<FrailPower>(Owner.Creature, base.DynamicVars["Power"].IntValue, base.Owner.Creature, this);
         await PowerCmd.Apply<CityWitchPower>(Owner.Creature, 1, base.Owner.Creature, this);
     }

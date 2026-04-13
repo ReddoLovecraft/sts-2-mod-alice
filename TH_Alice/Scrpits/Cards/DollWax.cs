@@ -44,6 +44,10 @@ public class DollWax : AliceCardModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.IntValue,Owner.Creature.Player);
+         if (base.Owner.Character is AliceCharacter)
+		            {
+			        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+		            }
         await ToolBox.MakeRandomDoll(Owner.Creature,true);
     }
 	protected override void OnUpgrade()

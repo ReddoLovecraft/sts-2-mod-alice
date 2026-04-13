@@ -106,6 +106,7 @@ namespace TH_Alice.TH_Alice.Scrpits.Main
         }
         public  static async Task MakeDoll<T>(Creature player, bool isWax = false) where T : AlicePowerModel
         {
+		    SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/summon.wav"));
             if (player == null)
                 return;
             T inst= ModelDb.Power<T>();

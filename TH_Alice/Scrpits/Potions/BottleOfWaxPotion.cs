@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TH_Alice.Scrpits.Character;
+using TH_Alice.Scrpits.Main;
 using TH_Alice.Scrpits.Powers;
 using TH_Alice.TH_Alice.Scrpits.Main;
 
@@ -42,7 +43,15 @@ public sealed class BottleOfWaxPotion : CustomPotionModel
     public override string? CustomPackedOutlinePath => "res://ArtWorks/Potion/Outlines/BOTTLE_OF_WAX_DOLL_POTION.png";
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {
+       if (base.Owner.Character is AliceCharacter)
+		            {
+			        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+		            }
         await ToolBox.MakeRandomDoll(Owner.Creature, true);
+         if (base.Owner.Character is AliceCharacter)
+		            {
+			        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+		            }
         await ToolBox.MakeRandomDoll(Owner.Creature, true);
     }
 }

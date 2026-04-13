@@ -45,6 +45,10 @@ public class DollOrl : AliceCardModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
       await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
+       if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
       await ToolBox.MakeDoll<OrlPower>(base.Owner.Creature);
     }
 	protected override void OnUpgrade()

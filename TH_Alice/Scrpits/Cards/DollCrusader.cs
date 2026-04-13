@@ -45,8 +45,14 @@ public class DollCrusader : AliceCardModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-        await ToolBox.MakeDoll<ShangHaiPower>(Owner.Creature);
-        await ToolBox.MakeDoll<ShangHaiPower>(Owner.Creature);
+        for(int i=0;i<2;i++)
+        {
+          if(Owner.Character is AliceCharacter)
+            {
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+            }
+          await ToolBox.MakeDoll<ShangHaiPower>(Owner.Creature);
+       }
     }
     protected override void OnUpgrade()
 	{

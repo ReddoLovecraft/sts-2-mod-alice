@@ -24,6 +24,7 @@ public class ManaRunOut : AliceCardModel
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/cast.wav"));
 		await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue,Owner);
 		await PowerCmd.Apply<WasteAwayPower>(Owner.Creature,1,Owner.Creature,this);
 	}

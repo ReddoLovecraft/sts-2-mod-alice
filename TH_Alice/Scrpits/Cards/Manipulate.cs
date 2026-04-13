@@ -38,6 +38,8 @@ public class Manipulate : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+
+        SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/cast.wav"));
         await PowerCmd.Apply<MgrPower>(cardPlay.Target, 1, base.Owner.Creature, this);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }
