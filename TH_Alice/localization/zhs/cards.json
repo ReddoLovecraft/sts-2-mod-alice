@@ -169,8 +169,6 @@
 	"TH_ALICE-MEGATRON.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n在本场战斗中[gold]升级[/gold]你的所有[gold]手牌[/gold]。",
 	"TH_ALICE-LAZY.title": "慵懒",
 	"TH_ALICE-LAZY.description": "给予{IfUpgraded:show:所有敌人|所有角色}1层[gold]缓慢[/gold]。\n结束你的回合。",
-	"TH_ALICE-EVENT.title": "过去、未来？：事件",
-	"TH_ALICE-EVENT.description": "追忆过去：获得特定卡（旧作爱丽丝的）。\n走向未来：升级卡组中的卡牌。",
 	"TH_ALICE-SHANG_HAI_ATTACK.title": "沪爷冲击",
 	"TH_ALICE-SHANG_HAI_ATTACK.description": "造成{Damage:diff()}点伤害。\n制作一个[gold]上海人形[/gold]。",
 	"TH_ALICE-ALICE_MAGATROID.title": "妈个陀螺仪的",
@@ -233,5 +231,7 @@
 	"TH_ALICE-DOLL_REPLACEMENT.title": "替身人偶",
 	"TH_ALICE-DOLL_REPLACEMENT.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n每个存活的[gold]人偶[/gold]都会使你本回合内受到的伤害减少10%。",
 	"TH_ALICE-YA_PENG_LAI.title": "雅符「文静的蓬莱人形」",
-	"TH_ALICE-YA_PENG_LAI.description": "你每有一个[gold]蓬莱人形[/gold]就抽1张牌。\n制作{Cards:diff()}个[gold]蓬莱人形[/gold]。"
+	"TH_ALICE-YA_PENG_LAI.description": "你每有一个[gold]蓬莱人形[/gold]就抽1张牌。\n制作{Cards:diff()}个[gold]蓬莱人形[/gold]。",
+	"TH_ALICE-EVENT.title": "旧作卡牌",
+	"TH_ALICE-EVENT.description": "请输入效果文本。"
 }

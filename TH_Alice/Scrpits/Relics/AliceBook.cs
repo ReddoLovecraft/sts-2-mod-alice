@@ -1,17 +1,21 @@
 using BaseLib.Abstracts;
 using BaseLib.Utils;
 using Godot;
+using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.Factories;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
+using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using System;
 using System.Collections.Generic;
@@ -24,46 +28,31 @@ using TH_Alice.Scrpits.Main;
 using TH_Alice.Scrpits.Powers;
 using TH_Alice.TH_Alice.Scrpits.Main;
 
-    //[Pool(typeof(AliceRelicPool))] 卫星，不注册
+    [Pool(typeof(AliceRelicPool))] 
     public class AliceBook : CustomRelicModel
     {
-        public AliceBook() : base(autoAdd: false)
-        {
-        }
-
-        private int _combatsLeft = 1;
-        public override bool IsUsedUp => _combatsLeft <= 0;
-        protected override IEnumerable<DynamicVar> CanonicalVars => [(new EnergyVar(1))];
         public override bool ShowCounter => false;
         public override RelicRarity Rarity => RelicRarity.Event;
         public override string PackedIconPath => $"res://ArtWorks/Relics/{Id.Entry}.png";
         protected override string PackedIconOutlinePath => $"res://ArtWorks/Relics/Outlines/{Id.Entry}.png";
         protected override string BigIconPath => $"res://ArtWorks/Relics/{Id.Entry}.png";
-        protected override IEnumerable<IHoverTip> ExtraHoverTips => (new IHoverTip[1]
-        {
-       HoverTipFactory.ForEnergy(this)
-        });
-        public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
-        {
-            if (side != base.Owner.Creature.Side)
+       public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
+	{
+		if (side == base.Owner.Creature.Side && combatState.RoundNumber <= 1)
+		{
+			CardModel cardModel;
+            List<CardModel> cards = CardFactory.GetDistinctForCombat(Owner,base.Owner.Character.CardPool.GetUnlockedCards(base.Owner.UnlockState, base.Owner.RunState.CardMultiplayerConstraint), base.Owner.Character.CardPool.GetUnlockedCards(base.Owner.UnlockState, base.Owner.RunState.CardMultiplayerConstraint).Count(),Owner.RunState.Rng.CombatCardGeneration).ToList();
+            CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 0,1);
+            cardModel = (await CardSelectCmd.FromSimpleGrid(choiceContext, cards, base.Owner, prefs)).FirstOrDefault();
+            if (cardModel != null)
             {
-                return;
+                await CardPileCmd.Add(Owner.RunState.CloneCard(cardModel), PileType.Deck);
+                await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Draw, addedByPlayer: true);
             }
-            if (!IsUsedUp)
-            {
-               await PlayerCmd.GainEnergy(1, base.Owner);
-                Flash();
-            } 
-        }
-        public override async Task AfterCombatVictory(CombatRoom _)
-        {
-            if (!base.Owner.Creature.IsDead)
-            {
-                Flash();
-                _combatsLeft--;
-            }
-        }
+		}
+	}
 
     }
+    
 
 
