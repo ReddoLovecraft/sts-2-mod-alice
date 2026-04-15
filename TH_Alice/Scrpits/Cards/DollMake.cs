@@ -44,8 +44,8 @@ public class DollMake : AliceCardModel
     {
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
             CardModel cardModel;
-            IEnumerable<CardModel> c =[ModelDb.Card<CreatePengLai>(), ModelDb.Card<CreateShangHai>(), ModelDb.Card<CreateNetherland>(), ModelDb.Card<CreateBomb>(), ModelDb.Card<CreateCurse>(), ModelDb.Card<CreateRussia>(), ModelDb.Card<CreateXiZang>(), ModelDb.Card<CreateGoliath>(), ModelDb.Card<CreateRoundTable>(), ModelDb.Card<CreateHina>(), ModelDb.Card<CreateLondon>(), ModelDb.Card<CreateOrl>(), ModelDb.Card<CreateFrance>()];
-            List<CardModel> cards = CardFactory.GetDistinctForCombat(Owner,c,13, Owner.RunState.Rng.CombatCardGeneration).ToList();
+            List<CardModel> cards =[ModelDb.Card<CreatePengLai>().ToMutable(), ModelDb.Card<CreateShangHai>().ToMutable(), ModelDb.Card<CreateNetherland>().ToMutable(), ModelDb.Card<CreateBomb>().ToMutable(), ModelDb.Card<CreateCurse>().ToMutable(), ModelDb.Card<CreateRussia>().ToMutable(), ModelDb.Card<CreateXiZang>().ToMutable(), ModelDb.Card<CreateGoliath>().ToMutable(), ModelDb.Card<CreateRoundTable>().ToMutable(), ModelDb.Card<CreateHina>().ToMutable(), ModelDb.Card<CreateLondon>().ToMutable(), ModelDb.Card<CreateOrl>().ToMutable(), ModelDb.Card<CreateFrance>().ToMutable()];
+           // List<CardModel> cards = CardFactory.GetDistinctForCombat(Owner,c,13, Owner.RunState.Rng.CombatCardGeneration).ToList();
         for (int i=0;i< base.DynamicVars.Cards.IntValue;i++)
         {
             CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 1);
@@ -56,6 +56,7 @@ public class DollMake : AliceCardModel
             }
             if (cardModel != null)
             {
+                cardModel.Owner=this.Owner;
                 await ((AliceCardModel)cardModel).OnChosen();
             }
         }

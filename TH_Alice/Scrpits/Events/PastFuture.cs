@@ -46,7 +46,19 @@ public sealed class PastFuture : CustomEventModel
         {CreateOption(Back, "TH_ALICE-PAST_FUTURE.pages.INITIAL.options.PAST",HoverTipFactory.FromRelic<AliceBook>()),
         CreateOption(Ahead, "TH_ALICE-PAST_FUTURE.pages.INITIAL.options.FUTURE",new IHoverTip[] { HoverTipFactory.Static(StaticHoverTip.Transform)})});
     }
-    
+      public override bool IsAllowed(RunState runState)
+	{
+        bool flag=true;
+        foreach (var player in runState.Players)
+        {
+            if (player.Character != null && player.Character is not AliceCharacter)
+             {
+                    flag=false;
+                    break;
+             }
+        }
+		return flag;
+    }
     private async Task Ahead()
     {
      	List<CardModel> list = (await CardSelectCmd.FromDeckForTransformation(prefs: new CardSelectorPrefs(CardSelectorPrefs.TransformSelectionPrompt, 5), player: base.Owner)).ToList();

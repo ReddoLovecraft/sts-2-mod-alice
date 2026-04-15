@@ -44,7 +44,16 @@ public sealed class MeetSakuya : CustomEventModel
 		{
 			return false;
 		}
-        return true;
+        bool flag=true;
+        foreach (var player in runState.Players)
+        {
+            if (player.Character != null && player.Character is not AliceCharacter)
+             {
+                    flag=false;
+                    break;
+             }
+        }
+		return flag;
     }
     	private IEnumerable<RelicModel> GetValidRelics(Player player)
 	{

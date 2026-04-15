@@ -49,6 +49,10 @@ public class ViolentInvultuation : AliceCardModel
         {
             if(buff.Type==PowerType.Buff)
             {
+                if((buff is StrengthPower||buff is DexterityPower)&&buff.Amount<=0)
+                {
+                    continue;
+                }
                 to_remove.Add(buff);
             }
         }

@@ -46,7 +46,19 @@ public sealed class DollPerform : CustomEventModel
     {
         return (new EventOption[2] {CreateOption(Join, "TH_ALICE-DOLL_PERFORM.pages.INITIAL.options.JOIN"),CreateOption(Watch, "TH_ALICE-DOLL_PERFORM.pages.INITIAL.options.WATCH")});
     }
-    
+      public override bool IsAllowed(RunState runState)
+	{
+        bool flag=true;
+        foreach (var player in runState.Players)
+        {
+            if (player.Character != null && player.Character is not AliceCharacter)
+             {
+                    flag=false;
+                    break;
+             }
+        }
+		return flag;
+    }
     private async Task Watch()
     {
         IEnumerable<CardModel> enumerable = PileType.Deck.GetPile(base.Owner).Cards.Where((CardModel c) => c?.IsUpgradable ?? false).ToList().StableShuffle(base.Owner.RunState.Rng.Niche)
