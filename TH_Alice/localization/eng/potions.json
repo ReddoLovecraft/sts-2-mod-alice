@@ -1,0 +1,8 @@
+{
+  "TH_ALICE-MANA_POTION.description": "Restore energy to maximum. At the start of your next [blue]2[/blue] turns, lose [blue]1[/blue] energy.",
+  "TH_ALICE-MANA_POTION.title": "Mana Potion",
+  "TH_ALICE-LUBE_POTION.description": "All [gold]Dolls[/gold] act an additional [blue]1[/blue] time this turn.",
+  "TH_ALICE-LUBE_POTION.title": "Joint Lubricant",
+  "TH_ALICE-BOTTLE_OF_WAX_POTION.description": "Randomly create [blue]2[/blue] [gold]Wax Dolls[/gold].",
+  "TH_ALICE-BOTTLE_OF_WAX_POTION.title": "Bottle of Wax Dolls"
+}

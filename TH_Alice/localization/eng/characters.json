@@ -1,0 +1,17 @@
+{
+  "TH_ALICE-ALICE_CHARACTER.aromaPrinciple": "[sine][blue]...Waiting...[/blue][/sine]",
+  "TH_ALICE-ALICE_CHARACTER.banter.alive.endTurnPing": "...",
+  "TH_ALICE-ALICE_CHARACTER.banter.dead.endTurnPing": "...",
+  "TH_ALICE-ALICE_CHARACTER.cardsModifierDescription": "Alice's cards now appear in rewards and shops.",
+  "TH_ALICE-ALICE_CHARACTER.cardsModifierTitle": "Alice Cards",
+  "TH_ALICE-ALICE_CHARACTER.description": "The seven-colored doll manipulator,\nskilled at using dolls and magic to defeat enemies.",
+  "TH_ALICE-ALICE_CHARACTER.eventDeathPrevention": "Ugh... I won't give up...",
+  "TH_ALICE-ALICE_CHARACTER.goldMonologue": "[sine]These gold coins... might come in handy...[/sine]",
+  "TH_ALICE-ALICE_CHARACTER.possessiveAdjective": "Her",
+  "TH_ALICE-ALICE_CHARACTER.pronounObject": "her",
+  "TH_ALICE-ALICE_CHARACTER.pronounPossessive": "her",
+  "TH_ALICE-ALICE_CHARACTER.pronounSubject": "She",
+  "TH_ALICE-ALICE_CHARACTER.title": "Alice Margatroid",
+  "TH_ALICE-ALICE_CHARACTER.titleObject": "Alice",
+  "TH_ALICE-ALICE_CHARACTER.unlockText": "Play a game with [pink]{Prerequisite}[/pink] to unlock this character."
+}

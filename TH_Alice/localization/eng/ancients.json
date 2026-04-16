@@ -1,0 +1,19 @@
+{
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.1-0.ancient": "Hmm... Instead of manipulating dolls, aren't you the one being manipulated?",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.1-0.next": "What do you mean?",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.1-1.char": "... Literally, aren't you being manipulated by the one who poisoned me?",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.1-1.next": "Silence",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.1-2.ancient": "Looks like you don't understand at all. See you next time!",
+
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.2-0r.ancient": "You're back. What do you think this time?",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.2-0r.next": "Continue",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.2-1r.char": "Anyway, it seems I have to teach you a lesson.",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.2-1r.next": "Dolls attack!",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.2-2r.ancient": "Sigh... See you next time!",
+
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.0-0.ancient": "The little girl who manipulates dolls? Interesting, but far from enough.",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.0-0.next": "Continue",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.0-1.char": "How can you know without trying?",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.0-1.next": "Dolls attack!",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.0-2.ancient": "... Come see me again!"
+}
