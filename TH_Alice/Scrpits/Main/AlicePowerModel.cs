@@ -70,7 +70,7 @@ namespace TH_Alice.Scrpits.Main
             //执行一些buff的判断
         }
         public virtual async Task DollAction(PlayerChoiceContext choiceContext,bool Repeatable=true) { }
-        public async Task APM_Remove(bool IsRecyle,AlicePowerModel power) 
+        public async Task APM_Remove(bool IsRecyle, AlicePowerModel power) 
         {
             //调用这个函数来移除这个Power，触发移除时的相关效果
             if (Owner.HasPower<DollJudgmentPower>())
@@ -78,6 +78,7 @@ namespace TH_Alice.Scrpits.Main
                 await PowerCmd.Apply<StrengthPower>(Owner, Owner.GetPowerAmount<DollJudgmentPower>(), null, null);
             }
 
+            bool shouldSpawnXiZang = Owner.HasPower<XiZangPower>() || power is XiZangPower;
 
             if (IsRecyle)
             {
@@ -90,11 +91,11 @@ namespace TH_Alice.Scrpits.Main
                     list.Add(Owner.CombatState.CreateCard<DollPart>(Owner.Player));
                 }
                 CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Draw, addedByPlayer: true, CardPilePosition.Random));
-                if (Owner.HasPower<XiZangPower>() || power is XiZangPower) 
+                if (shouldSpawnXiZang)
                 {
-                     if(Owner is AliceCharacter)
+                    if (Owner.Player?.Character is AliceCharacter character)
                     {
-                    await CreatureCmd.TriggerAnim(base.Owner, "Summon", base.Owner.Player.Character.CastAnimDelay);
+                        await CreatureCmd.TriggerAnim(base.Owner, "Summon", character.CastAnimDelay);
                     }
                     await ToolBox.MakeDoll<XiZangPower>(Owner);
                 }
@@ -130,15 +131,15 @@ namespace TH_Alice.Scrpits.Main
             {
 		        SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/dolldie.wav"));
                 //触发死亡时的逻辑
-                if (Owner.Player.GetRelic<BottlePowder>() != null)
+                if (Owner.Player?.GetRelic<BottlePowder>() != null)
                 {
                     (await PowerCmd.Apply<TheBombPower>(Owner, 1, null, null)).SetDamage(power.Amount);
                 }
-                if (Owner.HasPower<XiZangPower>() || power is XiZangPower)
+                if (shouldSpawnXiZang)
                 {
-                     if(Owner is AliceCharacter)
+                    if (Owner.Player?.Character is AliceCharacter character)
                     {
-                        await CreatureCmd.TriggerAnim(base.Owner, "Summon", base.Owner.Player.Character.CastAnimDelay);
+                        await CreatureCmd.TriggerAnim(base.Owner, "Summon", character.CastAnimDelay);
                     }
                     await ToolBox.MakeDoll<XiZangPower>(Owner);
                 }
