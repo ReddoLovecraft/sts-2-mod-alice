@@ -1,11 +1,11 @@
 {
-  "id": "TH_Alice",          
+  "id": "TH_Alice",
   "name": "爱丽丝·玛格特洛伊德",
   "author": "Reddo",
-  "description": "加入了来自东方Project的角色，七色的人偶师爱丽丝。\n拥有95张角色卡牌(含多人游戏卡牌与先古牌)，9个新遗物和3瓶新药水。",
-  "version": "1.4",
-  "has_pck": true,         
-  "has_dll": true,       
-  "dependencies": ["BaseLib"],    
-  "affects_gameplay": true 
+  "description": "加入了来自东方Project的角色，七色的人偶师爱丽丝。\n拥有95张角色卡牌(含多人游戏卡牌与先古牌)，6个新事件，10个新遗物与3瓶新药水。",
+  "version": "1.6",
+  "has_pck": true,
+  "has_dll": true,
+  "dependencies": [ "BaseLib" ],
+  "affects_gameplay": true
 }
