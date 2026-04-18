@@ -61,7 +61,6 @@ public static class DollTurnPhase
 		{
 			nCreature.ToggleIsInteractable(true);
 			await nCreature.RefreshIntents();
-			await nCreature.PerformIntent();
 		}
 		if (dollCreature.Monster is AliceDollMonsterModel doll)
 		{
@@ -73,14 +72,15 @@ public static class DollTurnPhase
 				await Cmd.CustomScaledWait(PauseBeforeActionFast, PauseBeforeActionStandard);
 			}
 			await doll.PerformIntent(ctx);
-			if (originalPos.HasValue && attackPos.HasValue && nCreature != null)
+			if (dollCreature.IsDead || nCreature == null || !GodotObject.IsInstanceValid(nCreature))
+			{
+				return;
+			}
+			if (originalPos.HasValue && attackPos.HasValue)
 			{
 				await TweenTo(nCreature, originalPos.Value, MoveBackSecondsFast, MoveBackSecondsStandard, outEase: false);
 			}
-			if (nCreature != null)
-			{
-				await nCreature.RefreshIntents();
-			}
+			await nCreature.RefreshIntents();
 		}
 	}
 

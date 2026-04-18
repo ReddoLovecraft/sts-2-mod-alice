@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using System.Linq;
 using TH_Alice.Scrpits.Dolls;
@@ -48,7 +49,13 @@ namespace TH_Alice.Scrpits.Powers
                 for (int i = 0; i < dolls.Count; i++)
                 {
                     SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/dollbow.wav"));
-                    await CreatureCmd.Damage(context, base.Owner, value, ValueProp.Move, dolls[i], null);
+                    decimal dmg = value;
+                    dmg += dolls[i].GetPowerAmount<StrengthPower>();
+                    if (dolls[i].HasPower<WeakPower>())
+                    {
+                        dmg *= 0.75m;
+                    }
+                    await CreatureCmd.Damage(context, base.Owner, dmg, ValueProp.Move, null, null);
                 }
                
             }

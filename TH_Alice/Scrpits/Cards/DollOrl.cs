@@ -38,7 +38,7 @@ public class DollOrl : AliceCardModel
          new HoverTip(locString3,locString4),
         new HoverTip(locString,locString2)
   });
-    public DollOrl() : base(1, CardType.Skill ,CardRarity.Common, TargetType.AnyEnemy)
+    public DollOrl() : base(1, CardType.Skill ,CardRarity.Common, TargetType.Self)
 	{
 	}
 

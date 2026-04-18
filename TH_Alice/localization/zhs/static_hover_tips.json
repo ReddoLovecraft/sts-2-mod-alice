@@ -1,6 +1,6 @@
 {
 	"DOLL.title": "人偶",
-	"DOLL.description": "在你的回合开始或结束时触发特定效果的召唤物，每种[gold]人偶[/gold]都拥有自己的数量上限，当数量超过上限后再制作将改为触发所有同类[gold]人偶[/gold]的指定效果。\n当你受到未被[gold]格挡[/gold]的伤害时，改为由所有[gold]人偶[/gold]均摊伤害(向下取整)。",
+	"DOLL.description": "在你的回合结束时触发特定效果的召唤物，每种[gold]人偶[/gold]都拥有自己的数量上限，当数量超过上限后再制作将改为触发所有同类[gold]人偶[/gold]的指定效果。\n当你受到未被[gold]格挡[/gold]的伤害时，改为由所有[gold]人偶[/gold]均摊伤害(向下取整)。",
 	"RECYCLE.title": "回收",
 	"RECYCLE.description": "移除[gold]人偶[/gold]，并根据其当前生命值将3(>100%)/2(100%)/1(<100%)张[gold]人偶零部件[/gold]放入你的[gold]抽牌堆[/gold]。",
 	"SHANGHAI.title": "上海人形",

@@ -67,6 +67,24 @@ public abstract class AliceDollMonsterModel : CustomMonsterModel
 	protected Player? DollOwner => _cachedOwner ?? Creature.PetOwner;
 	protected Creature? DollOwnerCreature => DollOwner?.Creature;
 
+	protected decimal GetAttackAmount(decimal baseAmount, ValueProp props)
+	{
+		decimal amount = baseAmount;
+		if (props.IsPoweredAttack())
+		{
+			decimal str = Creature.GetPowerAmount<StrengthPower>();
+			if (str != 0)
+			{
+				amount += str;
+			}
+			if (Creature.HasPower<WeakPower>())
+			{
+				amount *= 0.75m;
+			}
+		}
+		return amount;
+	}
+
 	public override Task AfterCreatureAddedToCombat(Creature creature)
 	{
 		if (creature == Creature)
@@ -228,7 +246,7 @@ public sealed class SHANGHAI : AliceDollMonsterModel
 		{
 			if (combat.HittableEnemies.Count > 0)
 			{
-				await CreatureCmd.Damage(choiceContext, combat.HittableEnemies, Intent, ValueProp.Move, Creature, null);
+				await CreatureCmd.Damage(choiceContext, combat.HittableEnemies, GetAttackAmount(Intent, ValueProp.Move), ValueProp.Move, null, null);
 			}
 		}
 		else
@@ -237,7 +255,7 @@ public sealed class SHANGHAI : AliceDollMonsterModel
 			target ??= combat.RunState.Rng.CombatTargets.NextItem(combat.HittableEnemies);
 			if (target != null && target.IsAlive)
 			{
-				await CreatureCmd.Damage(choiceContext, target, Intent, ValueProp.Move, Creature, null);
+				await CreatureCmd.Damage(choiceContext, target, GetAttackAmount(Intent, ValueProp.Move), ValueProp.Move, null, null);
 			}
 		}
 		await TriggerSilk();
@@ -342,7 +360,7 @@ public sealed class PENGLAI : AliceDollMonsterModel
 		{
 			return;
 		}
-		await CreatureCmd.Damage(choiceContext, combat.HittableEnemies, Creature.CurrentHp, ValueProp.Move, Creature, null);
+		await CreatureCmd.Damage(choiceContext, combat.HittableEnemies, GetAttackAmount(Creature.CurrentHp, ValueProp.Move), ValueProp.Move, null, null);
 	}
 
 	public override async Task PerformIntent(PlayerChoiceContext choiceContext, bool repeatable = true)
@@ -358,7 +376,7 @@ public sealed class PENGLAI : AliceDollMonsterModel
 		Creature? owner = DollOwnerCreature;
 		if (combat != null && owner != null && combat.HittableEnemies.Count > 0)
 		{
-			await CreatureCmd.Damage(choiceContext, combat.HittableEnemies, Creature.MaxHp, ValueProp.Move, Creature, null);
+			await CreatureCmd.Damage(choiceContext, combat.HittableEnemies, GetAttackAmount(Creature.MaxHp, ValueProp.Move), ValueProp.Move, null, null);
 		}
 		await Recycle(choiceContext);
 	}
@@ -498,7 +516,7 @@ public sealed class ROUNDTABLE : AliceDollMonsterModel
 		await PowerCmd.Apply<PlatingPower>(owner, Intent, owner, null);
 		if (combat.HittableEnemies.Count > 0)
 		{
-		await CreatureCmd.Damage(choiceContext, combat.HittableEnemies, Intent, ValueProp.Move, Creature, null);
+		await CreatureCmd.Damage(choiceContext, combat.HittableEnemies, GetAttackAmount(Intent, ValueProp.Move), ValueProp.Move, null, null);
 		}
 		await TriggerSilk();
 		await MaybeRepeatByLube(choiceContext, repeatable);
@@ -547,7 +565,7 @@ public sealed class FRANCE : AliceDollMonsterModel
 			target ??= combat.RunState.Rng.CombatTargets.NextItem(combat.HittableEnemies);
 			if (target != null && target.IsAlive)
 			{
-				await CreatureCmd.Damage(choiceContext, target, Intent, ValueProp.Move, Creature, null);
+				await CreatureCmd.Damage(choiceContext, target, GetAttackAmount(Intent, ValueProp.Move), ValueProp.Move, null, null);
 			}
 		}
 		await TriggerSilk();
@@ -597,7 +615,7 @@ public sealed class ORL : AliceDollMonsterModel
 		if (combat.HittableEnemies.Count > 0)
 		{
 			Creature target = combat.RunState.Rng.CombatTargets.NextItem(combat.HittableEnemies);
-			await CreatureCmd.Damage(choiceContext, target, Creature.Block, ValueProp.Move, Creature, null);
+			await CreatureCmd.Damage(choiceContext, target, GetAttackAmount(Creature.Block, ValueProp.Move), ValueProp.Move, null, null);
 		}
 		await TriggerSilk();
 		await MaybeRepeatByLube(choiceContext, repeatable);
@@ -642,7 +660,7 @@ public sealed class NETHERLAND : AliceDollMonsterModel
 		}
 		if (combat.HittableEnemies.Count > 0 && Intent > 0)
 		{
-			await CreatureCmd.Damage(choiceContext, combat.HittableEnemies, Intent, ValueProp.Move, Creature, null);
+			await CreatureCmd.Damage(choiceContext, combat.HittableEnemies, GetAttackAmount(Intent, ValueProp.Move), ValueProp.Move, null, null);
 		}
 		Intent = Math.Max(0, Intent - 2);
 		await TriggerSilk();
@@ -731,7 +749,7 @@ public sealed class BOMB : AliceDollMonsterModel
 		Creature? owner = DollOwnerCreature;
 		if (combat != null && owner != null && combat.HittableEnemies.Count > 0)
 		{
-			await CreatureCmd.Damage(choiceContext, combat.HittableEnemies, Intent, ValueProp.Move, Creature, null);
+			await CreatureCmd.Damage(choiceContext, combat.HittableEnemies, GetAttackAmount(Intent, ValueProp.Move), ValueProp.Move, null, null);
 		}
 		await CreatureCmd.Kill(Creature, force: true);
 	}

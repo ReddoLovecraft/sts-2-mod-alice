@@ -41,11 +41,11 @@ public class DollRevenge : AliceCardModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
          await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<DollRevengePower>(Owner.Creature, base.DynamicVars["Power"].IntValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<DollRevengePower>(Owner.Creature, 1, base.Owner.Creature, this);
        
     }
 	protected override void OnUpgrade()
 	{
-        base.DynamicVars["Power"].UpgradeValueBy(2);
+        this.EnergyCost.UpgradeBy(-1);
     }
 }

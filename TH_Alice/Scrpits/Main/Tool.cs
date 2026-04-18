@@ -254,6 +254,10 @@ namespace TH_Alice.TH_Alice.Scrpits.Main
 
             Creature pet = combat.CreateCreature(monster, ownerCreature.Side, null);
             await PlayerCmd.AddPet(pet, owner);
+            if (pet.Monster is AliceDollMonsterModel dollMonster)
+            {
+                dollMonster.CacheOwner(owner);
+            }
             pet.PrepareForNextTurn(combat.HittableEnemies, rollNewMove: true);
             DollPlacement.Arrange(owner);
         }

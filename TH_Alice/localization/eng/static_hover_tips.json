@@ -1,6 +1,6 @@
 {
 	"DOLL.title": "Doll",
-	"DOLL.description": "Summons that trigger specific effects at the start or end of your turn.Each type of [gold]Doll[/gold] has its own quantity cap. When the cap is exceeded, further creations will instead trigger the specified effect of all [gold]Dolls[/gold] of that type.\n When you take unblocked damage, it is evenly distributed among all [gold]Dolls[/gold] (rounded down).",
+	"DOLL.description": "Summons that trigger specific effects at the end of your turn.Each type of [gold]Doll[/gold] has its own quantity cap. When the cap is exceeded, further creations will instead trigger the specified effect of all [gold]Dolls[/gold] of that type.\n When you take unblocked damage, it is evenly distributed among all [gold]Dolls[/gold] (rounded down).",
 	"RECYCLE.title": "Recycle",
 	"RECYCLE.description": "Remove a [gold]Doll[/gold] and put 3 (>100% HP)/2 (100% HP)/1 (<100% HP) [gold]Doll Part(s)[/gold] into your [gold]Draw Pile[/gold] based on its current HP.",
 	"SHANGHAI.title": "Shanghai Doll",
