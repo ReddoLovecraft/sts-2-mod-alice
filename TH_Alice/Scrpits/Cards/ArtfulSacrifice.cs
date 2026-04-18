@@ -16,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TH_Alice.Scrpits.Character;
+using TH_Alice.Scrpits.Dolls;
 using TH_Alice.Scrpits.Main;
 using TH_Alice.TH_Alice.Scrpits.Main;
 
@@ -23,7 +24,7 @@ namespace TH_Alice.Scrpits.Cards;
 [Pool(typeof(AliceCardPool))]
 public sealed class ArtfulSacrifice : AliceCardModel
 {
-  
+  public override bool IsTargetDoll => true;
     protected override IEnumerable<DynamicVar> CanonicalVars => (new DynamicVar[3]
 {
         new HpLossVar(4m),
@@ -45,17 +46,9 @@ public sealed class ArtfulSacrifice : AliceCardModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        if (ToolBox.GetDollCount(Owner.Creature)>0)
+        if (cardPlay.Target is Creature doll && DollCardTargetingState.IsAliveDollOfOwner(doll, Owner))
         {
-     
-            foreach(PowerModel pm in Owner.Creature.Powers) 
-            {
-                if(pm is AlicePowerModel apm&&apm.IsDollPower)
-                {
-                    await apm.APM_Decline(base.DynamicVars.HpLoss.IntValue);
-                    break;
-                }
-            }
+            await CreatureCmd.Damage(choiceContext, doll, base.DynamicVars.HpLoss.IntValue, ValueProp.Unblockable | ValueProp.Unpowered, base.Owner.Creature, this);
             await PlayerCmd.GainEnergy(base.DynamicVars.Energy.IntValue, base.Owner);
             await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
         }

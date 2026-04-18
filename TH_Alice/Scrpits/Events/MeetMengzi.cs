@@ -46,7 +46,7 @@ public sealed class MeetMengzi : CustomEventModel
         new StringVar("DrinkRandomPotion"),
         new GoldVar(100)
     ];
-   public override bool IsAllowed(RunState runState)
+   public override bool IsAllowed(IRunState runState)
 	{
 		if (runState.CurrentActIndex >1)
 		{
@@ -62,7 +62,7 @@ public sealed class MeetMengzi : CustomEventModel
 		}
 		return false;
 	}
-    protected override Task BeforeEventStarted()
+    protected override Task BeforeEventStarted(bool isPreFinished)
     {
         Owner!.CanRemovePotions = false;
         return Task.CompletedTask;

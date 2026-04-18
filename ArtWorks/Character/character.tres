@@ -1,7 +1,7 @@
 [gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://col3wxkdjy4px"]
 
-[ext_resource type="SpineAtlasResource" uid="uid://b4rv8j33cwsi2" path="res://ArtWorks/Character/skeleton.atlas" id="1_g6moc"]
-[ext_resource type="SpineSkeletonFileResource" uid="uid://b6tkcpbwo555g" path="res://ArtWorks/Character/alice.skel" id="2_j45iu"]
+[ext_resource type="SpineAtlasResource" uid="uid://dfghmcmure84" path="res://ArtWorks/Character/skeleton.atlas" id="1_g6moc"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://4wkmj4h712d3" path="res://ArtWorks/Character/alice.skel" id="2_j45iu"]
 
 [resource]
 atlas_res = ExtResource("1_g6moc")

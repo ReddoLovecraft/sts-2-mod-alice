@@ -2,6 +2,7 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -46,14 +47,6 @@ public class CurseShangHai : AliceCardModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        foreach(PowerModel debuff in cardPlay.Target.Powers) 
-        {
-            if (debuff.Type == PowerType.Debuff&&debuff.StackType == PowerStackType.Counter) 
-            {
-                int amt=debuff.Amount;
-                await PowerCmd.Apply(debuff, cardPlay.Target, amt,Owner.Creature,this);
-            }
-        }
         int cnt=ToolBox.GetDebuffKind(cardPlay.Target);
         if (cnt > 0) 
         {
@@ -65,7 +58,14 @@ public class CurseShangHai : AliceCardModel
             }
                 await ToolBox.MakeDoll<ShangHaiPower>(base.Owner.Creature);
             }
-         
+        }
+        int cnt2=ToolBox.GetDebuffTotalCount(cardPlay.Target);
+        foreach(Creature doll in Owner.Creature.Pets)
+        { 
+            if(doll.IsAlive)
+            {
+                 await CreatureCmd.Heal(doll, cnt2);
+            }
         }
     }
        

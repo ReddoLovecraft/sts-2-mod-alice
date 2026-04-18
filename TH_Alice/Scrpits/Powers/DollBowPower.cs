@@ -8,6 +8,8 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
+using System.Linq;
+using TH_Alice.Scrpits.Dolls;
 using TH_Alice.Scrpits.Main;
 using TH_Alice.TH_Alice.Scrpits.Main;
 
@@ -42,10 +44,11 @@ namespace TH_Alice.Scrpits.Powers
             if (GetInternalData<Data>().amountsForPlayedCards.Remove(cardPlay.Card, out var value))
             {
                 Flash();
-                for(int i = 0;i<ToolBox.GetDollCount(cardPlay.Card.Owner.Creature);i++)
+                var dolls = cardPlay.Card.Owner.Creature.Pets.Where(p => p.IsAlive && p.Monster is AliceDollMonsterModel).ToList();
+                for (int i = 0; i < dolls.Count; i++)
                 {
                     SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/dollbow.wav"));
-                    await CreatureCmd.Damage(context, base.Owner, value,ValueProp.Unpowered, null, null);
+                    await CreatureCmd.Damage(context, base.Owner, value, ValueProp.Move, cardPlay.Card.Owner.Creature, null);
                 }
                
             }

@@ -49,8 +49,15 @@ public class LittleLegion : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, ToolBox.GetDollCount(Owner.Creature), base.Owner.Creature, this);
+        foreach(Creature dolls in Owner.Creature.Pets)
+        {
+            if(dolls.IsAlive)
+            {
+                await PowerCmd.Apply<StrengthPower>(dolls, ToolBox.GetDollCount(Owner.Creature), dolls, this);
+            }
+        }
     }
     protected override void OnUpgrade()
     {

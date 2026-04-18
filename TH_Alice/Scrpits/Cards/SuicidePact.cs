@@ -18,6 +18,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TH_Alice.Scrpits.Character;
+using TH_Alice.Scrpits.Dolls;
 using TH_Alice.Scrpits.Main;
 using TH_Alice.Scrpits.Powers;
 using TH_Alice.TH_Alice.Scrpits.Main;
@@ -28,6 +29,7 @@ namespace TH_Alice.Scrpits.Cards;
 public class SuicidePact : AliceCardModel
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
+    public override bool IsTargetDoll => true;
     static string text = StringHelper.Slugify("Doll");
     static LocString locString = ToolBox.L10NStatic(text + ".title");
     static LocString locString2 = ToolBox.L10NStatic(text + ".description");
@@ -46,14 +48,17 @@ public class SuicidePact : AliceCardModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        foreach (PowerModel pm in Owner.Creature.Powers)
+        foreach (Creature pet in Owner.Creature.Pets.Where(p => p.IsAlive && p.Monster is AliceDollMonsterModel))
         {
-            if (pm is AlicePowerModel apm && apm.IsDollPower)
+            if (pet.Monster is AliceDollMonsterModel doll)
             {
-                apm.AddDamage(DynamicVars.Cards.BaseValue);
+                doll.Intent += (int)DynamicVars.Cards.BaseValue;
             }
         }
-        await ToolBox.RecycleDolls(Owner.Creature, 1);
+        if (cardPlay.Target is Creature target && DollCardTargetingState.IsAliveDollOfOwner(target, Owner) && target.Monster is AliceDollMonsterModel targetDoll)
+        {
+            await targetDoll.Recycle(choiceContext);
+        }
     }
     protected override void OnUpgrade()
     {

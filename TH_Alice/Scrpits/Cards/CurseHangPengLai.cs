@@ -15,6 +15,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using TH_Alice.Scrpits.Character;
+using TH_Alice.Scrpits.Dolls;
 using TH_Alice.Scrpits.Main;
 using TH_Alice.Scrpits.Powers;
 using TH_Alice.TH_Alice.Scrpits.Main;
@@ -63,12 +64,12 @@ public class CurseHangPengLai : AliceCardModel
         if (ShouldGlowGoldInternal) 
         {
             int amt = 0;
-                foreach (PowerModel pm in Owner.Creature.Powers)
+                foreach (Creature pm in Owner.Creature.Pets)
                 {
-                    if (pm is PengLaiPower plm)
+                    if (pm.Monster is PENGLAI pl)
                     {
-                        amt+=plm.Amount;
-                    break;
+                        amt+=pl.Creature.MaxHp;
+                        break;
                     }
                 }
             await ToolBox.RecycleDolls(base.Owner.Creature, 1, PengLaiFirst: true);

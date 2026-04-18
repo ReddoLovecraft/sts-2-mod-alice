@@ -3,11 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://by5t7bps4fjxs" path="res://ArtWorks/VFX/energy_orb_burst.png" id="1_fxdbh"]
 [ext_resource type="Script" uid="uid://b3bqeloytrreg" path="res://NAliceEnergyCounter.cs" id="1_k51tk"]
 [ext_resource type="Material" uid="uid://c281ff8d6uddt" path="res://ArtWorks/VFX/canvas_item_material_additive_shared.tres" id="1_pabcb"]
+[ext_resource type="PackedScene" path="res://ArtWorks/VFX/energy/alice_energy_vfx_back.tscn" id="2_vfx_back"]
 [ext_resource type="Texture2D" uid="uid://ciag7i22afad1" path="res://ArtWorks/VFX/AliceEnergy.png" id="3_fxdbh"]
 [ext_resource type="Texture2D" uid="uid://0yu80eea534a" path="res://ArtWorks/VFX/AliceEnergy2.png" id="4_2dcmw"]
 [ext_resource type="Texture2D" uid="uid://c7hgg0p7tyv07" path="res://ArtWorks/VFX/energy_orb_shine.png" id="4_pabcb"]
 [ext_resource type="Texture2D" uid="uid://du5tt8m5yi1qw" path="res://ArtWorks/VFX/AliceEnergy3.png" id="5_2dcmw"]
 [ext_resource type="Script" path="res://addons/mega_text/MegaLabel.cs" id="mega_label"]
+[ext_resource type="PackedScene" path="res://ArtWorks/VFX/energy/alice_energy_vfx_front.tscn" id="9_vfx_front"]
 
 [ext_resource type="FontVariation" path="res://themes/kreon_bold_shared.tres" 
 
@@ -40,24 +42,9 @@ offset_bottom = 128.0
 pivot_offset = Vector2(64, 64)
 script = ExtResource("1_k51tk")
 
-[node name="BurstBack" type="CPUParticles2D" parent="."]
+[node name="EnergyVfxBack" parent="." instance=ExtResource("2_vfx_back")]
 unique_name_in_owner = true
-material = ExtResource("1_pabcb")
-position = Vector2(65, 63)
-emitting = false
-texture = ExtResource("4_pabcb")
-one_shot = true
-local_coords = true
-gravity = Vector2(0, 0)
-angular_velocity_min = 30.0
-angular_velocity_max = 30.0
-radial_accel_max = 10.0
-angle_max = 260.0
-scale_amount_min = 0.45
-scale_amount_max = 0.45
-scale_amount_curve = SubResource("Curve_2dcmw")
-color = Color(1, 1, 0.5254902, 0.6627451)
-color_ramp = SubResource("Gradient_k51tk")
+position = Vector2(64, 64)
 
 [node name="Layers" type="Control" parent="."]
 unique_name_in_owner = true
@@ -116,26 +103,9 @@ texture = ExtResource("5_2dcmw")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="BurstFront" type="CPUParticles2D" parent="."]
+[node name="EnergyVfxFront" parent="." instance=ExtResource("9_vfx_front")]
 unique_name_in_owner = true
-material = ExtResource("1_pabcb")
-position = Vector2(65, 63)
-emitting = false
-amount = 1
-texture = ExtResource("1_fxdbh")
-lifetime = 0.5
-one_shot = true
-local_coords = true
-gravity = Vector2(0, 0)
-angular_velocity_min = 30.0
-angular_velocity_max = 30.0
-radial_accel_max = 10.0
-angle_max = 260.0
-scale_amount_min = 0.45
-scale_amount_max = 0.45
-scale_amount_curve = SubResource("Curve_pabcb")
-color = Color(1, 1, 0.5294118, 0.6745098)
-color_ramp = SubResource("Gradient_2dcmw")
+position = Vector2(64, 64)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

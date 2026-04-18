@@ -1,4 +1,5 @@
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -14,6 +15,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.ValueProps;
 using TH_Alice.Scrpits.Character;
 using TH_Alice.Scrpits.Main;
@@ -53,7 +55,11 @@ public class ViolentInvultuation : AliceCardModel
                 {
                     continue;
                 }
-                to_remove.Add(buff);
+                if(buff is BattlewornDummyTimeLimitPower||buff is SandpitPower||buff is SkittishPower)
+                {
+                   continue;
+                }
+                 to_remove.Add(buff);
             }
         }
         for(int i=0;i<to_remove.Count;i++)

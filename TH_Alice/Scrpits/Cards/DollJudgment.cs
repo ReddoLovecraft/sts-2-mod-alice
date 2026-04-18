@@ -24,7 +24,7 @@ public class DollJudgment : AliceCardModel
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-        new DynamicVar("Power", 2)
+        new DynamicVar("Power", 3)
      ];
     static string text = StringHelper.Slugify("Doll");
     static LocString locString = ToolBox.L10NStatic(text + ".title");
@@ -45,10 +45,9 @@ public class DollJudgment : AliceCardModel
 	{
          await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         await PowerCmd.Apply<DollJudgmentPower>(Owner.Creature, base.DynamicVars["Power"].IntValue, base.Owner.Creature, this);
-       
     }
 	protected override void OnUpgrade()
 	{
-        base.DynamicVars["Power"].UpgradeValueBy(1);
+        base.DynamicVars["Power"].UpgradeValueBy(2);
     }
 }

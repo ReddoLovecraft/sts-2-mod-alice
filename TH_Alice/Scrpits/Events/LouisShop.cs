@@ -46,8 +46,8 @@ public sealed class LouisShop : CustomEventModel
     [
         new GoldVar(200)
     ];
-    public override bool IsAllowed(RunState runState) => runState.Players.All(p => p.Gold >= DynamicVars.Gold.BaseValue);
-    protected override Task BeforeEventStarted()
+    public override bool IsAllowed(IRunState runState) => runState.Players.All(p => p.Gold >= DynamicVars.Gold.BaseValue);
+    protected override Task BeforeEventStarted(bool isPreFinished)
     {
         Owner!.CanRemovePotions = false;
         return Task.CompletedTask;

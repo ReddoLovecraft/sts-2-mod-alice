@@ -46,6 +46,7 @@ using TH_Alice.TH_Alice.Scrpits.Main;
             cardModel = (await CardSelectCmd.FromSimpleGrid(choiceContext, cards, base.Owner, prefs)).FirstOrDefault();
             if (cardModel != null)
             {
+                CardCmd.Upgrade(cardModel);
                 await CardPileCmd.Add(Owner.RunState.CloneCard(cardModel), PileType.Deck);
                 await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Draw, addedByPlayer: true);
             }

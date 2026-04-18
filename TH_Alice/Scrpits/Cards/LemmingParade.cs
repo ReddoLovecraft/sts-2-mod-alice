@@ -48,12 +48,8 @@ public class LemmingParade : AliceCardModel
         }
         else if (amt- DynamicVars.Cards.IntValue < 0) 
         {
-            for(int i = 0; i < DynamicVars.Cards.IntValue - amt; i++)
+            while(ToolBox.GetDollCount(Owner.Creature) < DynamicVars.Cards.IntValue)
             {
-                if(Owner.Character is AliceCharacter)
-            {
-                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
-            }
                 await ToolBox.MakeRandomDoll(Owner.Creature);
             }
         }

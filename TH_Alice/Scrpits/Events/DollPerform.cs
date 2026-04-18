@@ -33,7 +33,7 @@ public sealed class DollPerform : CustomEventModel
     [
         new GoldVar(200)
     ];
-    protected override Task BeforeEventStarted()
+    protected override Task BeforeEventStarted(bool isPreFinished)
     {
         Owner!.CanRemovePotions = false;
         return Task.CompletedTask;
@@ -46,7 +46,7 @@ public sealed class DollPerform : CustomEventModel
     {
         return (new EventOption[2] {CreateOption(Join, "TH_ALICE-DOLL_PERFORM.pages.INITIAL.options.JOIN"),CreateOption(Watch, "TH_ALICE-DOLL_PERFORM.pages.INITIAL.options.WATCH")});
     }
-      public override bool IsAllowed(RunState runState)
+      public override bool IsAllowed(IRunState runState)
 	{
         bool flag=true;
         foreach (var player in runState.Players)

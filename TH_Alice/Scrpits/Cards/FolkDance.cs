@@ -13,7 +13,9 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
+using System.Linq;
 using TH_Alice.Scrpits.Character;
+using TH_Alice.Scrpits.Dolls;
 using TH_Alice.Scrpits.Main;
 using TH_Alice.Scrpits.Powers;
 using TH_Alice.TH_Alice.Scrpits.Main;
@@ -41,21 +43,17 @@ public class FolkDance : AliceCardModel
          await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         int num = 0 + ResolveEnergyXValue();
         if (IsUpgraded) num +=1;
+        CombatState? combatState = Owner.Creature.CombatState ?? base.CombatState;
+        if (combatState == null)
+        {
+            return;
+        }
         for (int i = 0; i < num; i++)
         {
-            List<AlicePowerModel> apms=new List<AlicePowerModel>();
-            foreach (PowerModel pm in Owner.Creature.Powers) 
+            var dolls = Owner.Creature.Pets.Where(p => p.IsAlive && p.Monster is AliceDollMonsterModel).ToList();
+            for (int j = 0; j < dolls.Count; j++)
             {
-                if (pm is AlicePowerModel apm&& apm.IsDollPower)
-                {
-                  apms.Add(apm);
-                }
-            }
-            //防止自爆人偶执行逻辑后自己删除导致循环越界
-            for(int j=apms.Count-1;j>=0;j--)
-            {
-                await apms[j].DollAction(choiceContext);
-                apms.RemoveAt(j);
+                await DollTurnPhase.ExecuteSingle(combatState, dolls[j], choiceContext);
             }
         }
     }

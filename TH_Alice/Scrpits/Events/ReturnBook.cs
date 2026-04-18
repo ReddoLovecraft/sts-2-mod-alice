@@ -49,7 +49,7 @@ public sealed class ReturnBook : CustomEventModel
         new StringVar("CardStolen"),
         new HpLossVar(10)
     ];
-   	public override bool IsAllowed(RunState runState)
+   	public override bool IsAllowed(IRunState runState)
 	{
 		if (runState.TotalFloor > 6)
 		{
@@ -57,7 +57,7 @@ public sealed class ReturnBook : CustomEventModel
 		}
 		return false;
 	}
-    protected override Task BeforeEventStarted()
+    protected override Task BeforeEventStarted(bool isPreFinished)
     {
         Owner!.CanRemovePotions = false;
         return Task.CompletedTask;

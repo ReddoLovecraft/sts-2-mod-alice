@@ -1,12 +1,19 @@
 using Godot;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Random;
+using System.Collections.Generic;
+using System.Linq;
+using TH_Alice.Scrpits.Cards;
+using TH_Alice.Scrpits.Dolls;
 using TH_Alice.Scrpits.Main;
 using TH_Alice.Scrpits.Powers;
 
@@ -22,9 +29,9 @@ namespace TH_Alice.TH_Alice.Scrpits.Main
         public static int GetDollCount(Creature player)
         {
             int result = 0;
-            foreach(PowerModel power in player.Powers)
+            foreach (Creature pet in player.Pets)
             {
-               if(power is AlicePowerModel&&((AlicePowerModel)power).IsDollPower)
+                if (pet.IsAlive && pet.Monster is AliceDollMonsterModel)
                 {
                     result++;
                 }
@@ -33,34 +40,15 @@ namespace TH_Alice.TH_Alice.Scrpits.Main
         }
         public static int GetDollKind(Creature player)
         {
-            int result = 0;
-            if(player.HasPower<ShangHaiPower>())
-                result++;
-            if(player.HasPower<PengLaiPower>())
-                result++;
-            if(player.HasPower<XiZangPower>())
-                result++;
-            if(player.HasPower<RoundTablePower>())
-                result++;
-            if(player.HasPower<OrlPower>())
-                result++;
-            if(player.HasPower<FrancePower>())
-                result++;
-            if(player.HasPower<NetherlandPower>())
-                result++;
-            if(player.HasPower<LondonPower>())
-                result++;
-            if(player.HasPower<CursePower>())
-                result++;
-            if(player.HasPower<BombPower>())
-                    result++;
-            if(player.HasPower<RussiaPower>())
-                result++;
-            if(player.HasPower<HinaPower>())
-                result++;
-            if(player.HasPower<GoliathPower>())
-                result++;
-                return result;
+            HashSet<Type> kinds = new HashSet<Type>();
+            foreach (Creature pet in player.Pets)
+            {
+                if (pet.IsAlive && pet.Monster is AliceDollMonsterModel)
+                {
+                    kinds.Add(pet.Monster.GetType());
+                }
+            }
+            return kinds.Count;
         }
         public static async Task RecycleDolls(Creature player,bool PengLaiFirst=false)
         {
@@ -72,121 +60,202 @@ namespace TH_Alice.TH_Alice.Scrpits.Main
         {
             if (player == null)
                 return;
+            Player? owner = player.Player;
+            CombatState? combat = player.CombatState;
+            if (owner == null || combat == null)
+            {
+                return;
+            }
+            Player ownerPlayer = owner;
+            CombatState combatState = combat;
             int cnt = 0;
-            List<AlicePowerModel> apms = new List<AlicePowerModel>();
+            List<Creature> dolls = new List<Creature>();
+            IEnumerable<Creature> pets = player.Pets.Where(p => p.IsAlive && p.Monster is AliceDollMonsterModel).ToList();
             if (PengLaiFirst)
             {
-                foreach (PowerModel pm in player.Powers)
+                foreach (Creature pet in pets)
                 {
-                    if (pm is PengLaiPower plm)
+                    if (pet.Monster is PENGLAI)
                     {
-                        apms.Add(plm);
+                        dolls.Add(pet);
                         cnt++;
                         if (cnt >= amount)
+                        {
                             break;
+                        }
                     }
                 }
             }
-            if(cnt<amount)
-            foreach (PowerModel pm in player.Powers)
+            if (cnt < amount)
             {
-                if (pm is AlicePowerModel apm&&apm.IsDollPower && !apms.Contains(apm))
+                foreach (Creature pet in pets)
                 {
-                    apms.Add(apm);
+                    if (dolls.Contains(pet))
+                    {
+                        continue;
+                    }
+                    dolls.Add(pet);
                     cnt++;
                     if (cnt >= amount)
-                            break;
+                    {
+                        break;
+                    }
                 }
             }
-            for (int i = apms.Count - 1; i >= 0; i--)
+
+            PlayerChoiceContext ctx = new ThrowingPlayerChoiceContext();
+            for (int i = dolls.Count - 1; i >= 0; i--)
             {
-                await apms[i].APM_Remove(true, apms[i]);
-                apms.RemoveAt(i);
+                Creature dollCreature = dolls[i];
+                if (dollCreature.Monster is AliceDollMonsterModel dollModel)
+                {
+                    await dollModel.Recycle(ctx);
+                }
             }
+        }
+
+        public static int GetRecycleNum(Creature dollCreature, AliceDollMonsterModel dollModel)
+        {
+            int baseHp = dollModel.BaseHp;
+            if (dollCreature.CurrentHp > baseHp)
+            {
+                return 3;
+            }
+            if (dollCreature.CurrentHp == baseHp)
+            {
+                return 2;
+            }
+            return 1;
         }
         public  static async Task MakeDoll<T>(Creature player, bool isWax = false) where T : AlicePowerModel
         {
-		    SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/summon.wav"));
             if (player == null)
                 return;
-            T inst= ModelDb.Power<T>();
+		    SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/summon.wav"));
+
             if (player.HasPower<DollJudgmentPower>()) 
             {
-                await PowerCmd.Apply<DexterityPower>(player,player.GetPowerAmount<DollJudgmentPower>(),null,null);
+                await PowerCmd.Apply<SpeedPotionPower>(player,player.GetPowerAmount<DollJudgmentPower>(),null,null);
             }
             if (player.HasPower<MasterPower>()) 
             {
-                await PlayerCmd.GainEnergy(player.GetPowerAmount<MasterPower>(), player.Player);
+                if (player.Player != null)
+                {
+                    await PlayerCmd.GainEnergy(player.GetPowerAmount<MasterPower>(), player.Player);
+                }
             }
             if (player.HasPower<MakeSequencePower>()) 
             {
                 await CreatureCmd.GainBlock(player,new MegaCrit.Sts2.Core.Localization.DynamicVars.BlockVar(player.GetPowerAmount<MakeSequencePower>(), MegaCrit.Sts2.Core.ValueProps.ValueProp.Unpowered) , null);
             }
-            if(inst is ShangHaiPower) 
+
+            Type dollType = typeof(T);
+            if (dollType == typeof(ShangHaiPower))
             {
-                (await PowerCmd.Apply<ShangHaiPower>(player, 10, player, null)).SetDamageAndWax(6,isWax);
+                await MakeDollMonster<SHANGHAI>(player, isWax);
                 return;
             }
-            if (inst is XiZangPower)
+            if (dollType == typeof(XiZangPower))
             {
-                (await PowerCmd.Apply<XiZangPower>(player, 6, player, null)).SetDamageAndWax(0, isWax);
+                await MakeDollMonster<XIZANG>(player, isWax);
                 return;
             }
-            if (inst is PengLaiPower)
+            if (dollType == typeof(PengLaiPower))
             {
-                (await PowerCmd.Apply<PengLaiPower>(player, 4, player, null)).SetDamageAndWax(4, isWax);
+                await MakeDollMonster<PENGLAI>(player, isWax);
                 return;
             }
-            if (inst is HinaPower)
+            if (dollType == typeof(HinaPower))
             {
-                (await PowerCmd.Apply<HinaPower>(player, 5, player, null)).SetDamageAndWax(1, isWax);
+                await MakeDollMonster<HINA>(player, isWax);
                 return;
             }
-            if (inst is OrlPower)
+            if (dollType == typeof(OrlPower))
             {
-                (await PowerCmd.Apply<OrlPower>(player, 10, player, null)).SetDamageAndWax(6, isWax);
+                await MakeDollMonster<ORL>(player, isWax);
                 return;
             }
-            if (inst is FrancePower)
+            if (dollType == typeof(FrancePower))
             {
-                (await PowerCmd.Apply<FrancePower>(player, 10, player, null)).SetDamageAndWax(4, isWax);
+                await MakeDollMonster<FRANCE>(player, isWax);
                 return;
             }
-            if (inst is GoliathPower)
+            if (dollType == typeof(GoliathPower))
             {
-                (await PowerCmd.Apply<GoliathPower>(player, 20, player, null)).SetDamageAndWax(4, isWax);
+                await MakeDollMonster<GOLIATH>(player, isWax);
                 return;
             }
-            if (inst is RoundTablePower)
+            if (dollType == typeof(RoundTablePower))
             {
-                (await PowerCmd.Apply<RoundTablePower>(player, 12, player, null)).SetDamageAndWax(2, isWax);
+                await MakeDollMonster<ROUNDTABLE>(player, isWax);
                 return;
             }
-            if (inst is RussiaPower)
+            if (dollType == typeof(RussiaPower))
             {
-                (await PowerCmd.Apply<RussiaPower>(player, 8, player, null)).SetDamageAndWax(2, isWax);
+                await MakeDollMonster<RUSSIA>(player, isWax);
                 return;
             }
-            if (inst is LondonPower)
+            if (dollType == typeof(LondonPower))
             {
-                (await PowerCmd.Apply<LondonPower>(player, 12, player, null)).SetDamageAndWax(3, isWax);
+                await MakeDollMonster<LONDON>(player, isWax);
                 return;
             }
-            if (inst is BombPower)
+            if (dollType == typeof(BombPower))
             {
-                (await PowerCmd.Apply<BombPower>(player, 2, player, null)).SetDamageAndWax(8, isWax);
+                await MakeDollMonster<BOMB>(player, isWax);
                 return;
             }
-            if (inst is NetherlandPower)
+            if (dollType == typeof(NetherlandPower))
             {
-                (await PowerCmd.Apply<NetherlandPower>(player, 30, player, null)).SetDamageAndWax(10, isWax);
+                await MakeDollMonster<NETHERLAND>(player, isWax);
                 return;
             }
-            if (inst is CursePower)
+            if (dollType == typeof(CursePower))
             {
-                (await PowerCmd.Apply<CursePower>(player, 6, player, null)).SetDamageAndWax(1, isWax);
+                await MakeDollMonster<CURSE>(player, isWax);
                 return;
             }
+        }
+
+        private static async Task MakeDollMonster<TMonster>(Creature ownerCreature, bool isWax) where TMonster : MonsterModel
+        {
+            Player? owner = ownerCreature.Player;
+            CombatState? combat = ownerCreature.CombatState;
+            if (owner == null || combat == null || owner.PlayerCombatState == null)
+            {
+                return;
+            }
+
+            int maxCount = int.MaxValue;
+            if (ModelDb.Monster<TMonster>() is AliceDollMonsterModel canonicalDoll)
+            {
+                maxCount = canonicalDoll.MaxCount;
+            }
+
+            List<Creature> existing = ownerCreature.Pets.Where(p => p.IsAlive && p.Monster is TMonster).ToList();
+            if (existing.Count >= maxCount)
+            {
+                PlayerChoiceContext ctx = new ThrowingPlayerChoiceContext();
+                foreach (Creature dollCreature in existing)
+                {
+                    if (dollCreature.Monster is AliceDollMonsterModel doll)
+                    {
+                        await doll.PerformMaxIntent(ctx);
+                    }
+                }
+                return;
+            }
+
+            MonsterModel monster = ModelDb.Monster<TMonster>().ToMutable();
+            if (monster is AliceDollMonsterModel dollModel)
+            {
+                dollModel.ConfigureAsWax(isWax);
+            }
+
+            Creature pet = combat.CreateCreature(monster, ownerCreature.Side, null);
+            await PlayerCmd.AddPet(pet, owner);
+            pet.PrepareForNextTurn(combat.HittableEnemies, rollNewMove: true);
+            DollPlacement.Arrange(owner);
         }
         public static int GetRecycleNum(Creature player,AlicePowerModel apm) 
         {

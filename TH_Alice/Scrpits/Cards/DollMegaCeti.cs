@@ -2,6 +2,7 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
@@ -14,6 +15,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using TH_Alice.Scrpits.Character;
+using TH_Alice.Scrpits.Dolls;
 using TH_Alice.Scrpits.Main;
 using TH_Alice.Scrpits.Powers;
 using TH_Alice.TH_Alice.Scrpits.Main;
@@ -22,6 +24,7 @@ namespace TH_Alice.Scrpits.Cards;
 [Pool(typeof(AliceCardPool))]
 public class DollMegaCeti : AliceCardModel
 {
+    public override bool IsTargetDoll => true;
     protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
         new EnergyVar(2)
@@ -39,14 +42,16 @@ public class DollMegaCeti : AliceCardModel
         new HoverTip(locString3,locString4),
         base.EnergyHoverTip
   });
-    public DollMegaCeti() : base(1, CardType.Skill ,CardRarity.Common, TargetType.None)
+    public DollMegaCeti() : base(1, CardType.Skill ,CardRarity.Common, TargetType.Self)
 	{
 	}
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-        
-        await ToolBox.RecycleDolls(base.Owner.Creature);
+         if (cardPlay.Target is Creature target && DollCardTargetingState.IsAliveDollOfOwner(target, Owner) && target.Monster is AliceDollMonsterModel targetDoll)
+        {
+            await targetDoll.Recycle(choiceContext);
+        }
         await PlayerCmd.GainEnergy(base.DynamicVars.Energy.IntValue, base.Owner);
         await PowerCmd.Apply<EnergyNextTurnPower>(base.Owner.Creature, base.DynamicVars.Energy.IntValue,base.Owner.Creature,this);
     }

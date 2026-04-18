@@ -38,7 +38,7 @@ public sealed class MeetSakuya : CustomEventModel
        new StringVar("ExchangeRelic"),
        new StringVar("RandomRelic")
     ];
-    public override bool IsAllowed(RunState runState) 
+    public override bool IsAllowed(IRunState runState) 
     {
 		if (runState.Players.Any((Player p) => !GetValidRelics(p).Any()))
 		{
@@ -59,7 +59,7 @@ public sealed class MeetSakuya : CustomEventModel
 	{
 		return player.Relics.Where((RelicModel r) => r.IsTradable);
 	}
-    protected override Task BeforeEventStarted()
+    protected override Task BeforeEventStarted(bool isPreFinished)
     {
         Owner!.CanRemovePotions = false;
         return Task.CompletedTask;

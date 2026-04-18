@@ -49,6 +49,6 @@ public class GirlDoll : AliceCardModel
     }
 	protected override void OnUpgrade()
 	{
-        base.DynamicVars["Power"].UpgradeValueBy(2);
+        base.DynamicVars["Power"].UpgradeValueBy(4);
     }
 }

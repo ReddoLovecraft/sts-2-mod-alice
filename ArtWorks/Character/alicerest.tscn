@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhnafu0ui0xx6"]
+[gd_scene load_steps=4 format=3 uid="uid://bhnafu0ui0xx6"]
 
 [ext_resource type="Script" uid="uid://d1sdrupj7gfic" path="res://ArtWorks/Character/Alicerest.cs" id="1_rfjk2"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://d1wbtdhnjuwwt" path="res://ArtWorks/Character/rest/rest.tres" id="1_xodtj"]
+[ext_resource type="PackedScene" path="res://scenes/ui/selection_reticle.tscn" id="2_selection_reticle"]
 
 [node name="alicerest" type="Node2D"]
 script = ExtResource("1_rfjk2")
@@ -19,7 +20,7 @@ scale = Vector2(8, 8)
 layout_mode = 3
 anchors_preset = 0
 
-[node name="SelectionRetic" type="Control" parent="ControlRoot"]
+[node name="SelectionReticle" parent="ControlRoot" instance=ExtResource("2_selection_reticle")]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_left = -189.0

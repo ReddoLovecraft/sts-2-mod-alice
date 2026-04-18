@@ -11,7 +11,9 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using System.Collections.Generic;
+using System.Linq;
 using TH_Alice.Scrpits.Character;
+using TH_Alice.Scrpits.Dolls;
 using TH_Alice.Scrpits.Main;
 using TH_Alice.TH_Alice.Scrpits.Main;
 
@@ -39,24 +41,17 @@ public class SuicideSolider : AliceCardModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        List<AlicePowerModel> dolls = new List<AlicePowerModel>();
-        foreach (PowerModel pm in Owner.Creature.Powers)
+        var dolls = Owner.Creature.Pets.Where(p => p.IsAlive && p.Monster is AliceDollMonsterModel).ToList();
+        foreach (Creature dollCreature in dolls)
         {
-            if (pm is AlicePowerModel apm && apm.IsDollPower)
-            {
-                dolls.Add(apm);
-            }
-        }
-        foreach (AlicePowerModel apm in dolls)
-        {
-            int cnt = apm.Amount * (int)base.DynamicVars.Cards.BaseValue;
+            int cnt = dollCreature.CurrentHp * (int)base.DynamicVars.Cards.BaseValue;
             await DamageCmd.Attack(cnt).WithHitCount(1).FromCard(this)
                 .TargetingRandomOpponents(base.CombatState)
                 .WithHitVfxNode((Creature t) => NScratchVfx.Create(t, goingRight: true))
                 .Execute(choiceContext);
             SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/bomb.wav"));
         }
-        await ToolBox.RecycleDolls(Owner.Creature, ToolBox.GetDollCount(Owner.Creature));
+        await ToolBox.RecycleDolls(Owner.Creature, dolls.Count);
     }
     protected override void OnUpgrade()
     {

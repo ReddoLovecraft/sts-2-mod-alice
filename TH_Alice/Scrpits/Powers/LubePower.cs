@@ -26,7 +26,7 @@ namespace TH_Alice.Scrpits.Powers
         public LubePower() { }
         public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
         {
-            if (side != base.Owner.Side)
+            if (side != CombatSide.Enemy)
             {
                 return;
             }

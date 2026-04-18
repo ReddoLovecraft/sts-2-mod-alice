@@ -31,7 +31,7 @@ public sealed class PastFuture : CustomEventModel
 		LocString description = new LocString(LocTable, optionKey + ".description");
 		return new EventOption(this, onChosen, title, description, optionKey, hoverTips ?? Enumerable.Empty<IHoverTip>());
 	}
-    protected override Task BeforeEventStarted()
+    protected override Task BeforeEventStarted(bool isPreFinished)
     {
         Owner!.CanRemovePotions = false;
         return Task.CompletedTask;
@@ -46,7 +46,7 @@ public sealed class PastFuture : CustomEventModel
         {CreateOption(Back, "TH_ALICE-PAST_FUTURE.pages.INITIAL.options.PAST",HoverTipFactory.FromRelic<AliceBook>()),
         CreateOption(Ahead, "TH_ALICE-PAST_FUTURE.pages.INITIAL.options.FUTURE",new IHoverTip[] { HoverTipFactory.Static(StaticHoverTip.Transform)})});
     }
-      public override bool IsAllowed(RunState runState)
+      public override bool IsAllowed(IRunState runState)
 	{
         bool flag=true;
         foreach (var player in runState.Players)

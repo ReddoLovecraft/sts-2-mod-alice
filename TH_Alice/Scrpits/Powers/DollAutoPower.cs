@@ -8,6 +8,8 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
+using System.Linq;
+using TH_Alice.Scrpits.Dolls;
 using TH_Alice.Scrpits.Main;
 
 namespace TH_Alice.Scrpits.Powers
@@ -22,22 +24,28 @@ namespace TH_Alice.Scrpits.Powers
         public DollAutoPower() { }
         public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
         {
-                Flash();
-            List<AlicePowerModel> apms=new List<AlicePowerModel>();
-              foreach(PowerModel pm in cardPlay.Card.Owner.Creature.Powers) 
+            Flash();
+            CombatState? combatState = cardPlay.Card.Owner.Creature.CombatState ?? Owner.CombatState;
+            if (combatState == null)
             {
-                if(pm is AlicePowerModel apm && apm.IsDollPower) 
+                return;
+            }
+
+            var dolls = cardPlay.Card.Owner.Creature.Pets
+                .Where(p => p.IsAlive && p.Monster is AliceDollMonsterModel)
+                .ToList();
+            if (dolls.Count == 0)
+            {
+                return;
+            }
+
+            for (int j = 0; j < Amount; j++)
+            {
+                for (int i = 0; i < dolls.Count; i++)
                 {
-                    apms.Add(apm);
+                    await DollTurnPhase.ExecuteSingle(combatState, dolls[i], context);
                 }
             }
-            for (int i = apms.Count - 1; i >= 0; i--)
-            {
-                for (int j = 0; j < Amount; j++)
-                    await apms[i].DollAction(context);
-                apms.RemoveAt(i);
-            }
-          
         }
         public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
         {

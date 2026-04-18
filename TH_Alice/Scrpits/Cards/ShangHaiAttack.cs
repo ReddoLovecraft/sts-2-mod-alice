@@ -11,13 +11,14 @@ using MegaCrit.Sts2.Core.Localization;
 using TH_Alice.TH_Alice.Scrpits.Main;
 using MegaCrit.Sts2.Core.HoverTips;
 using TH_Alice.Scrpits.Powers;
+using TH_Alice.Scrpits.Dolls;
 
 namespace TH_Alice.Scrpits.Cards;
 [Pool(typeof(AliceCardPool))]
 public class ShangHaiAttack : AliceCardModel
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7, ValueProp.Move)];
-	  static string text = StringHelper.Slugify("Doll");
+    protected override IEnumerable<DynamicVar> CanonicalVars => [];
+  static string text = StringHelper.Slugify("Doll");
   static LocString locString = ToolBox.L10NStatic(text + ".title");
   static LocString locString2 = ToolBox.L10NStatic(text + ".description");
   static string text2 = StringHelper.Slugify("Shanghai");
@@ -28,20 +29,24 @@ public class ShangHaiAttack : AliceCardModel
      new HoverTip(locString3,locString4),
       new HoverTip(locString,locString2)
 });
-	public ShangHaiAttack() : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+	public ShangHaiAttack() : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.Self)
 	{
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue) .FromCard(this) .Targeting(cardPlay.Target).Execute(choiceContext);
 		if(Owner.Character is AliceCharacter)
-            {
+        {
                 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
-            }
+        }
 		await ToolBox.MakeDoll<ShangHaiPower>(Owner.Creature);
+		var dolls = Owner.Creature.Pets.Where(p => p.IsAlive && p.Monster is SHANGHAI).ToList();
+        for (int j = 0; j < dolls.Count; j++)
+        {
+                await DollTurnPhase.ExecuteSingle(CombatState!, dolls[j], choiceContext);
+        }
 	}
 	protected override void OnUpgrade()
 	{
-		DynamicVars.Damage.UpgradeValueBy(3); 
+		this.EnergyCost.UpgradeBy(-1);
 	}
 }

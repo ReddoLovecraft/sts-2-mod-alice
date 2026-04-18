@@ -14,8 +14,10 @@ using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using System.Collections.Generic;
+using System.Linq;
 using TH_Alice.Scrpits.Cards;
 using TH_Alice.Scrpits.Character;
+using TH_Alice.Scrpits.Dolls;
 using TH_Alice.Scrpits.Main;
 using TH_Alice.Scrpits.Powers;
 using TH_Alice.TH_Alice.Scrpits.Main;
@@ -23,8 +25,7 @@ using TH_Alice.TH_Alice.Scrpits.Main;
 [Pool(typeof(AliceRelicPool))]
 public class BloodThread : CustomRelicModel
 {
-    private readonly List<AlicePowerModel> _pendingRemove = new List<AlicePowerModel>();
-    private readonly List<(AlicePowerModel power, int decline)> _pendingDeclines = new List<(AlicePowerModel, int)>();
+    private readonly List<(Creature creature, int damage)> _pendingDollDamages = new List<(Creature, int)>();
 	public override RelicRarity Rarity => RelicRarity.Ancient;
 	public override string PackedIconPath => $"res://ArtWorks/Relics/{Id.Entry}.png";
 	protected override string PackedIconOutlinePath => $"res://ArtWorks/Relics/Outlines/{Id.Entry}.png";
@@ -54,67 +55,49 @@ public class BloodThread : CustomRelicModel
 			return;
 		}
 		Flash();
-         var dolls = new List<AlicePowerModel>();
-            foreach (PowerModel pm in Owner.Creature.Powers)
+        foreach (Creature pet in Owner.Creature.Pets)
+        {
+            if (pet.IsAlive && pet.Monster is AliceDollMonsterModel doll && doll.ParticipatesInDamageShare)
             {
-                if (pm is AlicePowerModel apm && apm.IsDollPower)
-                {
-                    dolls.Add(apm);
-                }
+                await CreatureCmd.GainMaxHp(pet, 5);
             }
-            foreach (var apm in dolls)
-            {
-                await PowerCmd.ModifyAmount(apm, 5, Owner.Creature, null);
-            }
+        }
 		await CardPileCmd.AddGeneratedCardToCombat(combatState.CreateCard<Manipulate>(Owner), PileType.Hand, true);
 	}
     public override decimal ModifyHpLostAfterOsty(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        _pendingRemove.Clear();
-        _pendingDeclines.Clear();
+        _pendingDollDamages.Clear();
         if (target != base.Owner.Creature || Owner.Creature.HasPower<AliceUnreadPower>())
         {
             return amount;
         }
-        var dolls = new List<AlicePowerModel>();
-        foreach (PowerModel pm in target.Powers)
+        List<Creature> dolls = target.Pets
+            .Where(p => p.IsAlive && p.Monster is AliceDollMonsterModel doll && doll.ParticipatesInDamageShare)
+            .ToList();
+
+        int damage = (int)amount;
+        int count = dolls.Count;
+        if (count == 0 || damage <= 0)
         {
-            if (pm is AlicePowerModel apm && apm.IsDollPower && pm is not NetherlandPower)
-            {
-                dolls.Add(apm);
-            }
+            return amount;
         }
-        int dec = 0;
-        int p_amt = 0;
-        foreach (var apm in dolls)
+
+        int perDollDamage = damage / count;
+        if (perDollDamage <= 0)
         {
-            dec += apm.Amount;
-            p_amt++;
-        }
-        if (dec <= amount)
-        {
-            _pendingRemove.AddRange(dolls);
-            return Math.Max(0m, amount - dec);
-        }
-        else
-        {
-            int real_dmg = (int)amount / p_amt;
-            if (real_dmg > 0)
-            {
-                foreach (var apm in dolls)
-                {
-                    if (apm.Amount > real_dmg)
-                    {
-                        _pendingDeclines.Add((apm, real_dmg));
-                    }
-                    else
-                    {
-                        _pendingRemove.Add(apm);
-                    }
-                }
-            }
             return 0;
         }
+
+        bool wouldKillAll = dolls.All(d => d.CurrentHp + d.Block <= perDollDamage);
+        if (wouldKillAll)
+        {
+            return amount;
+        }
+        foreach (Creature doll in dolls)
+        {
+            _pendingDollDamages.Add((doll, perDollDamage));
+        }
+        return 0;
 
     }
     public override Task AfterModifyingHpLostAfterOsty()
@@ -130,25 +113,19 @@ public class BloodThread : CustomRelicModel
         _isProcessing = true;
         try
         {
-            while (_pendingDeclines.Count > 0 || _pendingRemove.Count > 0)
+            while (_pendingDollDamages.Count > 0)
             {
-                if (_pendingDeclines.Count > 0)
+                var damages = _pendingDollDamages.ToArray();
+                _pendingDollDamages.Clear();
+                foreach (var item in damages)
                 {
-                    var declines = _pendingDeclines.ToArray();
-                    _pendingDeclines.Clear();
-                    foreach (var item in declines)
+                    Creature dollCreature = item.creature;
+                    int dmg = item.damage;
+                    if (dollCreature == null || dollCreature.IsDead || dmg <= 0)
                     {
-                        await item.power.APM_Decline(item.decline);
+                        continue;
                     }
-                }
-                if (_pendingRemove.Count > 0)
-                {
-                    var removes = _pendingRemove.ToArray();
-                    _pendingRemove.Clear();
-                    for (int i = removes.Length - 1; i >= 0; i--)
-                    {
-                        await removes[i].APM_Remove(false, removes[i]);
-                    }
+                    await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), dollCreature, dmg, ValueProp.Move, null, null);
                 }
             }
         }

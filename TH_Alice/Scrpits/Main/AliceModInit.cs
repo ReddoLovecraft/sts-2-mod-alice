@@ -39,9 +39,12 @@ using System.Reflection.Emit;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using EmitLabel = System.Reflection.Emit.Label;
+using TH_Alice.Scrpits.Dolls;
 
 namespace TH_Alice.Scrpits.Main
 {
+
+
     [ModInitializer("Init")]
     public class AliceModInit
     {
@@ -58,33 +61,13 @@ namespace TH_Alice.Scrpits.Main
             var harmony = new Harmony("TH_Alice");
             harmony.PatchAll();
             ScriptManagerBridge.LookupScriptsInAssembly(typeof(AliceModInit).Assembly);
+            DollIntentLocalization.Install();
             Log.Debug("Alice Mod initialized!");
             //GD.Print("[TH_Alice] Alice mod initialized");
         }
     }
     /*
-    代办
-
-+爱丽丝的皮靴 稀有
-每场战斗开始时，击晕所有敌人。
-东脚吧专武，味大，无需多言。
-+灵丝 稀有
-每当人偶行动时，下回合获得一点能量。
-神秘的丝线，能够从人偶处回馈能量。
-+能力卡牌［上海人形］商店
-现在上海人形的意图改为对所有敌人造成伤害。
-原理不明的神秘卡牌，据说是市场之神的杰作。
-+罐装火药 罕见
-现在人偶死亡时额外对所有敌人造成其当前生命值的伤害。
-魔法秘典 罕见
-回合开始时，你每打出3张牌，将第三张牌的虚无复制品置入手中。
-一本神秘的书。
-爱丽丝的魔法书。 事件
-拾起时，选择任意张旧作卡牌加入卡组。卫星，等事件接口
-爱丽丝fumo 稀有
-回合开始时将一张带有消耗的随机牌置入手中，且本回合内耗能为0。
-fumofumo。
-
+ 
 
     */
     [HarmonyPatch(typeof(NAudioManager), "PlayOneShot", [typeof(string), typeof(float)])]

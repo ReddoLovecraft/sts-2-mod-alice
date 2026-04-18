@@ -2,6 +2,7 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -27,35 +28,40 @@ namespace TH_Alice.Scrpits.Cards;
 [Pool(typeof(AliceCardPool))]
 public class DollBlowUp : AliceCardModel
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Move)];
+     public override bool IsTargetDoll => true;
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
     static string text = StringHelper.Slugify("Doll");
     static LocString locString = ToolBox.L10NStatic(text + ".title");
     static LocString locString2 = ToolBox.L10NStatic(text + ".description");
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => (new IHoverTip[1]
+      static string text2 = StringHelper.Slugify("Recycle");
+    static LocString locString3 = ToolBox.L10NStatic(text2 + ".title");
+    static LocString locString4 = ToolBox.L10NStatic(text2 + ".description");
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => (new IHoverTip[2]
   {
-        new HoverTip(locString,locString2)
+        new HoverTip(locString,locString2),
+        new HoverTip(locString3,locString4)
   });
-    public DollBlowUp() : base(1, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
+    public DollBlowUp() : base(1, CardType.Attack, CardRarity.Common, TargetType.Self)
     {
 
     }
-
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(base.CombatState)
-			.WithHitFx("vfx/vfx_attack_blunt", null, "heavy_attack.mp3")
-			.Execute(choiceContext);
-         if(ToolBox.GetDollCount(Owner.Creature)>0)  
-         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(base.CombatState)
-			.WithHitFx("vfx/vfx_attack_blunt", null, "heavy_attack.mp3")
-			.Execute(choiceContext);
-        if(IsUpgraded&&ToolBox.GetDollCount(Owner.Creature)>0)
-         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(base.CombatState)
-			.WithHitFx("vfx/vfx_attack_blunt", null, "heavy_attack.mp3")
-			.Execute(choiceContext);
+        if (cardPlay.Target is Creature target && DollCardTargetingState.IsAliveDollOfOwner(target, Owner) && target.Monster is AliceDollMonsterModel targetDoll)
+        {
+             for(int i=0;i<this.DynamicVars.Cards.IntValue;i++)
+            {
+                if(target!=null&&target.IsAlive)
+                {
+                    await DollTurnPhase.ExecuteSingle(CombatState!, target, choiceContext); 
+                }
+                else return; 
+            }
+            await targetDoll.Recycle(choiceContext);
+        }
     }
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(3);
+        base.DynamicVars.Cards.UpgradeValueBy(1);
     }
 }
