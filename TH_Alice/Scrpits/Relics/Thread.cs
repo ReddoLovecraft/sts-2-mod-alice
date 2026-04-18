@@ -73,16 +73,17 @@ public class Thread : CustomRelicModel
             return 0;
         }
 
-        bool wouldKillAll = dolls.All(d => d.CurrentHp + d.Block <= perDollDamage);
-        if (wouldKillAll)
-        {
-            return amount;
-        }
+        int overflowToAlice = 0;
         foreach (Creature doll in dolls)
         {
+            int effective = doll.CurrentHp + doll.Block;
+            if (effective < perDollDamage)
+            {
+                overflowToAlice += perDollDamage - effective;
+            }
             _pendingDollDamages.Add((doll, perDollDamage));
         }
-        return 0;
+        return overflowToAlice;
 
     }
     public override Task AfterModifyingHpLostAfterOsty()

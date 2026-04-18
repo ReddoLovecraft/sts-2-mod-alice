@@ -94,7 +94,7 @@ public abstract class AliceDollMonsterModel : CustomMonsterModel
 			    await PowerCmd.Apply<StrengthPower>(allyDoll, result.TotalDamage, null, null);
 			}
 		}
-		if (owner != null && owner.HasPower<DollJudgmentPower>() && result.TotalDamage > 0)
+		if (owner != null && owner.HasPower<DollJudgmentPower>())
 		{
 			await PowerCmd.Apply<FlexPotionPower>(owner, owner.GetPowerAmount<DollJudgmentPower>(), null, null);
 		}
@@ -261,7 +261,7 @@ public sealed class XIZANG : AliceDollMonsterModel
 	public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
 	{
 		await base.AfterDeath(choiceContext, creature, wasRemovalPrevented, deathAnimLength);
-		if (Creature.IsDead)
+		if (Creature.IsDead && creature != Creature)
 		{
 			return;
 		}
@@ -277,6 +277,18 @@ public sealed class XIZANG : AliceDollMonsterModel
 		if (creature.PetOwner != owner)
 		{
 			return;
+		}
+		if (creature.Monster is XIZANG && creature != Creature)
+		{
+			return;
+		}
+		if (creature != Creature)
+		{
+			Creature? primary = owner.Creature.Pets.FirstOrDefault(p => p.IsAlive && p.Monster is XIZANG);
+			if (primary != Creature)
+			{
+				return;
+			}
 		}
 		await ToolBox.MakeDoll<XiZangPower>(owner.Creature);
 	}
