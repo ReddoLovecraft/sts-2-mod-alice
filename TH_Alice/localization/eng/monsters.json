@@ -13,7 +13,7 @@
   "XIZANG.moves.INTENT.title": "None",
   "XIZANG.moves.INTENT.description": "None.",
   "XIZANG.moves.MAXINTENT.title": "Reincarnation",
-  "XIZANG.moves.MAXINTENT.description": "Immediately create a random [gold]Doll[/gold].",
+  "XIZANG.moves.MAXINTENT.description": "At the start of your next turn, gain 1 energy and draw 1 card.",
   "HINA.name": "Hina Doll",
   "HINA.moves.INTENT.title": "Prevention",
   "HINA.moves.INTENT.description": "Give [gold]Alice[/gold] {Intent} [gold]Artifact[/gold].",

@@ -13,7 +13,7 @@
   "XIZANG.moves.INTENT.title": "无",
   "XIZANG.moves.INTENT.description": "无。", 
   "XIZANG.moves.MAXINTENT.title": "转世",
-  "XIZANG.moves.MAXINTENT.description": "立即制作一个随机[gold]人偶[/gold]。",
+  "XIZANG.moves.MAXINTENT.description": "在你的下个回合开始时，获得一点能量并抽一张牌。",
   "HINA.name": "雏人形",
   "HINA.moves.INTENT.title": "预防",
   "HINA.moves.INTENT.description": "使[gold]爱丽丝[/gold]获得{Intent}层[gold]人工制品[/gold]。",

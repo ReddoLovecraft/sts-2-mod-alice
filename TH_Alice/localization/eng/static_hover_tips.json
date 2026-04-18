@@ -8,7 +8,7 @@
 	"PENGLAI.title": "Hourai Doll",
 	"PENGLAI.description": "Base HP: [red]4[/red]\nIntent: At the start of the turn, gain 4 max HP.\nSpecial: When taking damage, deal damage equal to its HP to all enemies(don't effect on death).\nCap 4: Immediately make all enemies lose HP equal to its max HP, then [gold]Recycle[/gold] itself.",
 	"XIZANG.title": "Tibetan Doll",
-	"XIZANG.description": "Base HP: [red]6[/red]\nIntent: None.\nSpecial: While active, whenever a [gold]Doll[/gold] dies or is recycled, immediately create a [gold]Tibetan Doll[/gold].\nCap 6: Immediately create a random [gold]Doll[/gold].",
+	"XIZANG.description": "Base HP: [red]6[/red]\nIntent: None.\nSpecial: While active, whenever a [gold]Doll[/gold] dies or is recycled, immediately create a [gold]Tibetan Doll[/gold].\nCap 6: At the start of your next turn, gain 1 energy and draw 1 card.",
 	"HINA.title": "Hina Doll",
 	"HINA.description": "Base HP: [red]5[/red]\nIntent: At the end of the turn, give you 1 [gold]Artifact[/gold].\nSpecial: On death or recycle, remove all your debuffs.\nCap 1: Remove all your debuffs, then [gold]Recycle[/gold] itself.",
 	"GOLIATH.title": "Goliath Doll",

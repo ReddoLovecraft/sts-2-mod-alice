@@ -8,7 +8,7 @@
 	"PENGLAI.title": "蓬莱人形",
 	"PENGLAI.description": "基础生命值：[red]4[/red]\n意图：回合开始时，获得4点最大生命值。\n特殊：受到伤害时，对所有敌人造成等同于自身生命值的伤害，死亡时无效。\n上限4：立即使所有敌人失去等同于自身最大生命值的伤害，然后将自身[gold]回收[/gold]。",
 	"XIZANG.title": "西藏人偶",
-	"XIZANG.description": "基础生命值：[red]6[/red]\n意图：无。\n特殊：存在时，每当有[gold]人偶[/gold]死亡或被[gold]回收[/gold]时，立即制作一个[gold]西藏人偶[/gold]。\n上限6：立即制作一个随机[gold]人偶[/gold]。",
+	"XIZANG.description": "基础生命值：[red]6[/red]\n意图：无。\n特殊：存在时，每当有[gold]人偶[/gold]死亡或被[gold]回收[/gold]时，立即制作一个[gold]西藏人偶[/gold]。\n上限6：在你的下个回合开始时，获得一点能量并抽一张牌。",
 	"HINA.title": "雏人形",
 	"HINA.description": "基础生命值：[red]5[/red]\n意图：回合结束时，使你获得1层[gold]人工制品[/gold]。\n特殊：死亡或被[gold]回收[/gold]时，移除你的所有负面效果。\n上限1：移除你的所有负面效果，然后将自身[gold]回收[/gold]。",
 	"GOLIATH.title": "歌莉娅人偶",

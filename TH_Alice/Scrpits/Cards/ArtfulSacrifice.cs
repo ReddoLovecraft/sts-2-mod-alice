@@ -27,9 +27,9 @@ public sealed class ArtfulSacrifice : AliceCardModel
   public override bool IsTargetDoll => true;
     protected override IEnumerable<DynamicVar> CanonicalVars => (new DynamicVar[3]
 {
-        new HpLossVar(4m),
+        new HpLossVar(8m),
 		new EnergyVar(1),
-		new CardsVar(2)
+		new CardsVar(1)
 });
     static string text = StringHelper.Slugify("Doll");
     static LocString locString = ToolBox.L10NStatic(text + ".title");
@@ -57,5 +57,6 @@ public sealed class ArtfulSacrifice : AliceCardModel
     protected override void OnUpgrade()
     {
         base.DynamicVars.Energy.UpgradeValueBy(1);
+        base.DynamicVars.HpLoss.UpgradeValueBy(-2);
     }
 }

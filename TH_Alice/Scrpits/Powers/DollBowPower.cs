@@ -48,7 +48,7 @@ namespace TH_Alice.Scrpits.Powers
                 for (int i = 0; i < dolls.Count; i++)
                 {
                     SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/dollbow.wav"));
-                    await CreatureCmd.Damage(context, base.Owner, value, ValueProp.Move, cardPlay.Card.Owner.Creature, null);
+                    await CreatureCmd.Damage(context, base.Owner, value, ValueProp.Move, dolls[i], null);
                 }
                
             }

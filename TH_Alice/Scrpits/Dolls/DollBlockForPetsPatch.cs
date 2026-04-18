@@ -1,86 +1,52 @@
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.ValueProps;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Reflection.Emit;
+using MegaCrit.Sts2.Core.Entities.Players;
 
 namespace TH_Alice.Scrpits.Dolls;
 
-[HarmonyPatch]
+[HarmonyPatch(typeof(CreatureCmd))]
 public static class DollBlockForPetsPatch
 {
-	private static MethodBase TargetMethod()
+	private static IEnumerable<MethodBase> TargetMethods()
 	{
-		return AccessTools.Method(
-			typeof(CreatureCmd),
-			nameof(CreatureCmd.Damage),
-			[
-				typeof(PlayerChoiceContext),
-				typeof(IEnumerable<Creature>),
-				typeof(decimal),
-				typeof(ValueProp),
-				typeof(Creature),
-				typeof(CardModel)
-			]
-		);
+		foreach (MethodInfo m in AccessTools.GetDeclaredMethods(typeof(CreatureCmd)))
+		{
+			if (m.Name == nameof(CreatureCmd.Damage))
+			{
+				yield return m;
+			}
+		}
 	}
 
-	private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+	public static void Prefix()
 	{
-		List<CodeInstruction> codes = instructions.ToList();
-		MethodInfo getPetOwner = AccessTools.PropertyGetter(typeof(Creature), nameof(Creature.PetOwner));
-		MethodInfo getBlockCreature = AccessTools.Method(typeof(DollDamageHelpers), nameof(DollDamageHelpers.GetBlockCreature));
+		DollDamageHelpers.CreatureCmdDamageDepth++;
+	}
 
-		for (int i = 0; i < codes.Count; i++)
+	public static void Finalizer(Exception __exception)
+	{
+		DollDamageHelpers.CreatureCmdDamageDepth = Math.Max(0, DollDamageHelpers.CreatureCmdDamageDepth - 1);
+	}
+}
+
+[HarmonyPatch(typeof(Creature), "get_PetOwner")]
+public static class DollPetOwnerForBlockPatch
+{
+	public static bool Prefix(Creature __instance, ref Player? __result)
+	{
+		if (!DollDamageHelpers.IsInCreatureCmdDamage)
 		{
-			if (!codes[i].Calls(getPetOwner))
-			{
-				continue;
-			}
-
-			int startPos = i - 1;
-			if (startPos < 0)
-			{
-				continue;
-			}
-
-			int endPos = -1;
-			OpCode stlocOp = default;
-			object? stlocOperand = null;
-			for (int j = i; j < Math.Min(codes.Count, i + 30); j++)
-			{
-				OpCode op = codes[j].opcode;
-				if (op == OpCodes.Stloc || op == OpCodes.Stloc_S || op == OpCodes.Stloc_0 || op == OpCodes.Stloc_1 || op == OpCodes.Stloc_2 || op == OpCodes.Stloc_3)
-				{
-					endPos = j;
-					stlocOp = op;
-					stlocOperand = codes[j].operand;
-					break;
-				}
-			}
-
-			if (endPos < 0)
-			{
-				continue;
-			}
-
-			CodeInstruction ldlocOriginalTarget = new CodeInstruction(codes[startPos].opcode, codes[startPos].operand);
-			codes.RemoveRange(startPos, endPos - startPos + 1);
-			codes.InsertRange(startPos, new[]
-			{
-				ldlocOriginalTarget,
-				new CodeInstruction(OpCodes.Call, getBlockCreature),
-				new CodeInstruction(stlocOp, stlocOperand)
-			});
-			break;
+			return true;
 		}
-
-		return codes;
+		if (__instance.Monster is not AliceDollMonsterModel)
+		{
+			return true;
+		}
+		__result = null;
+		return false;
 	}
 }
