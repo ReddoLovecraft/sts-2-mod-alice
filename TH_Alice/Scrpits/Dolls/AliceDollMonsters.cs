@@ -81,6 +81,7 @@ public abstract class AliceDollMonsterModel : CustomMonsterModel
 
 	public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
 	{
+		await base.AfterDamageReceived(choiceContext, target, result, props, dealer, cardSource);
 		if (target != Creature || Creature.IsDead)
 		{
 			return;
