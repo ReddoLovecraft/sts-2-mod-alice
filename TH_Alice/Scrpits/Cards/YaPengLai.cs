@@ -2,6 +2,7 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
@@ -14,6 +15,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using TH_Alice.Scrpits.Character;
+using TH_Alice.Scrpits.Dolls;
 using TH_Alice.Scrpits.Main;
 using TH_Alice.Scrpits.Powers;
 using TH_Alice.TH_Alice.Scrpits.Main;
@@ -43,9 +45,9 @@ public class YaPengLai : AliceCardModel
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-      foreach(PowerModel pm in Owner.Creature.Powers)
+      foreach(Creature pl in Owner.Creature.Pets)
       {
-        if(pm is PengLaiPower)
+        if(pl.Monster is PENGLAI)
         {
          await CardPileCmd.Draw(choiceContext, 1, base.Owner);
         }

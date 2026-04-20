@@ -1,0 +1,19 @@
+{
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.1-0.ancient": "ふむ……人形を操るというより、むしろお前こそが操られている人形ではないか？",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.1-0.next": "どういう意味？",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.1-1.char": "……そのままの意味さ。お前はあの私に毒を盛った奴に操られているんだろう？",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.1-1.next": "沈黙",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.1-2.ancient": "どうやら君は全く理解していないようだな、ではまた会おう！",
+
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.2-0r.ancient": "また戻ってきたな。今回はどう思う？",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.2-0r.next": "続ける",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.2-1r.char": "何にせよ、お前を懲らしめないといけないようだな。",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.2-1r.next": "人形出撃！",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.2-2r.ancient": "はあ……では、また会おう！",
+
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.0-0.ancient": "人形を操る小娘か。少しは面白いが、まだまだ足りんぞ。",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.0-0.next": "続ける",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.0-1.char": "そんなこと、やってみなければわからないでしょう？",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.0-1.next": "人形出撃！",
+  "THE_ARCHITECT.talk.TH_ALICE-ALICE_CHARACTER.0-2.ancient": "……次に会おう！"
+}

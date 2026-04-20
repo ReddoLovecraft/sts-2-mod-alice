@@ -1,0 +1,8 @@
+{
+  "TH_ALICE-MANA_POTION.description": "エネルギーを上限まで回復する。次の[blue]2[/blue]ターンの開始時に、[blue]1[/blue]エネルギーを失う。",
+  "TH_ALICE-MANA_POTION.title": "魔力薬水",
+  "TH_ALICE-LUBE_POTION.description": "このターン中、全ての[gold]人形[/gold]は行動時に追加で[blue]1[/blue]回行動する。",
+  "TH_ALICE-LUBE_POTION.title": "関節潤滑油",
+  "TH_ALICE-BOTTLE_OF_WAX_POTION.description": "ランダムな[gold]蝋形人形[/gold]を[blue]2[/blue]体作成する。",
+  "TH_ALICE-BOTTLE_OF_WAX_POTION.title": "瓶詰め蝋像"
+}

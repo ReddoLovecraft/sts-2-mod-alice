@@ -28,6 +28,8 @@ namespace TH_Alice.Scrpits.Powers
         public DollDancePower() { }
         public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
         {
+            if(cardPlay.Card.Owner!=this.Owner.Player)
+            return;
             Flash();
             List<Creature> dolls = cardPlay.Card.Owner.Creature.Pets
                 .Where(p => p.IsAlive && p.Monster is AliceDollMonsterModel)

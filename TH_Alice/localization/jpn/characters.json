@@ -1,0 +1,17 @@
+{
+  "TH_ALICE-ALICE_CHARACTER.aromaPrinciple": "[sine][blue]……待って……[/blue][/sine]",
+  "TH_ALICE-ALICE_CHARACTER.banter.alive.endTurnPing": "……",
+  "TH_ALICE-ALICE_CHARACTER.banter.dead.endTurnPing": "……",
+  "TH_ALICE-ALICE_CHARACTER.cardsModifierDescription": "アリスのカードが報酬やショップに出現するようになる。",
+  "TH_ALICE-ALICE_CHARACTER.cardsModifierTitle": "アリスカード",
+  "TH_ALICE-ALICE_CHARACTER.description": "七色の人形遣い。\n人形を操り、魔法で敵を倒す。",
+  "TH_ALICE-ALICE_CHARACTER.eventDeathPrevention": "うっ……悔しい……",
+  "TH_ALICE-ALICE_CHARACTER.goldMonologue": "[sine]このお金……役に立つかも……[/sine]",
+  "TH_ALICE-ALICE_CHARACTER.possessiveAdjective": "彼女の",
+  "TH_ALICE-ALICE_CHARACTER.pronounObject": "彼女",
+  "TH_ALICE-ALICE_CHARACTER.pronounPossessive": "彼女の",
+  "TH_ALICE-ALICE_CHARACTER.pronounSubject": "彼女",
+  "TH_ALICE-ALICE_CHARACTER.title": "アリス・マーガトロイド",
+  "TH_ALICE-ALICE_CHARACTER.titleObject": "アリス",
+  "TH_ALICE-ALICE_CHARACTER.unlockText": "[pink]{Prerequisite}[/pink]で1ゲームプレイしてこのキャラクターをアンロック。"
+}
