@@ -492,7 +492,7 @@ public sealed class GOLIATH : AliceDollMonsterModel
 public sealed class ROUNDTABLE : AliceDollMonsterModel
 {
 	public override int BaseHp => 12;
-	public override int MaxCount => 12;
+	public override int MaxCount => 4;
 
 	public ROUNDTABLE()
 	{
@@ -529,10 +529,7 @@ public sealed class ROUNDTABLE : AliceDollMonsterModel
 		{
 			return;
 		}
-		foreach (Creature dollCreature in owner.Creature.Pets.Where(p => p.IsAlive && p.Monster is AliceDollMonsterModel))
-		{
-			await PowerCmd.Apply<PlatingPower>(dollCreature, 1m, owner.Creature, null);
-		}
+		await PowerCmd.Apply<PlatingPower>(owner.Creature, 1m, owner.Creature, null);
 	}
 }
 

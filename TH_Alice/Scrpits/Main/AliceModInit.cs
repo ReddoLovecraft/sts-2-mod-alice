@@ -70,22 +70,26 @@ namespace TH_Alice.Scrpits.Main
  
 
     */
-    [HarmonyPatch(typeof(NAudioManager), "PlayOneShot", [typeof(string), typeof(float)])]
-    public static class ModSfxPatch
+      [HarmonyPatch(typeof(NAudioManager), "PlayOneShot", [typeof(string), typeof(System.Collections.Generic.Dictionary<string, float>), typeof(float)])]
+    public static class ModSfxWithParamsPatch
     {
-        static bool Prefix(string path, float volume)
+        static bool Prefix(string path, System.Collections.Generic.Dictionary<string, float> parameters, float volume)
         {
             if (path.StartsWith("mod_sfx://"))
             {
-                try 
+                try
                 {
-                    string resPath = "res://" + path.Substring(10); // 10 is "mod_sfx://".Length
+                    string resPath = "res://" + path.Substring(10);
                     var stream = ResourceLoader.Load<AudioStream>(resPath);
                     if (stream != null)
                     {
                         var player = new AudioStreamPlayer();
                         player.Stream = stream;
-                        player.VolumeDb = Mathf.LinearToDb(volume);
+                        player.Bus = "SFX";
+                        float master = SaveManager.Instance.SettingsSave.VolumeMaster;
+                        float sfx = SaveManager.Instance.SettingsSave.VolumeSfx;
+                        float finalVol = volume * Mathf.Pow(master, 2f) * Mathf.Pow(sfx, 2f);
+                        player.VolumeDb = Mathf.LinearToDb(Mathf.Max(0.0001f, finalVol));
                         NGame.Instance.AddChild(player);
                         player.Play();
                         player.Connect("finished", Callable.From(player.QueueFree));
@@ -95,7 +99,7 @@ namespace TH_Alice.Scrpits.Main
                 {
                     Log.Error($"Failed to play mod sfx: {path}. Error: {e.Message}");
                 }
-                return false; // 拦截原本的 FMOD 播放
+                return false;
             }
             return true;
         }

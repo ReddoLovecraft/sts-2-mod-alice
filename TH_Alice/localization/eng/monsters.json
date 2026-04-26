@@ -28,7 +28,7 @@
   "ROUNDTABLE.moves.INTENT.title": "Guard",
   "ROUNDTABLE.moves.INTENT.description": "Give [gold]Alice[/gold] {Intent} [gold]Plated Armor[/gold] and deal {Intent} damage to all enemies.",
   "ROUNDTABLE.moves.MAXINTENT.title": "Resolution",
-  "ROUNDTABLE.moves.MAXINTENT.description": "All [gold]Dolls[/gold] gain 1 [gold]Plated Armor[/gold].",
+  "ROUNDTABLE.moves.MAXINTENT.description": "[gold]Alice[/gold] gain 1 [gold]Plated Armor[/gold].",
   "FRANCE.name": "France Doll",
   "FRANCE.moves.INTENT.title": "Skirmish",
   "FRANCE.moves.INTENT.description": "Deal {Intent} damage to a random enemy twice.",

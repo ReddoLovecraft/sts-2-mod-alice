@@ -16,7 +16,7 @@
 	"WAX.title": "蜡形",
 	"WAX.description": "在3回合后自动死亡。",
 	"ROUND_TABLE.title": "圆桌人偶",
-	"ROUND_TABLE.description": "基础生命值：[red]12[/red]\n意图：回合结束时，使你获得2层[gold]覆甲[/gold]，并对所有敌人造成2点伤害。\n上限12：所有[gold]人偶[/gold]获得1层[gold]覆甲[/gold]。",
+	"ROUND_TABLE.description": "基础生命值：[red]12[/red]\n意图：回合结束时，使你获得2层[gold]覆甲[/gold]，并对所有敌人造成2点伤害。\n上限4：使你获得1层[gold]覆甲[/gold]。",
 	"FRANCE.title": "法兰西人偶",
 	"FRANCE.description": "基础生命值：[red]10[/red]\n意图：回合结束时，随机造成4点伤害2次。\n上限8：立即行动意图不是攻击的敌人总数次。",
 	"ORL.title": "奥尔良人偶",

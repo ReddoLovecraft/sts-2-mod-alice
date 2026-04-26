@@ -28,7 +28,7 @@
   "ROUNDTABLE.moves.INTENT.title": "护卫",
   "ROUNDTABLE.moves.INTENT.description": "使[gold]爱丽丝[/gold]获得{Intent}层[gold]覆甲[/gold]，并对所有敌人造成{Intent}点伤害。",
   "ROUNDTABLE.moves.MAXINTENT.title": "觉悟",
-  "ROUNDTABLE.moves.MAXINTENT.description": "所有[gold]人偶[/gold]获得1层[gold]覆甲[/gold]。",
+  "ROUNDTABLE.moves.MAXINTENT.description": "[gold]爱丽丝[/gold]获得1层[gold]覆甲[/gold]。",
   "FRANCE.name": "法兰西人偶",
   "FRANCE.moves.INTENT.title": "乱战",
   "FRANCE.moves.INTENT.description": "对一名随机敌人造成{Intent}点伤害2次。",

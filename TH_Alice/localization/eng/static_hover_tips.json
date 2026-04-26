@@ -16,7 +16,7 @@
 	"WAX.title": "Wax Doll",
 	"WAX.description": "Dies automatically after 3 turns.",
 	"ROUND_TABLE.title": "Round Table Doll",
-	"ROUND_TABLE.description": "Base HP: [red]12[/red]\nIntent: At the end of the turn, gain 2 [gold]Plated Armor[/gold] and deal 2 damage to all enemies.\nCap 12: All [gold]Dolls[/gold] gain 1 [gold]Plated Armor[/gold].",
+	"ROUND_TABLE.description": "Base HP: [red]12[/red]\nIntent: At the end of the turn, gain 2 [gold]Plated Armor[/gold] and deal 2 damage to all enemies.\nCap 4:Make you gain 1 [gold]Plated Armor[/gold].",
 	"FRANCE.title": "France Doll",
 	"FRANCE.description": "Base HP: [red]10[/red]\nIntent: At the end of the turn, randomly deal 4 damage twice.\nCap 8: Act immediately a number of times equal to the number of enemies not intending to attack.",
 	"ORL.title": "Orleans Doll",

@@ -16,7 +16,7 @@
 	"WAX.title": "蝋形",
 	"WAX.description": "3ターン後に自動的に死亡する。",
 	"ROUND_TABLE.title": "円卓人形",
-	"ROUND_TABLE.description": "基礎ライフ：[red]12[/red]\n意図：ターン終了時、あなたに2層の[gold]装甲[/gold]を付与し、全ての敵に2ダメージを与える。\n上限12：全ての[gold]人形[/gold]に1層の[gold]装甲[/gold]を付与する。",
+	"ROUND_TABLE.description": "基礎ライフ：[red]12[/red]\n意図：ターン終了時、あなたに2層の[gold]装甲[/gold]を付与し、全ての敵に2ダメージを与える。\n上限4：あなたに1層の[gold]装甲[/gold]を付与する。",
 	"FRANCE.title": "フランス人形",
 	"FRANCE.description": "基礎ライフ：[red]10[/red]\n意図：ターン終了時、ランダムに4ダメージを2回与える。\n上限8：意図が攻撃でない敵の数だけ即座に行動する。",
 	"ORL.title": "オルレアン人形",

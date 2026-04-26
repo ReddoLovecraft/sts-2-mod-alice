@@ -28,7 +28,7 @@
   "ROUNDTABLE.moves.INTENT.title": "護衛",
   "ROUNDTABLE.moves.INTENT.description": "[gold]アリス[/gold]に{Intent}層の[gold]装甲[/gold]を付与し、全ての敵に{Intent}ダメージを与える。",
   "ROUNDTABLE.moves.MAXINTENT.title": "覚悟",
-  "ROUNDTABLE.moves.MAXINTENT.description": "全ての[gold]人形[/gold]に1層の[gold]装甲[/gold]を付与する。",
+  "ROUNDTABLE.moves.MAXINTENT.description": "[gold]アリス[/gold]に1層の[gold]装甲[/gold]を付与する。",
   "FRANCE.name": "フランス人形",
   "FRANCE.moves.INTENT.title": "乱戦",
   "FRANCE.moves.INTENT.description": "ランダムな敵1体に{Intent}ダメージを2回与える。",
