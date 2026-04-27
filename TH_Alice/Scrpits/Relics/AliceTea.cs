@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
+using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,18 @@ namespace TH_Alice.Scrpits.Relics
     public class AliceTea : CustomRelicModel
     {
         private int _combatsLeft = 1;
-        public override bool IsUsedUp => _combatsLeft <= 0;
+        public override bool IsUsedUp => CombatLeft <= 0;
+        [SavedProperty]
+        public virtual int CombatLeft
+        {
+            get{return _combatsLeft;}
+            set
+            {
+            AssertMutable();
+			_combatsLeft=value;
+			InvokeDisplayAmountChanged();
+         }
+        }
         protected override IEnumerable<DynamicVar> CanonicalVars => [(new EnergyVar(1))];
         public override bool ShowCounter => false;
         public override RelicRarity Rarity => RelicRarity.Event;
@@ -58,7 +70,7 @@ namespace TH_Alice.Scrpits.Relics
             if (!base.Owner.Creature.IsDead)
             {
                 Flash();
-                _combatsLeft--;
+                CombatLeft--;
             }
         }
 
