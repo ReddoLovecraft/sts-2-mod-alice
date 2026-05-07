@@ -47,10 +47,10 @@ public class TripWire : AliceCardModel
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         SfxCmd.Play(AliceModInit.ToModSfxPath("ArtWorks/SFX/line.wav"));
         await PowerCmd.Apply<MgrPower>(cardPlay.Target, 1, base.Owner.Creature, this);
-        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this).Targeting(cardPlay.Target)
-            .WithAttackerFx(null, "event:/sfx/enemy/enemy_attacks/giant_louse/giant_louse_attack_web")
-            .WithHitFx("vfx/vfx_attack_blunt")
-            .Execute(choiceContext);
+        // await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this).Targeting(cardPlay.Target)
+        //     .WithAttackerFx(null, "event:/sfx/enemy/enemy_attacks/giant_louse/giant_louse_attack_web")
+        //     .WithHitFx("vfx/vfx_attack_blunt")
+        //     .Execute(choiceContext);
         await PowerCmd.Apply<PiercingWailPower>(cardPlay.Target, base.DynamicVars["Power"].BaseValue, base.Owner.Creature, this);
     }
     protected override void OnUpgrade()
