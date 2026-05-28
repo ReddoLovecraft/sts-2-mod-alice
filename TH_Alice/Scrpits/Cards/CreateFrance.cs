@@ -21,7 +21,7 @@ using TH_Alice.TH_Alice.Scrpits.Main;
 
 namespace TH_Alice.Scrpits.Cards
 {
-    [Pool(typeof(StatusCardPool))]
+    [Pool(typeof(DollCardPool))]
     public sealed class CreateFrance : AliceCardModel
     {
         public override bool CanBeGeneratedInCombat => true;
